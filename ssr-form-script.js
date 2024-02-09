@@ -67,7 +67,6 @@ const generateFormOptions = (form, index) => {
         },
         onFormSubmitted: function() {
             if (index < formKeys.length - 1) {
-                //$(target).empty();
                 hbspt.forms.create(options[index + 1]);
                 
                 const nextForm = formKeys[index + 1];
