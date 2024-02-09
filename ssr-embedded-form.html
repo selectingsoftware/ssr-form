@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SSR Form</title>
+    
     <style>
         body {
             display: flex;
@@ -53,7 +54,10 @@
         .step-bar {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-top: -1%;
+            margin-bottom: 5%;
+            margin-right: 20%;
+            margin-left: 20%;
         }
 
         .step {
@@ -72,8 +76,8 @@
         }
 
         .step-circle {
-            width: 26px;
-            height: 26px;
+            width: 20px;
+            height: 20px;
             background-color: #B8B9BD;
             border-radius: 50%;
             display: flex;
@@ -81,11 +85,12 @@
             justify-content: center;
             margin-right: 8px;
             position: relative;
+            border: 1.5px solid #B8B9BD;
         }
 
         .step.active .step-circle {
             background-color: #fff;
-            border: 2px solid #3B81F6;
+            border: 1.5px solid #3B81F6;
         }
 
         .step.completed .step-circle {
@@ -94,8 +99,8 @@
         }
 
         .step-inner-circle {
-            width: 20px;
-            height: 20px;
+            width: 10px;
+            height: 10px;
             background-color: #fff;
             border-radius: 50%;
             position: absolute;
@@ -197,7 +202,7 @@
         </div>
         <div id="multistep-form"></div>
     </div>
-            
+
     <script charset="utf-8" type="text/javascript" src="https://js.hsforms.net/forms/v2.js"></script>
     <script src="https://isaiastavares.github.io/ssr-form/ssr-form-script.js"></script>
 </body>
