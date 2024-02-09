@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SSR Form</title>
     <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
         ##multistep-form form {
             -webkit-animation: fadein 1s;
             -moz-animation: fadein 1s;
@@ -143,93 +151,54 @@
         }
 
         .ssr-form {
-            width: 100%;
-            margin-top: 20px;
-            position: relative;
-        }
-
-        .fillout-form_embed {
-            width: 100%;
-            margin-top: 20px;
-            position: relative;
-        }
-
-        .fillout-embed-standard {
-            width: 100%;
-            height: 100%;
-        }
-
-        .fillout-embed-standard .fillout-embed-loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            border: 6px solid #aaa;
-            border-radius: 50%;
-            border-top: 6px solid #fff;
-            width: 20px;
-            height: 20px;
-            -webkit-animation: spin 2s linear infinite;
-            animation: spin 2s linear infinite;
-            box-sizing: content-box;
-        }
-
-        .fillout-embed-standard .fillout-embed-iframe-container {
-            position: relative;
-            transition: opacity .25s ease-in-out;
-            width: 100%;
-            height: 100%;
+            width: 50%;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
-    <div class="ssr-advisor-survey">
-        <div class="fillout-form_embed w-embed w-script">
-            <div style="width: 100%; height: 500px; position: relative;" data-fillout-id="gVgQ1JWGWKus" data-fillout-embed-type="standard" data-fillout-inherit-parameters="" data-fillout-initialized="true">
-                <div class="fillout-embed-standard" style="opacity: 1;">
-                    <div class="fillout-embed-loading" style="display: none;"></div>
-                    <div class="fillout-embed-iframe-container" style="opacity: 1;">
-                        <div class="step-bar">
-                            <div class="step" id="step1">
-                                <div class="step-circle">
-                                    <div class="step-inner-circle">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="h-5 w-5 step-check">
-                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <span class="step-text">Requirements</span>
-                            </div>
-                            <div class="step-line"></div>
-                            <div class="step" id="step2">
-                                <div class="step-circle">
-                                    <div class="step-inner-circle">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="h-5 w-5 step-check">
-                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <span class="step-text">Your Info</span>
-                            </div>
-                            <div class="step-line"></div>
-                            <div class="step" id="step3">
-                                <div class="step-circle">
-                                    <div class="step-inner-circle">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="h-5 w-5 step-check">
-                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <span class="step-text">Get Advice</span>
-                            </div>
-                        </div>
-                        <div id="multistep-form"></div>
+    <div class="ssr-form">
+        <div class="step-bar">
+            <div class="step" id="step1">
+                <div class="step-circle">
+                    <div class="step-inner-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="h-5 w-5 step-check">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
                     </div>
                 </div>
+                <span class="step-text">Requirements</span>
             </div>
-            <script src="https://server.fillout.com/embed/v1/"></script>
-            <script charset="utf-8" type="text/javascript" src="https://js.hsforms.net/forms/v2.js"></script>
-            <script src="https://isaiastavares.github.io/ssr-form/ssr-form-script.js"></script>
+            <div class="step-line"></div>
+            <div class="step" id="step2">
+                <div class="step-circle">
+                    <div class="step-inner-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="h-5 w-5 step-check">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                </div>
+                <span class="step-text">Your Info</span>
+            </div>
+            <div class="step-line"></div>
+            <div class="step" id="step3">
+                <div class="step-circle">
+                    <div class="step-inner-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="h-5 w-5 step-check">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                </div>
+                <span class="step-text">Get Advice</span>
+            </div>
         </div>
+        <div id="multistep-form"></div>
     </div>
+            
+    <script charset="utf-8" type="text/javascript" src="https://js.hsforms.net/forms/v2.js"></script>
+    <script src="https://isaiastavares.github.io/ssr-form/ssr-form-script.js"></script>
 </body>
 </html>
