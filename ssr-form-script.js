@@ -68,7 +68,7 @@ const generateFormOptions = (form, index) => {
         onFormSubmitted: function() {
             if (index < formKeys.length - 1) {
                 $(target).empty();
-                hbspt.forms.create(options[index + 1]);
+                window.hbspt.forms.create(options[index + 1]);
                 
                 const nextForm = formKeys[index + 1];
                 const nextStep = formToStepMapping[nextForm];
@@ -88,7 +88,7 @@ const multiStepForm = () => {
 
     updateStepBar(1);
 
-    hbspt.forms.create(options[0]);
+    window.hbspt.forms.create(options[0]);
 };
 
 multiStepForm();
