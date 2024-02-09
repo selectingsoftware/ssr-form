@@ -1,11 +1,11 @@
 const formToStepMapping = {
-    "1aa90452-a352-4bce-848b-645ce088b9f7": 1, // 1 Requirements
-    "1847fccb-4e07-46fd-b987-5abd688303d2": 1, // 1.1 Requirements
-    "b1ded006-4c7d-4192-ba18-a08eeda6081c": 2, // 2 Your Info
-    "d6ed34de-f6d8-4408-8f8f-0472d4ceee59": 3  // 3 Get advice
+    "69dba9c6-a008-435d-866e-3d8f23ce936d": 1, // 1 Requirements
+    "77cdf42b-3eec-4bc8-8219-0310a41d5924": 1, // 1.1 Requirements
+    "0bdcee61-bc3f-4450-b5d4-5453268fde89": 2, // 2 Your Info
+    "347762a3-e6f8-4c4a-b4a2-e11b560fd6e3": 3  // 3 Get advice
 };
 
-const portalId = '45145570';
+const portalId = '22035903';
 const target = '#multistep-form';
 
 const data = [];
