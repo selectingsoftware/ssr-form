@@ -40,7 +40,7 @@ const generateFormOptions = (form, index) => {
         target,
         onFormReady: function(form) {
             if (index === 2) {
-                form.find('.hs_' + solutionField + ').hide();
+                form.find('.hs_' + solutionField).hide();
                 form.find('input[name="' + employeeField + '"]').val(data[0].value).change();
 
                 solutionValues.forEach(value => {
