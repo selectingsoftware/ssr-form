@@ -18,8 +18,6 @@ const updateStepBar = (currentStep) => {
     stepElements.forEach((stepElement, index) => {
         if (index + 1 === currentStep) {
             stepElement.classList.add('active');
-        } else {
-            stepElement.classList.remove('active');
         }
     });
 };
@@ -73,9 +71,9 @@ const generateFormOptions = (form, index) => {
                 const nextStep = formToStepMapping[nextForm];
                 if (nextStep) {
                     updateStepBar(nextStep);
-                    addCompletedClass(index);
                 }
             }
+            addCompletedClass(index);
         }
     };
 };
