@@ -7,6 +7,8 @@ const formToStepMapping = {
 
 const portalId = '22035903';
 const target = '#multistep-form';
+const solutionField = 'what_kind_of_solution_are_you_looking_for_';
+const employeeField = "0-2/employee_number"
 
 const data = [];
 const options = [];
@@ -38,15 +40,11 @@ const generateFormOptions = (form, index) => {
         target,
         onFormReady: function(form) {
             if (index === 2) {
-                form.find('input[name="0-2/employees"]').val(data[0].value).change();
+                form.find('.hs_' + solutionField).hide();
+                form.find('input[name="' + employeeField + '"]').val(data[0].value).change();
 
-                const checkboxes = document.querySelectorAll('input[name="0-2/solution"]');
                 solutionValues.forEach(value => {
-                    Array.from(checkboxes).forEach(cb => {
-                        if (cb.value === value) {
-                            cb.checked = true;
-                        }
-                    });
+                    form.find('input[name="' + solutionField + '"][value="' + value + '"]').prop('checked', true);
                 });
             }
         },
@@ -57,9 +55,8 @@ const generateFormOptions = (form, index) => {
             }
             if (index === 1) {
                 const incoming = $(form).serializeArray();
-                solutionValues.length = 0; // Clear previous values
                 solutionValues.push(...incoming
-                    .filter(item => item.name === "0-2/solution")
+                    .filter(item => item.name === solutionField)
                     .map(item => item.value));
             }
         },
