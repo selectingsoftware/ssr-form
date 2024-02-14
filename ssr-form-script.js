@@ -7,7 +7,7 @@ const formToStepMapping = {
 
 const portalId = '22035903';
 const target = '#multistep-form';
-const solutionField = 'what_kind_of_solution_are_you_looking_for_';
+const solutionField = 'software_type_requested';
 const employeeField = "0-2/employee_number"
 
 const data = [];
