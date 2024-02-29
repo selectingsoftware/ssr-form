@@ -39,6 +39,8 @@ const generateFormOptions = (form, index) => {
         formId: form,
         target,
         onFormReady: function(form) {
+            addSourceUrl();
+            
             if (index === 2) {
                 form.find('.hs_' + solutionField).hide();
                 form.find('input[name="' + employeeField + '"]').val(data[0].value).change();
@@ -81,7 +83,6 @@ const multiStepForm = () => {
     });
 
     updateStepBar(1);
-    addSourceUrl();
 
     hbspt.forms.create(options[0]);
 };
