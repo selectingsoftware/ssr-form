@@ -39,8 +39,6 @@ const generateFormOptions = (form, index) => {
         formId: form,
         target,
         onFormReady: function(form) {
-            addSourceUrl();
-            
             if (index === 2) {
                 form.find('.hs_' + solutionField).hide();
                 form.find('input[name="' + employeeField + '"]').val(data[0].value).change();
@@ -97,5 +95,9 @@ const addSourceUrl = () => {
         iframe.src = currentSrc + (currentSrc.includes('?') ? '&' : '?') + 'source=' + encodeURIComponent(window.location.href);
     }
 };
+
+document.addEventListener('DOMContentLoaded', function () {
+    addSourceUrl();
+});
 
 multiStepForm();
