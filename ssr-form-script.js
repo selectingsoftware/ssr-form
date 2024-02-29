@@ -81,6 +81,7 @@ const multiStepForm = () => {
     });
 
     updateStepBar(1);
+    addSourceUrl();
 
     hbspt.forms.create(options[0]);
 };
@@ -95,4 +96,3 @@ const addSourceUrl = () => {
 };
 
 multiStepForm();
-addSourceUrl();
