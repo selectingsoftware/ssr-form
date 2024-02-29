@@ -96,30 +96,4 @@ const addSourceUrl = () => {
     }
 };
 
-document.addEventListener('DOMContentLoaded', function () {
-    addSourceUrl();
-});
-
 multiStepForm();
-
-document.addEventListener('DOMContentLoaded', function () {
-    var iframe = document.getElementById('ssr-form');
-
-    if (iframe) {
-        // Adiciona um listener para aguardar mensagens do iframe
-        window.addEventListener('message', function (event) {
-            if (event.origin === 'https://selectingsoftware.github.io') {
-                // Verifica se a mensagem veio do iframe desejado
-                if (event.data === 'iframeLoaded') {
-                    // Envia a URL da página como mensagem para o iframe
-                    iframe.contentWindow.postMessage(window.location.href, 'https://selectingsoftware.github.io');
-                }
-            }
-        });
-
-        // Injeta um script no iframe para notificar quando o iframe estiver carregado
-        iframe.onload = function () {
-            iframe.contentWindow.postMessage('iframeLoaded', 'https://selectingsoftware.github.io');
-        };
-    }
-});
