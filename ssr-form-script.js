@@ -85,15 +85,4 @@ const multiStepForm = () => {
     hbspt.forms.create(options[0]);
 };
 
-const addSourceUrl = () => {
-    var iframe = document.getElementById('ssr-form');
-    console.log(iframe);
-
-    if (iframe) {
-        var currentSrc = iframe.src;
-        console.log(currentSrc);
-        iframe.src = currentSrc + (currentSrc.includes('?') ? '&' : '?') + 'source=' + encodeURIComponent(window.location.href);
-    }
-};
-
 multiStepForm();
