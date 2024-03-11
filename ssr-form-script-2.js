@@ -31,7 +31,7 @@ const options = [];
 const solutionValues = [];
 const formKeys = Object.keys(formInformation);
 
-const updateStepBar = (currentStep) => {
+const updateStepBar = (currentStep, nextForm) => {
     const stepElements = document.querySelectorAll('.step');
     stepElements.forEach((stepElement, index) => {
         if (index + 1 === currentStep) {
@@ -42,11 +42,13 @@ const updateStepBar = (currentStep) => {
     const progressBar = document.getElementById('progress-bar');
     const timerText = document.getElementById('timer-text');
 
-    const percentage = formInformation[currentStep].progressBarPercentage;
-    const timeRemaining = formInformation[currentStep].timeRemaining;
-
-    progressBar.style.width = percentage + '%';
-    timerText.innerText = timeRemaining;
+    if (nextForm) {
+        const percentage = formInformation[nextForm].progressBarPercentage;
+        const timeRemaining = formInformation[nextForm].timeRemaining;
+    
+        progressBar.style.width = percentage + '%';
+        timerText.innerText = timeRemaining;
+    }
 };
 
 const addCompletedClass = (step) => {
@@ -92,7 +94,7 @@ const generateFormOptions = (form, index) => {
                 const nextForm = formKeys[index + 1];
                 const nextStep = formInformation[nextForm].step;
                 if (nextStep) {
-                    updateStepBar(nextStep);
+                    updateStepBar(nextStep, nextForm);
                 }
             }
             addCompletedClass(index);
