@@ -164,6 +164,36 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
+        #progress-bar-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        #progress-bar {
+            height: 10px;
+            width: 0;
+            background-color: #3B81F6; /* Cor da barra de progresso ativa */
+            transition: width 0.3s ease-in-out;
+        }
+
+        #timer-container {
+            display: flex;
+            align-items: center;
+        }
+
+        #timer-container i {
+            margin-right: 5px;
+            font-size: 18px;
+        }
+
+        #timer-text {
+            font-size: 14px;
+            font-weight: bold;
+            color: #B8B9BD; /* Cor do texto do cronômetro */
+        }
     </style>
 </head>
 <body>
