@@ -40,6 +40,7 @@ const updateStepBar = (currentStep, nextForm) => {
     });
 
     const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
     const timerText = document.getElementById('timer-text');
 
     if (nextForm) {
@@ -47,6 +48,7 @@ const updateStepBar = (currentStep, nextForm) => {
         const timeRemaining = formInformation[nextForm].timeRemaining;
     
         progressBar.style.width = percentage + '%';
+        progressText.innerText = `Progress: ${percentage}%`;
         timerText.innerText = timeRemaining;
     }
 };
