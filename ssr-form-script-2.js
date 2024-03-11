@@ -1,8 +1,24 @@
-const formToStepMapping = {
-    "1aa90452-a352-4bce-848b-645ce088b9f7": 1, // 1 Requirements
-    "1847fccb-4e07-46fd-b987-5abd688303d2": 1, // 1.1 Requirements
-    "b1ded006-4c7d-4192-ba18-a08eeda6081c": 2, // 2 Your Info
-    "d6ed34de-f6d8-4408-8f8f-0472d4ceee59": 3  // 3 Get advice
+const formInformation = {
+    "1aa90452-a352-4bce-848b-645ce088b9f7": {
+        step: 1,  // 1 Requirements
+        progressBarPercentage: 0,
+        timeRemaining: "60 seconds left"
+    },
+    "1847fccb-4e07-46fd-b987-5abd688303d2": {
+        step: 1,  // 1.1 Requirements
+        progressBarPercentage: 25,
+        timeRemaining: "45 seconds left"
+    },
+    "b1ded006-4c7d-4192-ba18-a08eeda6081c": {
+        step: 2, // 2 Your Info
+        progressBarPercentage: 50,
+        timeRemaining: "30 seconds left"
+    },
+    "d6ed34de-f6d8-4408-8f8f-0472d4ceee59": {
+        step: 3, // 3 Get advice
+        progressBarPercentage: 75,
+        timeRemaining: "15 seconds left"
+    }
 };
 
 const portalId = '45145570';
@@ -13,7 +29,7 @@ const employeeField = '0-2/employees';
 const data = [];
 const options = [];
 const solutionValues = [];
-const formKeys = Object.keys(formToStepMapping);
+const formKeys = Object.keys(formInformation);
 
 const updateStepBar = (currentStep) => {
     const stepElements = document.querySelectorAll('.step');
@@ -65,7 +81,7 @@ const generateFormOptions = (form, index) => {
                 hbspt.forms.create(options[index + 1]);
                 
                 const nextForm = formKeys[index + 1];
-                const nextStep = formToStepMapping[nextForm];
+                const nextStep = formInformation[nextForm].step;
                 if (nextStep) {
                     updateStepBar(nextStep);
                 }
