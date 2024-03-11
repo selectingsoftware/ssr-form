@@ -42,13 +42,11 @@ const updateStepBar = (currentStep) => {
     const progressBar = document.getElementById('progress-bar');
     const timerText = document.getElementById('timer-text');
 
-    if (formInformation[currentStep]) {
-        const percentage = formInformation[currentStep].progressBarPercentage;
-        const timeRemaining = formInformation[currentStep].timeRemaining;
+    const percentage = formInformation[currentStep].progressBarPercentage;
+    const timeRemaining = formInformation[currentStep].timeRemaining;
 
-        progressBar.style.width = percentage + '%';
-        timerText.innerText = timeRemaining;
-    }
+    progressBar.style.width = percentage + '%';
+    timerText.innerText = timeRemaining;
 };
 
 const addCompletedClass = (step) => {
