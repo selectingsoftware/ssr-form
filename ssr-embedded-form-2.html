@@ -8,7 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
     <style>
-        body, html {
+        body {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -198,24 +198,54 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
         }
 
-        #progress-bar {
-            height: 20px;
-            width: 100%; /* Definindo a largura inicial para 100% */
-            background-color: #3B81F6; /* Cor da barra de progresso ativa */
-            transition: width 0.3s ease-in-out;
-            position: relative; /* Adicionando posição relativa */
+        .progress-bar-filled.bar-color-primary {
+            background-color: rgb(57, 218, 150);
         }
 
-        #progress-text {
+        .progress-bar-filled {
+            width: 100%;
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #fff; /* Cor do texto da barra de progresso */
-            font-size: 14px;
+            left: 0px;
+            bottom: 0px;
+            top: 0px;
+            transition: transform 0.4s linear 0s;
+            transform-origin: left center;
+            background-color: rgb(94, 194, 230);
+        }
+
+        .progress-bar.color-primary {
+            background-color: rgb(247, 247, 247);
+        }
+
+        .progress-bar {
+            overflow: hidden;
+            display: block;
+            z-index: 0;
+            background-color: rgb(193, 231, 245);
+            height: 100%;
+            position: relative;
+            grid-row-start: 1;
+            grid-column-start: 1;
+        }
+
+        .progress-text {
+            margin: 0px;
+            font-family: "Public Sans", sans-serif;
+            font-weight: 400;
+            grid-row-start: 1;
+            grid-column-start: 1;
+            position: relative;
+            width: inherit;
+            z-index: 1;
+            line-height: 25px;
+            font-size: 11px;
+            text-shadow: rgb(255, 255, 255) 1px 1px 4px;
+            color: rgb(0, 0, 0);
+            text-align: center;
+            transition: color 0.5s ease 0s, textShadow 0.5s ease 0s;
         }
 
         #timer-container {
@@ -276,7 +306,10 @@
         -->
         <div id="progress-bar-container">
             <div id="progress-bar">
-                <div id="progress-text">Progress: 0%</div>
+                <p class="progress-text">Progress: 0%</div>
+                <span class="color-primary progress-bar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">
+                    <span class="bar-color-primary progress-bar-filled" style="transform: translateX(-55%);"></span>
+                </span>
             </div>
         </div>
         <div id="timer-container">
