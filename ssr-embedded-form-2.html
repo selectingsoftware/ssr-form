@@ -294,6 +294,14 @@
             font-size: 12px;
             color: rgb(0, 0, 0);
         }
+        
+        .text-header {
+            border: 0;
+            font-size: 100%;
+            margin: 0;
+            padding: 0;
+            vertical-align: baseline;
+        }
 
         .hs-button:hover {
             border-radius: 6px !important;
@@ -340,11 +348,18 @@
             </div>
         </div>
         -->
+        <div class="text-header">
+            <h2 style="text-align: center; visibility: visible;">
+                <span style="color: #000000">Book a Free Consult with an HR Software Expert - Limited Spots Remaining.</span>
+            </h2>
+        </div>
         <div id="progress-bar-container">
             <div class="progress-bar-root">
                 <p id="progress-text">Progress: 0%</p>
-                <span id="progress-bar" class="color-primary progress-bar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                    <span id="progress-bar-filled" class="bar-color-primary progress-bar-filled" style="transform: translateX(-100%);"></span>
+                <span id="progress-bar" class="color-primary progress-bar" aria-valuenow="0" aria-valuemin="0"
+                    aria-valuemax="100">
+                    <span id="progress-bar-filled" class="bar-color-primary progress-bar-filled"
+                        style="transform: translateX(-100%);"></span>
                 </span>
             </div>
         </div>
@@ -352,7 +367,9 @@
         <div id="timer-container">
             <p id="timer-text">
                 <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                    <path d="M176 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h16V98.4C92.3 113.8 16 200 16 304c0 114.9 93.1 208 208 208s208-93.1 208-208c0-41.8-12.3-80.7-33.5-113.2l24.1-24.1c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L355.7 143c-28.1-23-62.2-38.8-99.7-44.6V64h16c17.7 0 32-14.3 32-32s-14.3-32-32-32H224 176zm72 192V320c0 13.3-10.7 24-24 24s-24-10.7-24-24V192c0-13.3 10.7-24 24-24s24 10.7 24 24z"></path>
+                    <path
+                        d="M176 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h16V98.4C92.3 113.8 16 200 16 304c0 114.9 93.1 208 208 208s208-93.1 208-208c0-41.8-12.3-80.7-33.5-113.2l24.1-24.1c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L355.7 143c-28.1-23-62.2-38.8-99.7-44.6V64h16c17.7 0 32-14.3 32-32s-14.3-32-32-32H224 176zm72 192V320c0 13.3-10.7 24-24 24s-24-10.7-24-24V192c0-13.3 10.7-24 24-24s24 10.7 24 24z">
+                    </path>
                 </svg>
                 <strong id="timer-text-replaced">60</strong> seconds left...
             </p>
