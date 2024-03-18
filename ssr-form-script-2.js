@@ -39,7 +39,7 @@ const updateStepBar = (currentStep, nextForm) => {
         }
     });
 
-    const progressBar = document.getElementsByClassName('progress-bar');
+    const progressBar = document.getElementById('progress-bar');
     const progressText = document.getElementById('progress-text');
     const timerText = document.getElementById('timer-text');
 
