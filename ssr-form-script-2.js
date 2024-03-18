@@ -40,6 +40,7 @@ const updateStepBar = (currentStep, nextForm) => {
     });
 
     const progressBar = document.getElementById('progress-bar');
+    const progressBarFilled = document.getElementById('progress-bar-filled');
     const progressText = document.getElementById('progress-text');
     const timerText = document.getElementById('timer-text');
 
@@ -50,6 +51,9 @@ const updateStepBar = (currentStep, nextForm) => {
         progressBar.setAttribute('aria-valuenow', percentage);
         progressText.innerText = `Progress: ${percentage}%`;
         timerText.innerText = timeRemaining;
+
+        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : 0;
+        progressBarFilled.style.transform = `translateX(${translateXValue})`;
     }
 };
 
