@@ -227,11 +227,11 @@
             margin-bottom: 5px;
         }
 
-        .progress-bar-filled.bar-color-primary {
+        #progress-bar-filled.bar-color-primary {
             background-color: rgb(57, 218, 150);
         }
 
-        .progress-bar-filled {
+        #progress-bar-filled {
             width: 100%;
             position: absolute;
             left: 0px;
@@ -242,11 +242,11 @@
             background-color: rgb(94, 194, 230);
         }
 
-        .progress-bar.color-primary {
+        #progress-bar.color-primary {
             background-color: rgb(247, 247, 247);
         }
 
-        .progress-bar {
+        #progress-bar {
             overflow: hidden;
             display: block;
             z-index: 0;
@@ -257,7 +257,7 @@
             grid-column-start: 1;
         }
 
-        .progress-text {
+        #progress-text {
             margin: 0px;
             font-family: "Public Sans", sans-serif;
             font-weight: 400;
@@ -334,9 +334,9 @@
         -->
         <div id="progress-bar-container">
             <div id="progress-bar">
-                <p class="progress-text">Progress: 0%</p>
+                <p id="progress-text">Progress: 0%</p>
             </div>
-            <span class="color-primary progress-bar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">
+            <span class="color-primary progress-bar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                 <span class="bar-color-primary progress-bar-filled" style="transform: translateX(-55%);"></span>
             </span>
         </div>
