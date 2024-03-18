@@ -47,11 +47,9 @@ const updateStepBar = (currentStep, nextForm) => {
         const percentage = formInformation[nextForm].progressBarPercentage;
         const timeRemaining = formInformation[nextForm].timeRemaining;
     
-        progressBar.style.width = percentage + '%';
+        progressBar.setAttribute('aria-valuenow', percentage);
         progressText.innerText = `Progress: ${percentage}%`;
         timerText.innerText = timeRemaining;
-
-        progressBar.setAttribute('aria-valuenow', percentage);
     }
 };
 
