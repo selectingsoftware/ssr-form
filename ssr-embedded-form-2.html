@@ -8,11 +8,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
     <style>
-        body {
+        body, html {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            height: 100%;
             margin: 0;
         }
         
@@ -53,8 +53,18 @@
             to   { opacity: 1; }
         }
 
-        @media (min-width: 500px) svg-icon {
-            font-size: 13px;
+        @media (min-width: 500px) {
+            .svg-icon {
+                font-size: 13px;
+            }
+        }
+
+        /* Adicione as media queries conforme necessário */
+        @media (max-width: 768px) {
+            .svg-icon {
+                /* Ajuste de estilos para telas menores */
+                padding: 10px;
+            }
         }
         
         .svg-icon {
@@ -209,7 +219,8 @@
 
         #timer-container {
             display: flex;
-            align-items: center;
+            justify-content: center;
+            height: 100%;
         }
 
         #timer-container i {
@@ -226,6 +237,7 @@
 </head>
 <body>
     <div class="ssr-form-container">
+        <!--
         <div class="step-bar">
             <div class="step" id="step1">
                 <div class="step-circle">
@@ -260,6 +272,7 @@
                 <span class="step-text">Get Advice</span>
             </div>
         </div>
+        -->
         <div id="progress-bar-container">
             <div id="progress-bar">
                 <div id="progress-text">Progress: 0%</div>
