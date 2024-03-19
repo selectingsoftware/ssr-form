@@ -84,7 +84,7 @@ const generateFormOptions = (form, index) => {
             }
 
             if (index === 3) {
-                var userName = "John";
+                var userName = extractValueByName(data, 'firstname');
 
                 // Selecione todos os elementos com a classe 'hs-richtext'
                 var richtextElements = document.getElementsByClassName('hs-richtext');
@@ -128,6 +128,15 @@ const generateFormOptions = (form, index) => {
             addCompletedClass(index);
         }
     };
+};
+
+const extractValueByName = (array, name) => {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i].name === name) {
+            return array[i].value;
+        }
+    }
+    return null;
 };
 
 const addEvents = (form) => {
