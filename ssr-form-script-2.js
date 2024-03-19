@@ -78,6 +78,7 @@ const generateFormOptions = (form, index) => {
                     event.preventDefault();
                 
                     $(this).css('border-radius', '6px');
+                    $(this).css('box-shadow', 'rgba(0, 0, 0, 0.25) 1px 2px 5px');
 
                     //this.style.border.radius = '6px';
                     //this.style.box.shadow = 'rgba(0, 0, 0, 0.25) 1px 2px 5px';
@@ -86,6 +87,9 @@ const generateFormOptions = (form, index) => {
                 form.find('input[type="submit"]').on('mouseout', function(event) {
                     console.log('passou aqui tbm');
                     event.preventDefault();
+
+                    $(this).css('border-radius', '');
+                    $(this).css('box-shadow', '');
                 
                     //this.style.border.radius = '';
                     //this.style.box.shadow = '';
