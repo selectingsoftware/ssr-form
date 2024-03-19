@@ -111,7 +111,7 @@ const generateFormOptions = (form, index) => {
             if (index === 2) {
                 const form3 = $(form).serializeArray();
                 console.log(form3);
-                data = data.concat(form3);
+                data = [...data, ...form3];
             }
         },
         onFormSubmitted: function() {
