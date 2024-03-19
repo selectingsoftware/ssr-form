@@ -47,6 +47,15 @@ const updateProgressBar = (nextForm) => {
 
         const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : 0;
         progressBarFilled.style.transform = `translateX(${translateXValue})`;
+    } else {
+        const percentage = 100
+        progressBar.setAttribute('aria-valuenow', percentage);
+        progressText.innerText = `Progress: ${percentage}%`;
+
+        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : 0;
+        progressBarFilled.style.transform = `translateX(${translateXValue})`;
+
+        timerText.hide();
     }
 };
 
@@ -99,6 +108,8 @@ const generateFormOptions = (form, index) => {
                 if (nextForm) {
                     updateProgressBar(nextForm);
                 }
+            } else {
+                updateProgressBar()
             }
         }
     };
