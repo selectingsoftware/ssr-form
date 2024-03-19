@@ -84,9 +84,11 @@ const generateFormOptions = (form, index) => {
             }
 
             if (index === 3) {
-                console.log('data: ', data);
                 var userName = extractValueByName(data, 'firstname');
-                console.log('username: ', userName);
+
+                form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
+                    return oldHtml.replace('{FirstName}', userName);
+                });
 
                 var richtextElements = document.getElementsByClassName('hs-richtext');
 
@@ -110,7 +112,6 @@ const generateFormOptions = (form, index) => {
             }
             if (index === 2) {
                 const form3 = $(form).serializeArray();
-                console.log(form3);
                 data.push(...form3);
             }
         },
