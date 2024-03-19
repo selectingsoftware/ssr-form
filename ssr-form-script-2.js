@@ -77,8 +77,8 @@ const generateFormOptions = (form, index) => {
                     console.log('passou aqui');
                     event.preventDefault();
                 
-                    $(this).css('border-radius', '6px');
-                    $(this).css('box-shadow', 'rgba(0, 0, 0, 0.25) 1px 2px 5px');
+                    $(this).css('background-color', 'rgb(254, 161, 34)')
+                    $(this).css('box-shadow', 'rgba(0, 0, 0, 0.4) 2px 4px 10px 1p');
 
                     //this.style.border.radius = '6px';
                     //this.style.box.shadow = 'rgba(0, 0, 0, 0.25) 1px 2px 5px';
@@ -88,7 +88,7 @@ const generateFormOptions = (form, index) => {
                     console.log('passou aqui tbm');
                     event.preventDefault();
 
-                    $(this).css('border-radius', '');
+                    $(this).css('background-color', '')
                     $(this).css('box-shadow', '');
                 
                     //this.style.border.radius = '';
