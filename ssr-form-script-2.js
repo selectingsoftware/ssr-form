@@ -114,14 +114,14 @@ const addEvents = (form) => {
     form.find('input[type="submit"]').on('mouseover', function(event) {
         event.preventDefault();
     
-        $(this).css('background-color', 'rgb(254, 161, 34)');
-        $(this).css('box-shadow', 'rgba(0, 0, 0, 0.4) 2px 4px 10px 1p');
+        //$(this).css('background-color', 'rgb(254, 161, 34)');
+        $(this).css('box-shadow', '2px 4px 10px 1p rgba(0, 0, 0, 0.5)');
     });
 
     form.find('input[type="submit"]').on('mouseout', function(event) {
         event.preventDefault();
 
-        $(this).css('background-color', '');
+        //$(this).css('background-color', '');
         $(this).css('box-shadow', '');
     });
 };
