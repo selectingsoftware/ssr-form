@@ -71,8 +71,10 @@ const generateFormOptions = (form, index) => {
         portalId,
         formId: form,
         target,
-        cssClass: "hs-button",
         onFormReady: function(form) {
+            if (index === 0) {
+                addEvents();
+            }
             if (index === 2) {
                 form.find('.hs_' + solutionField).hide();
                 form.find('input[name="' + employeeField + '"]').val(data[0].value).change();
@@ -117,6 +119,20 @@ const multiStepForm = () => {
     updateStepBar(1);
 
     hbspt.forms.create(options[0]);
+};
+
+const addEvents = () => {
+    const button = document.querySelector('.hs-button');
+
+    button.addEventListener('mouseover', function() {
+        this.style.border.radius = '6px';
+        this.style.box.shadow = 'rgba(0, 0, 0, 0.25) 1px 2px 5px';
+    });
+
+    button.addEventListener('mouseout', function() {
+        this.style.border.radius = '';
+        this.style.box.shadow = '';
+    });
 };
 
 multiStepForm();
