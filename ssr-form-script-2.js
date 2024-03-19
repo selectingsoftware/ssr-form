@@ -55,7 +55,8 @@ const updateProgressBar = (nextForm) => {
         const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : 0;
         progressBarFilled.style.transform = `translateX(${translateXValue})`;
 
-        form.find('timer-text').hide();
+        const timerContainer = document.getElementById('timer-container');
+        timerContainer.style.display = 'none';
     }
 };
 
