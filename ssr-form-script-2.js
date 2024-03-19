@@ -77,16 +77,18 @@ const generateFormOptions = (form, index) => {
                     console.log('passou aqui');
                     event.preventDefault();
                 
-                    this.style.border.radius = '6px';
-                    this.style.box.shadow = 'rgba(0, 0, 0, 0.25) 1px 2px 5px';
+                    $(this).css('border-radius', '6px');
+
+                    //this.style.border.radius = '6px';
+                    //this.style.box.shadow = 'rgba(0, 0, 0, 0.25) 1px 2px 5px';
                 });
 
                 form.find('input[type="submit"]').on('mouseout', function(event) {
                     console.log('passou aqui tbm');
                     event.preventDefault();
                 
-                    this.style.border.radius = '';
-                    this.style.box.shadow = '';
+                    //this.style.border.radius = '';
+                    //this.style.box.shadow = '';
                 });
             }
             if (index === 2) {
