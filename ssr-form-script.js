@@ -31,14 +31,7 @@ const options = [];
 const solutionValues = [];
 const formKeys = Object.keys(formInformation);
 
-const updateStepBar = (currentStep, nextForm) => {
-    const stepElements = document.querySelectorAll('.step');
-    stepElements.forEach((stepElement, index) => {
-        if (index + 1 === currentStep) {
-            stepElement.classList.add('active');
-        }
-    });
-
+const updateProgressBar = (nextForm) => {
     const progressBar = document.getElementById('progress-bar');
     const progressBarFilled = document.getElementById('progress-bar-filled');
     const progressText = document.getElementById('progress-text');
@@ -54,16 +47,17 @@ const updateStepBar = (currentStep, nextForm) => {
 
         const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : 0;
         progressBarFilled.style.transform = `translateX(${translateXValue})`;
-    }
-};
+    } else {
+        const percentage = 100
+        progressBar.setAttribute('aria-valuenow', percentage);
+        progressText.innerText = `Progress: ${percentage}%`;
 
-const addCompletedClass = (step) => {
-    const stepElements = document.querySelectorAll('.step');
-    stepElements.forEach((stepElement, index) => {
-        if (index + 1 === step) {
-            stepElement.classList.add('completed');
-        }
-    });
+        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : 0;
+        progressBarFilled.style.transform = `translateX(${translateXValue})`;
+
+        const timerContainer = document.getElementById('timer-container');
+        timerContainer.style.display = 'none';
+    }
 };
 
 const generateFormOptions = (form, index) => {
@@ -82,17 +76,29 @@ const generateFormOptions = (form, index) => {
                     form.find('input[name="' + solutionField + '"][value="' + value + '"]').prop('checked', true);
                 });
             }
+
+            if (index === 3) {
+                var userName = extractValueByName(data, 'firstname');
+
+                form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
+                    return oldHtml.replace('{FirstName}', userName);
+                });
+            }
         },
         onFormSubmit: function(form) {
             if (index === 0) {
-                const incoming = $(form).serializeArray();
-                data.push(incoming[0]);
+                const form1 = $(form).serializeArray();
+                data.push(form1[0]);
             }
             if (index === 1) {
-                const incoming = $(form).serializeArray();
-                solutionValues.push(...incoming
+                const form2 = $(form).serializeArray();
+                solutionValues.push(...form2
                     .filter(item => item.name === solutionField)
                     .map(item => item.value));
+            }
+            if (index === 2) {
+                const form3 = $(form).serializeArray();
+                data.push(...form3);
             }
         },
         onFormSubmitted: function() {
@@ -100,14 +106,23 @@ const generateFormOptions = (form, index) => {
                 hbspt.forms.create(options[index + 1]);
                 
                 const nextForm = formKeys[index + 1];
-                const nextStep = formInformation[nextForm].step;
-                if (nextStep) {
-                    updateStepBar(nextStep, nextForm);
+                if (nextForm) {
+                    updateProgressBar(nextForm);
                 }
+            } else {
+                updateProgressBar()
             }
-            addCompletedClass(index);
         }
     };
+};
+
+const extractValueByName = (array, name) => {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i].name === name) {
+            return array[i].value;
+        }
+    }
+    return null;
 };
 
 const addEvents = (form) => {
@@ -128,8 +143,6 @@ const multiStepForm = () => {
     formKeys.forEach((form, index) => {
         options.push(generateFormOptions(form, index));
     });
-
-    updateStepBar(1);
 
     hbspt.forms.create(options[0]);
 };
