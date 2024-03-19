@@ -82,17 +82,37 @@ const generateFormOptions = (form, index) => {
                     form.find('input[name="' + solutionField + '"][value="' + value + '"]').prop('checked', true);
                 });
             }
+
+            if (index === 3) {
+                var userName = "John";
+
+                // Selecione todos os elementos com a classe 'hs-richtext'
+                var richtextElements = document.getElementsByClassName('hs-richtext');
+
+                // Iterar sobre os elementos encontrados
+                for (var i = 0; i < richtextElements.length; i++) {
+                    // Verifique se o texto do elemento contém "{FirstName}"
+                    if (richtextElements[i].innerHTML.includes('{FirstName}')) {
+                        // Substitua o texto "{FirstName}" pelo nome do usuário
+                        richtextElements[i].innerHTML = richtextElements[i].innerHTML.replace('{FirstName}', userName);
+                    }
+                }
+            }
         },
         onFormSubmit: function(form) {
             if (index === 0) {
-                const incoming = $(form).serializeArray();
-                data.push(incoming[0]);
+                const form1 = $(form).serializeArray();
+                data.push(form1[0]);
             }
             if (index === 1) {
-                const incoming = $(form).serializeArray();
-                solutionValues.push(...incoming
+                const form2 = $(form).serializeArray();
+                solutionValues.push(...form2
                     .filter(item => item.name === solutionField)
                     .map(item => item.value));
+            }
+            if (index === 2) {
+                const form3 = $(form).serializeArray();
+                console.log(form3);
             }
         },
         onFormSubmitted: function() {
