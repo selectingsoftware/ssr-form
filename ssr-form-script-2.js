@@ -31,14 +31,7 @@ const options = [];
 const solutionValues = [];
 const formKeys = Object.keys(formInformation);
 
-const updateStepBar = (currentStep, nextForm) => {
-    const stepElements = document.querySelectorAll('.step');
-    stepElements.forEach((stepElement, index) => {
-        if (index + 1 === currentStep) {
-            stepElement.classList.add('active');
-        }
-    });
-
+const updateProgressBar = (nextForm) => {
     const progressBar = document.getElementById('progress-bar');
     const progressBarFilled = document.getElementById('progress-bar-filled');
     const progressText = document.getElementById('progress-text');
@@ -55,15 +48,6 @@ const updateStepBar = (currentStep, nextForm) => {
         const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : 0;
         progressBarFilled.style.transform = `translateX(${translateXValue})`;
     }
-};
-
-const addCompletedClass = (step) => {
-    const stepElements = document.querySelectorAll('.step');
-    stepElements.forEach((stepElement, index) => {
-        if (index + 1 === step) {
-            stepElement.classList.add('completed');
-        }
-    });
 };
 
 const generateFormOptions = (form, index) => {
@@ -89,14 +73,6 @@ const generateFormOptions = (form, index) => {
                 form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
                     return oldHtml.replace('{FirstName}', userName);
                 });
-
-                var richtextElements = document.getElementsByClassName('hs-richtext');
-
-                for (var i = 0; i < richtextElements.length; i++) {
-                    if (richtextElements[i].innerHTML.includes('{FirstName}')) {
-                        richtextElements[i].innerHTML = richtextElements[i].innerHTML.replace('{FirstName}', userName);
-                    }
-                }
             }
         },
         onFormSubmit: function(form) {
@@ -120,12 +96,10 @@ const generateFormOptions = (form, index) => {
                 hbspt.forms.create(options[index + 1]);
                 
                 const nextForm = formKeys[index + 1];
-                const nextStep = formInformation[nextForm].step;
-                if (nextStep) {
-                    updateStepBar(nextStep, nextForm);
+                if (nextForm) {
+                    updateProgressBar(nextForm);
                 }
             }
-            addCompletedClass(index);
         }
     };
 };
@@ -157,8 +131,6 @@ const multiStepForm = () => {
     formKeys.forEach((form, index) => {
         options.push(generateFormOptions(form, index));
     });
-
-    updateStepBar(1);
 
     hbspt.forms.create(options[0]);
 };
