@@ -73,14 +73,18 @@ const generateFormOptions = (form, index) => {
         target,
         onFormReady: function(form) {
             if (index === 0) {
-                const button = form.querySelector('.hs-button');
-
-                button.addEventListener('mouseover', function() {
+                form.find('input[type="submit"]').on('mouseover', function(event) {
+                    console.log('passou aqui');
+                    event.preventDefault();
+                
                     this.style.border.radius = '6px';
                     this.style.box.shadow = 'rgba(0, 0, 0, 0.25) 1px 2px 5px';
                 });
 
-                button.addEventListener('mouseout', function() {
+                form.find('input[type="submit"]').on('mouseout', function(event) {
+                    console.log('passou aqui tbm');
+                    event.preventDefault();
+                
                     this.style.border.radius = '';
                     this.style.box.shadow = '';
                 });
