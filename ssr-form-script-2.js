@@ -73,7 +73,7 @@ const generateFormOptions = (form, index) => {
         target,
         onFormReady: function(form) {
             if (index === 0) {
-                const button = document.querySelector('.hs-button');
+                const button = form.querySelector('.hs-button');
 
                 button.addEventListener('mouseover', function() {
                     this.style.border.radius = '6px';
