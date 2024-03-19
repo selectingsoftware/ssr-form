@@ -72,29 +72,8 @@ const generateFormOptions = (form, index) => {
         formId: form,
         target,
         onFormReady: function(form) {
-            if (index === 0) {
-                form.find('input[type="submit"]').on('mouseover', function(event) {
-                    console.log('passou aqui');
-                    event.preventDefault();
-                
-                    $(this).css('background-color', 'rgb(254, 161, 34)')
-                    $(this).css('box-shadow', 'rgba(0, 0, 0, 0.4) 2px 4px 10px 1p');
+            addEvents(form);
 
-                    //this.style.border.radius = '6px';
-                    //this.style.box.shadow = 'rgba(0, 0, 0, 0.25) 1px 2px 5px';
-                });
-
-                form.find('input[type="submit"]').on('mouseout', function(event) {
-                    console.log('passou aqui tbm');
-                    event.preventDefault();
-
-                    $(this).css('background-color', '')
-                    $(this).css('box-shadow', '');
-                
-                    //this.style.border.radius = '';
-                    //this.style.box.shadow = '';
-                });
-            }
             if (index === 2) {
                 form.find('.hs_' + solutionField).hide();
                 form.find('input[name="' + employeeField + '"]').val(data[0].value).change();
@@ -129,6 +108,22 @@ const generateFormOptions = (form, index) => {
             addCompletedClass(index);
         }
     };
+};
+
+const addEvents = (form) => {
+    form.find('input[type="submit"]').on('mouseover', function(event) {
+        event.preventDefault();
+    
+        $(this).css('background-color', 'rgb(254, 161, 34)');
+        $(this).css('box-shadow', 'rgba(0, 0, 0, 0.4) 2px 4px 10px 1p');
+    });
+
+    form.find('input[type="submit"]').on('mouseout', function(event) {
+        event.preventDefault();
+
+        $(this).css('background-color', '');
+        $(this).css('box-shadow', '');
+    });
 };
 
 const multiStepForm = () => {
