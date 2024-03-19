@@ -84,10 +84,15 @@ const generateFormOptions = (form, index) => {
             }
 
             if (index === 3) {
+                console.log('passou aqui');
                 var userName = extractValueByName(data, 'firstname');
+
+                console.log('username: ', userName);
 
                 // Selecione todos os elementos com a classe 'hs-richtext'
                 var richtextElements = document.getElementsByClassName('hs-richtext');
+
+                console.log('richtextElements: ', richtextElements);
 
                 // Iterar sobre os elementos encontrados
                 for (var i = 0; i < richtextElements.length; i++) {
