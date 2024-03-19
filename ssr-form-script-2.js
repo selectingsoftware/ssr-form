@@ -86,19 +86,12 @@ const generateFormOptions = (form, index) => {
             if (index === 3) {
                 console.log('data: ', data);
                 var userName = extractValueByName(data, 'firstname');
-
                 console.log('username: ', userName);
 
-                // Selecione todos os elementos com a classe 'hs-richtext'
                 var richtextElements = document.getElementsByClassName('hs-richtext');
 
-                console.log('richtextElements: ', richtextElements);
-
-                // Iterar sobre os elementos encontrados
                 for (var i = 0; i < richtextElements.length; i++) {
-                    // Verifique se o texto do elemento contém "{FirstName}"
                     if (richtextElements[i].innerHTML.includes('{FirstName}')) {
-                        // Substitua o texto "{FirstName}" pelo nome do usuário
                         richtextElements[i].innerHTML = richtextElements[i].innerHTML.replace('{FirstName}', userName);
                     }
                 }
@@ -118,7 +111,7 @@ const generateFormOptions = (form, index) => {
             if (index === 2) {
                 const form3 = $(form).serializeArray();
                 console.log(form3);
-                data.concat(form3);
+                data = data.concat(form3);
             }
         },
         onFormSubmitted: function() {
