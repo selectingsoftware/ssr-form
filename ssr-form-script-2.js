@@ -84,7 +84,7 @@ const generateFormOptions = (form, index) => {
             }
 
             if (index === 3) {
-                console.log('passou aqui');
+                console.log('data: ', data);
                 var userName = extractValueByName(data, 'firstname');
 
                 console.log('username: ', userName);
