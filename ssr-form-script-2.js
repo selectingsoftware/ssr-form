@@ -115,7 +115,7 @@ const addEvents = (form) => {
         event.preventDefault();
     
         //$(this).css('background-color', 'rgb(254, 161, 34)');
-        $(this).css('box-shadow', '2px 4px 10px 1p rgba(0, 0, 0, 0.5)');
+        $(this).css('box-shadow', 'rgba(0, 0, 0, 0.4) 2px 4px 10px 1px');
     });
 
     form.find('input[type="submit"]').on('mouseout', function(event) {
