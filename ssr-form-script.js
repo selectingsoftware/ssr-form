@@ -24,7 +24,7 @@ const formInformation = {
 const portalId = '22035903';
 const target = '#multistep-form';
 const solutionField = 'software_type_requested';
-const employeeField = "0-2/employee_number"
+const employeeField = "annualrevenue"
 
 const data = [];
 const options = [];
