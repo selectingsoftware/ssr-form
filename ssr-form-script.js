@@ -66,6 +66,7 @@ const generateFormOptions = (form, index) => {
         formId: form,
         target,
         onFormReady: function(form) {
+            addCustomCss(form);
             addEvents(form);
 
             if (index === 2) {
@@ -124,6 +125,10 @@ const extractValueByName = (array, name) => {
     }
     return null;
 };
+
+const addCssCustom = (form) => {
+    form.find('label[class="hs-form-radio-display"]').addClass('hs-form-radio-display-custom');
+}
 
 const addEvents = (form) => {
     form.find('input[type="submit"]').on('mouseover', function(event) {
