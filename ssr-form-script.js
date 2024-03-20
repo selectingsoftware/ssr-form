@@ -154,7 +154,7 @@ const addEvents = (form) => {
         $(this).css('box-shadow', '');
     });
 
-    if (index == 0) {
+    if (index === 0) {
         var labels = form.find('label');
         labels.on('click', function() {
             var inputId = $(this).attr('for');
