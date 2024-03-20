@@ -141,7 +141,7 @@ const addCustomCss = (form) => {
         .css('padding', '5px')
 }
 
-const addEvents = (form) => {
+const addEvents = (form, index) => {
     form.find('input[type="submit"]').on('mouseover', function(event) {
         event.preventDefault();
     
