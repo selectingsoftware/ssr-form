@@ -126,7 +126,7 @@ const extractValueByName = (array, name) => {
     return null;
 };
 
-const addCssCustom = (form) => {
+const addCustomCss = (form) => {
     form.find('label[class="hs-form-radio-display"]').addClass('hs-form-radio-display-custom');
 }
 
