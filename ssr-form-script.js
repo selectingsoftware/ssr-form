@@ -67,7 +67,7 @@ const generateFormOptions = (form, index) => {
         target,
         onFormReady: function(form) {
             addCustomCss(form);
-            addEvents(form);
+            addEvents(form, index);
 
             if (index === 2) {
                 form.find('.hs_' + solutionField).hide();
@@ -154,20 +154,22 @@ const addEvents = (form) => {
         $(this).css('box-shadow', '');
     });
 
-    var labels = form.find('label');
-    labels.on('click', function() {
-        var inputId = $(this).attr('for');
-        console.log('inputID: ', inputId);
-
-        if (inputId) {
-            var input = form.find('#' + inputId);
-            console.log('input: ', input);
-
-            if (input.length > 0) {
-                form.submit();
+    if (index == 0) {
+        var labels = form.find('label');
+        labels.on('click', function() {
+            var inputId = $(this).attr('for');
+            console.log('inputID: ', inputId);
+    
+            if (inputId) {
+                var input = form.find('#' + inputId);
+                console.log('input: ', input);
+    
+                if (input.length > 0) {
+                    form.submit();
+                }
             }
-        }
-    });
+        });
+    }
 };
 
 const multiStepForm = () => {
