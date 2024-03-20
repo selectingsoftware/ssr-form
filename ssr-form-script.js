@@ -127,7 +127,18 @@ const extractValueByName = (array, name) => {
 };
 
 const addCustomCss = (form) => {
-    form.find('label[class="hs-form-radio-display"]').addClass('hs-form-radio-display-custom');
+    form.find('label[class="hs-form-radio-display"]')
+        .css('color', 'rgba(0, 0, 0, 0.87)')
+        .css('transition', 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms')
+        .css('background-color', 'rgb(249, 249, 249)')
+        .css('border', '1px solid rgb(198, 198, 198)')
+        .css('border-radius', '4px')
+        .css('box-shadow', 'rgba(33, 33, 33, 0.1) 0px 2px 5px')
+        .css('box-sizing', 'border-box')
+        .css('cursor', 'pointer')
+        .css('position', 'relative')
+        .css('overflow', 'visible')
+        .css('padding', '5px')
 }
 
 const addEvents = (form) => {
@@ -141,6 +152,21 @@ const addEvents = (form) => {
         event.preventDefault();
 
         $(this).css('box-shadow', '');
+    });
+
+    var labels = form.find('label');
+    labels.on('click', function() {
+        var inputId = $(this).attr('for');
+        console.log('inputID: ', inputId);
+
+        if (inputId) {
+            var input = form.find('#' + inputId);
+            console.log('input: ', input);
+
+            if (input.length > 0) {
+                form.submit();
+            }
+        }
     });
 };
 
