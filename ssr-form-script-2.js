@@ -113,10 +113,10 @@ const generateFormOptions = (form, index) => {
 
                     setTimeout(() => {
                         loadingContainer.style.display = 'none';
-                        createNextFormAndUpdateProgressBar(nextForm);
+                        createNextFormAndUpdateProgressBar(nextForm, index);
                     }, 2000);
                 } else {
-                    createNextFormAndUpdateProgressBar(nextForm);
+                    createNextFormAndUpdateProgressBar(nextForm, index);
                 }
             } else {
                 updateProgressBar();
@@ -125,7 +125,7 @@ const generateFormOptions = (form, index) => {
     };
 };
 
-const createNextFormAndUpdateProgressBar = (nextForm) => {
+const createNextFormAndUpdateProgressBar = (nextForm, index) => {
     hbspt.forms.create(options[index + 1]);
 
     if (nextForm) {
