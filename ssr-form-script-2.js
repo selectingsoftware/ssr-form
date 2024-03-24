@@ -155,6 +155,20 @@ const addCustomCss = (form) => {
         .css('position', 'relative')
         .css('overflow', 'visible')
         .css('padding', '5px')
+
+    form.find('div[class="actions"]')
+        .css('display', 'flex')
+        .css('flex-direction', 'row')
+
+    form.find('button[class="hs-back-button"]')
+        .css('color', 'rgb(0, 0, 0)')
+        .css('background-colorn', 'rgb(237, 237, 237)')
+        .css('min-width', '45px')
+        .css('border-radius', '4px')
+        .css('border', '0px')
+        .css('padding', '6px 8px')
+        .css('transition', 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;')
+        .css('cursor', 'pointer')
 }
 
 const addEvents = (form, index) => {
@@ -188,8 +202,8 @@ const addEvents = (form, index) => {
     }
 
     if (index > 0) {
-        const backButton = $('<input type="button" class="hs-button primary large" value="Voltar">');
-        //const backButton = $('<button class="" tabindex="0" type="button"><span><svg focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M15.41 16.59 10.83 12l4.58-4.59L14 6l-6 6 6 6z"></path></svg></span></button><div>&nbsp;</div>');
+        //const backButton = $('<input type="button" class="hs-button primary large" value="Voltar">');
+        const backButton = $('<div style="height: 100%;"><button class="hs-back-button" tabindex="0" type="button"><span><svg focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M15.41 16.59 10.83 12l4.58-4.59L14 6l-6 6 6 6z"></path></svg></span></button></div><div>&nbsp;</div>');
         backButton.on('click', function(event) {
             event.preventDefault();
             const previousForm = formKeys[index - 1];
