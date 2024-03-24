@@ -113,10 +113,10 @@ const generateFormOptions = (form, index) => {
 
                     setTimeout(() => {
                         loadingContainer.style.display = 'none';
-                        createFormAndUpdateProgressBar(nextForm, index);
+                        createFormAndUpdateProgressBar(nextForm, index + 1);
                     }, 30000);
                 } else {
-                    createFormAndUpdateProgressBar(nextForm, index);
+                    createFormAndUpdateProgressBar(nextForm, index + 1);
                 }
             } else {
                 updateProgressBar();
@@ -125,11 +125,11 @@ const generateFormOptions = (form, index) => {
     };
 };
 
-const createFormAndUpdateProgressBar = (nextForm, index) => {
-    hbspt.forms.create(options[index + 1]);
+const createFormAndUpdateProgressBar = (form, index) => {
+    hbspt.forms.create(options[index]);
 
-    if (nextForm) {
-        updateProgressBar(nextForm);
+    if (form) {
+        updateProgressBar(form);
     }
 };
 
@@ -192,7 +192,7 @@ const addEvents = (form, index) => {
         backButton.on('click', function(event) {
             event.preventDefault();
             const previousForm = formKeys[index - 1];
-            createFormAndUpdateProgressBar(previousForm, index);
+            createFormAndUpdateProgressBar(previousForm, index - 1);
         });
         form.find('.actions').prepend(backButton);
     }
