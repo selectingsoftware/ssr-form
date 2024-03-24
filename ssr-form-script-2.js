@@ -104,17 +104,33 @@ const generateFormOptions = (form, index) => {
         },
         onFormSubmitted: function() {
             if (index < formKeys.length - 1) {
-                hbspt.forms.create(options[index + 1]);
-                
                 const nextForm = formKeys[index + 1];
-                if (nextForm) {
-                    updateProgressBar(nextForm);
+                const nextFormStep = formInformation[nextForm].step;
+
+                if (nextFormStep === 3) {
+                    const loadingContainer = document.getElementById('loading-container');
+                    loadingContainer.style.display = 'block';
+
+                    setTimeout(() => {
+                        loadingContainer.style.display = 'none';
+                        createNextFormAndUpdateProgressBar(nextForm);
+                    }, 2000);
+                } else {
+                    createNextFormAndUpdateProgressBar(nextForm);
                 }
             } else {
-                updateProgressBar()
+                updateProgressBar();
             }
         }
     };
+};
+
+const createNextFormAndUpdateProgressBar = (nextForm) => {
+    hbspt.forms.create(options[index + 1]);
+
+    if (nextForm) {
+        updateProgressBar(nextForm);
+    }
 };
 
 const extractValueByName = (array, name) => {
