@@ -114,7 +114,7 @@ const generateFormOptions = (form, index) => {
                     setTimeout(() => {
                         loadingContainer.style.display = 'none';
                         createNextFormAndUpdateProgressBar(nextForm, index);
-                    }, 10000);
+                    }, 30000);
                 } else {
                     createNextFormAndUpdateProgressBar(nextForm, index);
                 }
