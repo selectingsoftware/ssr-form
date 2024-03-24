@@ -113,10 +113,10 @@ const generateFormOptions = (form, index) => {
 
                     setTimeout(() => {
                         loadingContainer.style.display = 'none';
-                        createNextFormAndUpdateProgressBar(nextForm, index);
+                        createFormAndUpdateProgressBar(nextForm, index);
                     }, 30000);
                 } else {
-                    createNextFormAndUpdateProgressBar(nextForm, index);
+                    createFormAndUpdateProgressBar(nextForm, index);
                 }
             } else {
                 updateProgressBar();
@@ -125,7 +125,7 @@ const generateFormOptions = (form, index) => {
     };
 };
 
-const createNextFormAndUpdateProgressBar = (nextForm, index) => {
+const createFormAndUpdateProgressBar = (nextForm, index) => {
     hbspt.forms.create(options[index + 1]);
 
     if (nextForm) {
@@ -185,6 +185,16 @@ const addEvents = (form, index) => {
                 }
             }
         });
+    }
+
+    if (index > 0) {
+        const backButton = $('<input type="button" class="hs-button primary large" value="Voltar">');
+        backButton.on('click', function(event) {
+            event.preventDefault();
+            const previousForm = formKeys[index - 1];
+            createFormAndUpdateProgressBar(previousForm, index);
+        });
+        form.find('.actions').prepend(backButton);
     }
 };
 
