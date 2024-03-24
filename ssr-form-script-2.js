@@ -188,7 +188,8 @@ const addEvents = (form, index) => {
     }
 
     if (index > 0) {
-        const backButton = $('<input type="button" class="hs-button primary large" value="Voltar">');
+        //const backButton = $('<input type="button" class="hs-button primary large" value="Voltar">');
+        const backButton = $('<button class="" tabindex="0" type="button"><span><svg focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M15.41 16.59 10.83 12l4.58-4.59L14 6l-6 6 6 6z"></path></svg></span></button><div>&nbsp;</div>');
         backButton.on('click', function(event) {
             event.preventDefault();
             const previousForm = formKeys[index - 1];
