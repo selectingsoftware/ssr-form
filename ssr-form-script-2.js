@@ -141,7 +141,7 @@ const addCustomCss = (form) => {
         .css('padding', '5px')
 }
 
-const addEvents = (form) => {
+const addEvents = (form, index) => {
     form.find('input[type="submit"]').on('mouseover', function(event) {
         event.preventDefault();
     
@@ -154,7 +154,7 @@ const addEvents = (form) => {
         $(this).css('box-shadow', '');
     });
 
-    if (index == 0) {
+    if (index === 0) {
         var labels = form.find('label');
         labels.on('click', function() {
             var inputId = $(this).attr('for');
