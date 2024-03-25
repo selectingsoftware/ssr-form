@@ -104,7 +104,7 @@ const generateFormOptions = (form, index) => {
                 data.push(...form3);
             }
         },
-        onFormSubmitted: function($form, data) {
+        onFormSubmitted: function(form, data) {
             console.log('onFormSubmitted: ', $(form).serializeArray());
 
             if (index < formKeys.length - 1) {
@@ -143,7 +143,7 @@ const generateFormOptions = (form, index) => {
 
                 $(document).ready(function() {
                     console.log('código executado');
-                    form.find('div[class="submitted-message"]').append(meetingsDivElement).append(meetingsScriptElement);          
+                    $(form).find('.submitted-message').append(meetingsDivElement).append(meetingsScriptElement);          
                 });
 
                 //form.find('div[class="submitted-message"]').append(meetingsDivElement).append(meetingsScriptElement);
