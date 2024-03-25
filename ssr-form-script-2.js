@@ -126,8 +126,16 @@ const generateFormOptions = (form, index) => {
                 const meetingsDivElement = createDivElement('meetings-iframe-container', 'https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true');
                 const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
 
+                const submittedMessageDiv = form.find('div[class="submitted-message"]')
+                const submittedMessageDiv2 = form.find('.submitted-message')
+
+                console.log(submittedMessageDiv);
+                console.log(submittedMessageDiv2);
+
+                form.find('.submitted-message').prepend(meetingsDivElement);
+
                 //form.find('div[class="submitted-message"]').append(meetingsDivElement).append(meetingsScriptElement);
-                $(form).find('div.submitted-message').append(meetingsDivElement).append(meetingsScriptElement);
+                //$(form).find('div.submitted-message').append(meetingsDivElement).append(meetingsScriptElement);
                 
                 updateProgressBar();
             }
@@ -226,7 +234,6 @@ const addEvents = (form, index) => {
     }
 
     if (index > 0) {
-        //const backButton = $('<input type="button" class="hs-button primary large" value="Voltar">');
         const backButton = $('<div style="height: 100%;"><button class="hs-back-button" tabindex="0" type="button"><span><svg focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M15.41 16.59 10.83 12l4.58-4.59L14 6l-6 6 6 6z"></path></svg></span></button></div><div>&nbsp;</div>');
         backButton.on('click', function(event) {
             event.preventDefault();
