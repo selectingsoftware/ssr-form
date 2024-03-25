@@ -127,7 +127,7 @@ const generateFormOptions = (form, index) => {
                 //const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
 
                 console.log($(form));
-                console.log($(form).querySelector('.submitted-message'));
+                //console.log($(form).querySelector('.submitted-message'));
                 console.log($(form).find('.submitted-message'));
 
                 const submittedMessageDiv = form.find('div[class="submitted-message"]')
