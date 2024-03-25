@@ -115,7 +115,7 @@ const generateFormOptions = (form, index) => {
                 const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
 
                 $(document).ready(function() {
-                    $(form).append(meetingsDivElement).append(meetingsScriptElement);;          
+                    $(form).append(meetingsScriptElement).append(meetingsDivElement);
                 });
                 
                 updateProgressBar();
