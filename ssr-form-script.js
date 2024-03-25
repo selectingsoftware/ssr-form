@@ -176,7 +176,7 @@ const addCustomCss = (form) => {
     form.find('button[class="hs-back-button"]')
         .css('color', 'rgb(0, 0, 0)')
         .css('background-colorn', 'rgb(237, 237, 237)')
-        .css('min-width', '45px')
+        .css('min-width', '52px')
         .css('border-radius', '4px')
         .css('border', '0px')
         .css('padding', '6px 8px')
