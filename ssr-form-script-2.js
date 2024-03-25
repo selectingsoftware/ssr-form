@@ -66,6 +66,7 @@ const generateFormOptions = (form, index) => {
         formId: form,
         target,
         onFormReady: function(form) {
+            console.log('onFormReady: ', $(form).serializeArray());
             addEvents(form, index);
             addCustomCss(form);
 
@@ -87,6 +88,7 @@ const generateFormOptions = (form, index) => {
             }
         },
         onFormSubmit: function(form) {
+            console.log('onFormSubmit: ', $(form).serializeArray());
             if (index === 0) {
                 const form1 = $(form).serializeArray();
                 data.push(form1[0]);
@@ -103,6 +105,7 @@ const generateFormOptions = (form, index) => {
             }
         },
         onFormSubmitted: function() {
+            console.log('onFormSubmitted: ', $(form).serializeArray());
             if (index < formKeys.length - 1) {
                 const nextForm = formKeys[index + 1];
                 const nextFormStep = formInformation[nextForm].step;
