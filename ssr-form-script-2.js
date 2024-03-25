@@ -124,7 +124,7 @@ const generateFormOptions = (form, index) => {
                 }
             } else {
                 //const meetingsDivElement = createDivElement('meetings-iframe-container', 'https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true');
-                const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
+                //const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
 
                 const submittedMessageDiv = form.find('div[class="submitted-message"]')
                 const submittedMessageDiv2 = form.find('.submitted-message')
@@ -133,9 +133,9 @@ const generateFormOptions = (form, index) => {
                 console.log(submittedMessageDiv2);
 
                 const meetingsDivElement = $('<div class="meetings-iframe-container" data-src="https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true"></div>');
+                const meetingsScriptElement = $('<script type="text/javascript" src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"></script>');
 
-                form.find('.submitted-message').prepend(meetingsDivElement);
-                form.find('.submitted-message').prepend(meetingsScriptElement);
+                form.find('div[class="submitted-message"]').prepend(meetingsDivElement).prepend(meetingsScriptElement);
 
                 //form.find('div[class="submitted-message"]').append(meetingsDivElement).append(meetingsScriptElement);
                 //$(form).find('div.submitted-message').append(meetingsDivElement).append(meetingsScriptElement);
