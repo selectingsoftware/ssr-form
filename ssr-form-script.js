@@ -66,8 +66,8 @@ const generateFormOptions = (form, index) => {
         formId: form,
         target,
         onFormReady: function(form) {
-            addCustomCss(form);
             addEvents(form, index);
+            addCustomCss(form);
 
             if (index === 2) {
                 form.find('.hs_' + solutionField).hide();
@@ -102,7 +102,7 @@ const generateFormOptions = (form, index) => {
                 data.push(...form3);
             }
         },
-        onFormSubmitted: function() {
+        onFormSubmitted: function(form) {
             if (index < formKeys.length - 1) {
                 hbspt.forms.create(options[index + 1]);
                 
@@ -111,10 +111,39 @@ const generateFormOptions = (form, index) => {
                     updateProgressBar(nextForm);
                 }
             } else {
-                updateProgressBar()
-            }
+                const meetingsDivElement = createDivElement('meetings-iframe-container', 'https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true');
+                const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
+
+                $(document).ready(function() {
+                    $(form).append(meetingsDivElement).append(meetingsScriptElement);;          
+                });
+                
+                updateProgressBar();
+            }            
         }
     };
+};
+
+const createScriptElement = (src) => {
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = src;
+    return script;
+};
+
+const createDivElement = (className, dataSrc) => {
+    const div = document.createElement('div');
+    div.className = className;
+    div.setAttribute('data-src', dataSrc);
+    return div;
+};
+
+const createFormAndUpdateProgressBar = (form, index) => {
+    hbspt.forms.create(options[index]);
+
+    if (form) {
+        updateProgressBar(form);
+    }
 };
 
 const extractValueByName = (array, name) => {
@@ -138,7 +167,21 @@ const addCustomCss = (form) => {
         .css('cursor', 'pointer')
         .css('position', 'relative')
         .css('overflow', 'visible')
-        .css('padding', '5px')
+        .css('padding', '5px');
+
+    form.find('div[class="actions"]')
+        .css('display', 'flex')
+        .css('flex-direction', 'row');
+
+    form.find('button[class="hs-back-button"]')
+        .css('color', 'rgb(0, 0, 0)')
+        .css('background-colorn', 'rgb(237, 237, 237)')
+        .css('min-width', '45px')
+        .css('border-radius', '4px')
+        .css('border', '0px')
+        .css('padding', '6px 8px')
+        .css('transition', 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;')
+        .css('cursor', 'pointer');
 }
 
 const addEvents = (form, index) => {
@@ -170,6 +213,28 @@ const addEvents = (form, index) => {
             }
         });
     }
+
+    if (index > 0) {
+        const backButton = $('<div style="height: 100%;"><button class="hs-back-button" tabindex="0" type="button"><span><svg focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M15.41 16.59 10.83 12l4.58-4.59L14 6l-6 6 6 6z"></path></svg></span></button></div><div>&nbsp;</div>');
+        backButton.on('click', function(event) {
+            event.preventDefault();
+            const previousForm = formKeys[index - 1];
+            createFormAndUpdateProgressBar(previousForm, index - 1);
+        });
+        form.find('.actions').prepend(backButton);
+    }
+
+    form.find('button[class="hs-back-button"]').on('mouseover', function(event) {
+        event.preventDefault();
+    
+        $(this).css('box-shadow', 'rgba(0, 0, 0, 0.4) 2px 4px 10px 1px');
+    });
+
+    form.find('button[class="hs-back-button"]').on('mouseout', function(event) {
+        event.preventDefault();
+
+        $(this).css('box-shadow', '');
+    });
 };
 
 const multiStepForm = () => {
