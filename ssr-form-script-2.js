@@ -107,16 +107,6 @@ const generateFormOptions = (form, index) => {
         onFormSubmitted: function(form) {
             console.log('onFormSubmitted: ', $(form).serializeArray());
 
-            const submittedMessageDiv = form.find('div[class="submitted-message"]')
-
-            if (submittedMessageDiv) {
-                const meetingsDivElement = createDivElement('meetings-iframe-container', 'https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true');
-                const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
-            
-                submittedMessageDiv.appendChild(meetingsDivElement);
-                submittedMessageDiv.appendChild(meetingsScriptElement);
-            }
-
             if (index < formKeys.length - 1) {
                 const nextForm = formKeys[index + 1];
                 const nextFormStep = formInformation[nextForm].step;
@@ -133,6 +123,18 @@ const generateFormOptions = (form, index) => {
                     createFormAndUpdateProgressBar(nextForm, index + 1);
                 }
             } else {
+                const submittedMessageDiv = form.find('div[class="submitted-message"]')
+
+                console.log('submittedMessageDiv: ', submittedMessageDiv);
+
+                if (submittedMessageDiv) {
+                    const meetingsDivElement = createDivElement('meetings-iframe-container', 'https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true');
+                    const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
+                
+                    submittedMessageDiv.appendChild(meetingsDivElement);
+                    submittedMessageDiv.appendChild(meetingsScriptElement);
+                }
+                
                 updateProgressBar();
             }
         }
