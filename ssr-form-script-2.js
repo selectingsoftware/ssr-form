@@ -124,15 +124,25 @@ const generateFormOptions = (form, index) => {
                 }
             } else {
                 const submittedMessageDiv = form.find('div[class="submitted-message"]')
+                const submittedMessageDiv2 = document.querySelector('.submitted-message')
 
                 console.log('submittedMessageDiv: ', submittedMessageDiv);
+                console.log('submittedMessageDiv2: ', submittedMessageDiv2);
 
-                if (submittedMessageDiv) {
-                    const meetingsDivElement = createDivElement('meetings-iframe-container', 'https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true');
-                    const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
-                
+                const meetingsDivElement = createDivElement('meetings-iframe-container', 'https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true');
+                const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
+
+                console.log('meetingsDivElement: ', meetingsDivElement);
+                console.log('meetingsScriptElement: ', meetingsScriptElement);
+
+                if (submittedMessageDiv) {     
                     submittedMessageDiv.append(meetingsDivElement);
                     submittedMessageDiv.append(meetingsScriptElement);
+                }
+
+                if (submittedMessageDiv2) {
+                    submittedMessageDiv2.append(meetingsDivElement);
+                    submittedMessageDiv2.append(meetingsScriptElement);
                 }
                 
                 updateProgressBar();
