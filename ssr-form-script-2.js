@@ -124,10 +124,8 @@ const generateFormOptions = (form, index) => {
                 }
             } else {
                 const submittedMessageDiv = form.find('div[class="submitted-message"]')
-                const submittedMessageDiv2 = document.querySelector('.submitted-message')
 
                 console.log('submittedMessageDiv: ', submittedMessageDiv);
-                console.log('submittedMessageDiv2: ', submittedMessageDiv2);
 
                 const meetingsDivElement = createDivElement('meetings-iframe-container', 'https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true');
                 const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
@@ -135,15 +133,14 @@ const generateFormOptions = (form, index) => {
                 console.log('meetingsDivElement: ', meetingsDivElement);
                 console.log('meetingsScriptElement: ', meetingsScriptElement);
 
-                if (submittedMessageDiv) {     
+                submittedMessageDiv.append(meetingsDivElement);
+                    submittedMessageDiv.append(meetingsScriptElement);
+
+                /*if (submittedMessageDiv) {  
+                    console.log('entrou aqui');   
                     submittedMessageDiv.append(meetingsDivElement);
                     submittedMessageDiv.append(meetingsScriptElement);
-                }
-
-                if (submittedMessageDiv2) {
-                    submittedMessageDiv2.append(meetingsDivElement);
-                    submittedMessageDiv2.append(meetingsScriptElement);
-                }
+                }*/
                 
                 updateProgressBar();
             }
