@@ -132,10 +132,16 @@ const generateFormOptions = (form, index) => {
                 console.log(submittedMessageDiv);
                 console.log(submittedMessageDiv2);
 
+                console.log(form.find('div[class="submitted-message"]').length)
+
                 const meetingsDivElement = $('<div class="meetings-iframe-container" data-src="https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true"></div>');
                 const meetingsScriptElement = $('<script type="text/javascript" src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"></script>');
 
-                form.find('div[class="submitted-message"]').prepend(meetingsDivElement).prepend(meetingsScriptElement);
+                form.find('div[class="submitted-message"]').append(meetingsDivElement).append(meetingsScriptElement);
+
+                $(document).ready(function() {
+                    console.log('código executado');
+                });
 
                 //form.find('div[class="submitted-message"]').append(meetingsDivElement).append(meetingsScriptElement);
                 //$(form).find('div.submitted-message').append(meetingsDivElement).append(meetingsScriptElement);
