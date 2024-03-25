@@ -154,11 +154,11 @@ const addCustomCss = (form) => {
         .css('cursor', 'pointer')
         .css('position', 'relative')
         .css('overflow', 'visible')
-        .css('padding', '5px')
+        .css('padding', '5px');
 
     form.find('div[class="actions"]')
         .css('display', 'flex')
-        .css('flex-direction', 'row')
+        .css('flex-direction', 'row');
 
     form.find('button[class="hs-back-button"]')
         .css('color', 'rgb(0, 0, 0)')
@@ -168,7 +168,7 @@ const addCustomCss = (form) => {
         .css('border', '0px')
         .css('padding', '6px 8px')
         .css('transition', 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;')
-        .css('cursor', 'pointer')
+        .css('cursor', 'pointer');
 }
 
 const addEvents = (form, index) => {
