@@ -66,8 +66,8 @@ const generateFormOptions = (form, index) => {
         formId: form,
         target,
         onFormReady: function(form) {
-            addCustomCss(form);
             addEvents(form, index);
+            addCustomCss(form);
 
             if (index === 2) {
                 form.find('.hs_' + solutionField).hide();
