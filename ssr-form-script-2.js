@@ -104,7 +104,7 @@ const generateFormOptions = (form, index) => {
                 data.push(...form3);
             }
         },
-        onFormSubmitted: function(form) {
+        onFormSubmitted: function($form, data) {
             console.log('onFormSubmitted: ', $(form).serializeArray());
 
             if (index < formKeys.length - 1) {
@@ -127,6 +127,8 @@ const generateFormOptions = (form, index) => {
                 //const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
 
                 console.log($(form));
+                console.log($(form).querySelector('.submitted-message'));
+                console.log($(form).find('.submitted-message'));
 
                 const submittedMessageDiv = form.find('div[class="submitted-message"]')
                 const submittedMessageDiv2 = form.find('.submitted-message')
