@@ -126,6 +126,8 @@ const generateFormOptions = (form, index) => {
                 //const meetingsDivElement = createDivElement('meetings-iframe-container', 'https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true');
                 //const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
 
+                console.log($(form));
+
                 const submittedMessageDiv = form.find('div[class="submitted-message"]')
                 const submittedMessageDiv2 = form.find('.submitted-message')
 
