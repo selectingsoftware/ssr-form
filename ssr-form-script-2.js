@@ -123,35 +123,35 @@ const generateFormOptions = (form, index) => {
                     createFormAndUpdateProgressBar(nextForm, index + 1);
                 }
             } else {
-                //const meetingsDivElement = createDivElement('meetings-iframe-container', 'https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true');
-                //const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
+                const meetingsDivElement = createDivElement('meetings-iframe-container', 'https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true');
+                const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
 
                 console.log($(form));
                 //console.log($(form).querySelector('.submitted-message'));
                 //console.log($(form).find('.submitted-message'));
 
-                const submittedMessageDiv = $(form).find('div.submitted-message.hs-main-font-element.hs-form-d6ed34de-f6d8-4408-8f8f-0472d4ceee59.hs-form-d6ed34de-f6d8-4408-8f8f-0472d4ceee59_18a6b80c-63cd-42e2-aa40-ba24a0136760')
-                const submittedMessageDiv2 = $(form).find('.submitted-message')
+                //const submittedMessageDiv = $(form).find('div.submitted-message.hs-main-font-element.hs-form-d6ed34de-f6d8-4408-8f8f-0472d4ceee59.hs-form-d6ed34de-f6d8-4408-8f8f-0472d4ceee59_18a6b80c-63cd-42e2-aa40-ba24a0136760')
+                //const submittedMessageDiv2 = $(form).find('.submitted-message')
 
-                console.log('Submitted Message Div 1: ', submittedMessageDiv);
-                console.log('Submitted Message Div 2: ', submittedMessageDiv2);
+                //console.log('Submitted Message Div 1: ', submittedMessageDiv);
+                //console.log('Submitted Message Div 2: ', submittedMessageDiv2);
 
-                console.log(submittedMessageDiv.length)
-                console.log(submittedMessageDiv2.length)
+                //console.log(submittedMessageDiv.length)
+                //console.log(submittedMessageDiv2.length)
 
-                const meetingsDivElement = $('<div class="meetings-iframe-container" data-src="https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true"></div>');
-                const meetingsScriptElement = $('<script type="text/javascript" src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"></script>');
+                //const meetingsDivElement = $('<div class="meetings-iframe-container" data-src="https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true"></div>');
+                //const meetingsScriptElement = $('<script type="text/javascript" src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"></script>');
 
                 $(form).append(meetingsDivElement).append(meetingsScriptElement);
-                submittedMessageDiv.append(meetingsDivElement).append(meetingsScriptElement);
-                submittedMessageDiv2.append(meetingsDivElement).append(meetingsScriptElement);
+                //submittedMessageDiv.append(meetingsDivElement).append(meetingsScriptElement);
+                //submittedMessageDiv2.append(meetingsDivElement).append(meetingsScriptElement);
                 
-                $(document).ready(function() {
+                /*$(document).ready(function() {
                     console.log('código executado');
                     $(form).append(meetingsDivElement).append(meetingsScriptElement);
                     submittedMessageDiv.append(meetingsDivElement).append(meetingsScriptElement);
                     submittedMessageDiv2.append(meetingsDivElement).append(meetingsScriptElement);          
-                });
+                });*/
 
                 //form.find('div[class="submitted-message"]').append(meetingsDivElement).append(meetingsScriptElement);
                 //$(form).find('div.submitted-message').append(meetingsDivElement).append(meetingsScriptElement);
