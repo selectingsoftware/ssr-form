@@ -131,8 +131,8 @@ const generateFormOptions = (form, index) => {
                     const meetingsDivElement = createDivElement('meetings-iframe-container', 'https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true');
                     const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
                 
-                    submittedMessageDiv.appendChild(meetingsDivElement);
-                    submittedMessageDiv.appendChild(meetingsScriptElement);
+                    submittedMessageDiv.append(meetingsDivElement);
+                    submittedMessageDiv.append(meetingsScriptElement);
                 }
                 
                 updateProgressBar();
