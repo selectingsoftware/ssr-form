@@ -31,6 +31,9 @@ const options = [];
 const solutionValues = [];
 const formKeys = Object.keys(formInformation);
 
+const hubspotCalender = document.getElementById('hubspotCalender');
+hubspotCalender.style.display = 'none';
+
 const updateProgressBar = (nextForm) => {
     const progressBar = document.getElementById('progress-bar');
     const progressBarFilled = document.getElementById('progress-bar-filled');
@@ -57,6 +60,7 @@ const updateProgressBar = (nextForm) => {
 
         const timerContainer = document.getElementById('timer-container');
         timerContainer.style.display = 'none';
+        hubspotCalender.style.display = 'block';
     }
 };
 
