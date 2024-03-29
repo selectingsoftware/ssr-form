@@ -298,7 +298,7 @@ const addCustomValidate = (form) => {
                         complete_all_fields.innerHTML = `<span>&#9888;</span> ${error_messages['complete_all_fields']}`
                     }
                 }, 50)
-            }  
+            }
         }
     }
 
@@ -307,7 +307,6 @@ const addCustomValidate = (form) => {
     });
 
     for (var i = 0; i < input.length; i += 1) {
-        console.log('passou aqui');
         let typeCheck = input[i].getAttribute('type') == 'checkbox' ? true : input[i].hasAttribute('required')
         console.log('typeCheck: ', typeCheck);
         console.log('input: ', input[i]);
@@ -315,10 +314,15 @@ const addCustomValidate = (form) => {
         if (error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck) {
             console.log('passou aqui 2');
             var target = form.find(`input[name=${input[i].getAttribute('name')}]`);
-            console.log('target: ', target);
-            observer.observe(target, {
-                attributes: true
-            })
+            console.log('Target: ', target);
+            console.log('Target type:', typeof target);
+            if (target instanceof Node) {
+                observer.observe(target, {
+                    attributes: true
+                });
+            } else {
+                console.error('Target is not a valid Node:', target);
+            }
         }  
         if (input[i].getAttribute('type') == 'checkbox') {
             ['keyup', 'mouseleave', 'click','mouseout', 'onfocusout'].forEach(function(e) {
