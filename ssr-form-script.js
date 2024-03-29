@@ -71,6 +71,7 @@ const generateFormOptions = (form, index) => {
                 missingOptionSelection: "Please select at least one option.",
             }
         },
+        cssRequired: "[hs_error_rollup {display: none};]",
         onFormReady: function(form) {
             form.find('div[class="hs_error_rollup"]')
                 .css('display', 'none');
