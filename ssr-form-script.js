@@ -69,7 +69,7 @@ const generateFormOptions = (form, index) => {
         translations: {
             en: {
                 missingOptionSelection: "Please select at least one option.",
-                software_type_requested: "Please select at least one option 2.",
+                forbiddenEmailDomain: "Please provide your business email",
             }
         },
         onFormReady: function(form) {
@@ -190,6 +190,9 @@ const addCustomCss = (form) => {
         .css('padding', '6px 8px')
         .css('transition', 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;')
         .css('cursor', 'pointer');
+
+    form.find('div[class="hs_error_rollup"]')
+        .css('display', 'none');
 }
 
 const addEvents = (form, index) => {
