@@ -282,18 +282,22 @@ const addCustomValidate = (form) => {
 
     function globalInputsOnChangeHandler() {
         for (var i = 0; i < input.length; i += 1) {
+            console.log('passou aqui');
             let typeCheck = input[i].getAttribute('type') == 'checkbox' ? true : input[i].hasAttribute('required')
             if (error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck ) {
+                console.log('passou aqui 2');
                 let changedElement = input[i];
-                setTimeout(function(){  
+                setTimeout(function() {  
                     if (changedElement.classList.contains('invalid') || changedElement.classList.contains('error') || changedElement.getAttribute('type') == 'checkbox') {
                         let parentElement = changedElement.closest('.field');
-                        let errorDiv = parentElement.querySelector('.hs-error-msg')
+                        console.log('parent element: ', parentElement);
+                        let errorDiv = parentElement.querySelector('.hs-error-msg');
+                        console.log('erro div: ', errorDiv);
                         if(errorDiv) errorDiv.innerHTML = `<span>&#9888;</span> ${error_messages[changedElement.getAttribute('name')]}`
                     }
 
                     let complete_all_fields = document.querySelector('.hs_error_rollup label.hs-main-font-element');
-                    if (document.body.contains( complete_all_fields )) {
+                    if (document.body.contains(complete_all_fields)) {
                         complete_all_fields.innerHTML = `<span>&#9888;</span> ${error_messages['complete_all_fields']}`
                     }
                 }, 50)
@@ -308,7 +312,7 @@ const addCustomValidate = (form) => {
     for (var i = 0; i < input.length; i += 1) {
         let typeCheck = input[i].getAttribute('type') == 'checkbox' ? true : input[i].hasAttribute('required')
         if( error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck ){
-            var target = document.querySelector(`form input[name=${input[i].getAttribute('name')}]`);
+            var target = form.find(`input[name=${input[i].getAttribute('name')}]`);
             observer.observe(target, {
                 attributes: true
             })
