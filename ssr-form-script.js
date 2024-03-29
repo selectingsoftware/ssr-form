@@ -65,9 +65,11 @@ const generateFormOptions = (form, index) => {
         portalId,
         formId: form,
         target,
+        locale: 'en',
         translations: {
             en: {
-                software_type_requested: "Please enter your business email address"
+                missingOptionSelection: "Please select at least one option.",
+                software_type_requested: "Please select at least one option 2.",
             }
         },
         onFormReady: function(form) {
