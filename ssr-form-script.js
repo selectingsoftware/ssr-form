@@ -272,7 +272,7 @@ const addEvents = (form, index) => {
 };
 
 const addCustomValidate = (form) => {
-    let input = form.find('.input');
+    let input = form.find('input');
     let submit = form.find('input[type="submit"]');
 
     console.log('Input: ', input);
@@ -310,6 +310,7 @@ const addCustomValidate = (form) => {
         console.log('passou aqui');
         let typeCheck = input[i].getAttribute('type') == 'checkbox' ? true : input[i].hasAttribute('required')
         console.log('typeCheck: ', typeCheck);
+        console.log('input: ', input[i]);
         console.log('input attribute: ', input[i].getAttribute('name'));
         if (error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck) {
             console.log('passou aqui 2');
