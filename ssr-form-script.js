@@ -269,9 +269,12 @@ const addCustomValidate = (form) => {
     //let input = document.querySelectorAll('input');
     //let submit = document.querySelector('form input[type=submit]');
 
+    console.log('Input: ', input);
+    console.log('Input: ', input.length);
+
     function globalInputsOnChangeHandler() {
         for (var i = 0; i < input.length; i += 1) {
-            let typeCheck = input[i].hasAttribute('required')
+            let typeCheck = input[i].getAttribute('type') == 'checkbox' ? true : input[i].hasAttribute('required')
             if (error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck ) {
                 let changedElement = input[i];
                 setTimeout(function(){  
@@ -295,7 +298,7 @@ const addCustomValidate = (form) => {
     });
 
     for (var i = 0; i < input.length; i += 1) {
-        let typeCheck = input[i].hasAttribute('required')
+        let typeCheck = input[i].getAttribute('type') == 'checkbox' ? true : input[i].hasAttribute('required')
         if( error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck ){
             var target = document.querySelector(`form input[name=${input[i].getAttribute('name')}]`);
             observer.observe(target, {
