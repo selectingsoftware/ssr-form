@@ -71,9 +71,10 @@ const generateFormOptions = (form, index) => {
                 missingOptionSelection: "Please select at least one option.",
             }
         },
-        css: '',
-        cssRequired: '',
         onFormReady: function(form) {
+            form.find('div[class="hs_error_rollup"]')
+                .css('display', 'none');
+
             addEvents(form, index);
             addCustomCss(form);
 
@@ -94,7 +95,14 @@ const generateFormOptions = (form, index) => {
                 });
             }
         },
+        onBeforeFormSubmit: function(form) {
+            form.find('div[class="hs_error_rollup"]')
+                .css('display', 'none');
+        },
         onFormSubmit: function(form) {
+            form.find('div[class="hs_error_rollup"]')
+                .css('display', 'none');
+
             if (index === 0) {
                 const form1 = $(form).serializeArray();
                 data.push(form1[0]);
@@ -111,6 +119,9 @@ const generateFormOptions = (form, index) => {
             }
         },
         onFormSubmitted: function(form) {
+            form.find('div[class="hs_error_rollup"]')
+                .css('display', 'none');
+                
             if (index < formKeys.length - 1) {
                 hbspt.forms.create(options[index + 1]);
                 
