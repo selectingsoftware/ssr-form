@@ -308,8 +308,8 @@ const addCustomValidate = (form) => {
             })
         } 
     }
-    
-    submit.addEventListener('click', globalInputsOnChangeHandler)
+
+    //submit.addEventListener('click', globalInputsOnChangeHandler)
 }
 
 const multiStepForm = () => {
