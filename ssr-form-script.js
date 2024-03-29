@@ -34,6 +34,13 @@ const formKeys = Object.keys(formInformation);
 const hubspotCalender = document.getElementById('hubspotCalender');
 hubspotCalender.style.display = 'none';
 
+let error_messages = {
+    firstname: 'Please provide your first name',
+    lastname: 'Please provide your last name',
+    email: 'Please provide your business email',
+    company: 'Please provide your company name'
+}
+
 const updateProgressBar = (nextForm) => {
     const progressBar = document.getElementById('progress-bar');
     const progressBarFilled = document.getElementById('progress-bar-filled');
@@ -69,11 +76,19 @@ const generateFormOptions = (form, index) => {
         portalId,
         formId: form,
         target,
+        locale: 'en',
+        translations: {
+            en: {
+                missingOptionSelection: "Please select at least one option.",
+            }
+        },
         onFormReady: function(form) {
             addEvents(form, index);
             addCustomCss(form);
 
             if (index === 2) {
+                addCustomValidate(form);
+
                 form.find('.hs_' + solutionField).hide();
                 form.find('input[name="' + employeeField + '"]').val(data[0].value).change();
 
@@ -90,7 +105,14 @@ const generateFormOptions = (form, index) => {
                 });
             }
         },
+        onBeforeFormSubmit: function(form) {
+            form.find('div[class="hs_error_rollup"]')
+                .css('display', 'none');
+        },
         onFormSubmit: function(form) {
+            form.find('div[class="hs_error_rollup"]')
+                .css('display', 'none');
+
             if (index === 0) {
                 const form1 = $(form).serializeArray();
                 data.push(form1[0]);
@@ -111,6 +133,9 @@ const generateFormOptions = (form, index) => {
             }
         },
         onFormSubmitted: function(form) {
+            form.find('div[class="hs_error_rollup"]')
+                .css('display', 'none');
+                
             if (index < formKeys.length - 1) {
                 hbspt.forms.create(options[index + 1]);
                 
@@ -123,7 +148,7 @@ const generateFormOptions = (form, index) => {
                 const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
 
                 $(document).ready(function() {
-                     $(form).append(meetingsDivElement);
+                    $(form).append(meetingsDivElement);
                     $(form).append(meetingsScriptElement);
                 });
                 
@@ -245,6 +270,58 @@ const addEvents = (form, index) => {
         $(this).css('box-shadow', '');
     });
 };
+
+const addCustomValidate = (form) => {
+    let input = form.find('.input');
+    let submit = form.find('input[type="submit"]');
+    //let input = document.querySelectorAll('input');
+    //let submit = document.querySelector('form input[type=submit]');
+
+    console.log('Input: ', input);
+    console.log('Input: ', input.length);
+
+    function globalInputsOnChangeHandler() {
+        for (var i = 0; i < input.length; i += 1) {
+            let typeCheck = input[i].getAttribute('type') == 'checkbox' ? true : input[i].hasAttribute('required')
+            if (error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck ) {
+                let changedElement = input[i];
+                setTimeout(function(){  
+                    if (changedElement.classList.contains('invalid') || changedElement.classList.contains('error') || changedElement.getAttribute('type') == 'checkbox') {
+                        let parentElement = changedElement.closest('.field');
+                        let errorDiv = parentElement.querySelector('.hs-error-msg')
+                        if(errorDiv) errorDiv.innerHTML = `<span>&#9888;</span> ${error_messages[changedElement.getAttribute('name')]}`
+                    }
+
+                    let complete_all_fields = document.querySelector('.hs_error_rollup label.hs-main-font-element');
+                    if (document.body.contains( complete_all_fields )) {
+                        complete_all_fields.innerHTML = `<span>&#9888;</span> ${error_messages['complete_all_fields']}`
+                    }
+                }, 50)
+            }  
+        }
+    }
+
+    var observer = new MutationObserver(function(e) {
+        globalInputsOnChangeHandler()
+    });
+
+    for (var i = 0; i < input.length; i += 1) {
+        let typeCheck = input[i].getAttribute('type') == 'checkbox' ? true : input[i].hasAttribute('required')
+        if( error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck ){
+            var target = document.querySelector(`form input[name=${input[i].getAttribute('name')}]`);
+            observer.observe(target, {
+                attributes: true
+            })
+        }  
+        if( input[i].getAttribute('type') == 'checkbox' ){
+            ['keyup', 'mouseleave', 'click','mouseout', 'onfocusout'].forEach(function(e) {
+                input[i].addEventListener(e, globalInputsOnChangeHandler)
+            })
+        } 
+    }
+
+    //submit.addEventListener('click', globalInputsOnChangeHandler)
+}
 
 const multiStepForm = () => {
     formKeys.forEach((form, index) => {
