@@ -274,11 +274,8 @@ const addEvents = (form, index) => {
 const addCustomValidate = (form) => {
     let input = form.find('.input');
     let submit = form.find('input[type="submit"]');
-    //let input = document.querySelectorAll('input');
-    //let submit = document.querySelector('form input[type=submit]');
 
     console.log('Input: ', input);
-    console.log('Input: ', input.length);
 
     function globalInputsOnChangeHandler() {
         for (var i = 0; i < input.length; i += 1) {
@@ -328,6 +325,8 @@ const addCustomValidate = (form) => {
             })
         } 
     }
+
+    form.find('input[type="submit"]').on('click', globalInputsOnChangeHandler());
 
     //submit.addEventListener('click', globalInputsOnChangeHandler)
 }
