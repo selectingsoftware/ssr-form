@@ -35,6 +35,7 @@ const hubspotCalender = document.getElementById('hubspotCalender');
 hubspotCalender.style.display = 'none';
 
 let error_messages = {
+    software_type_requested: 'Please select at least one option',
     firstname: 'Please provide your first name',
     lastname: 'Please provide your last name',
     email: 'Please provide your business email',
@@ -76,12 +77,6 @@ const generateFormOptions = (form, index) => {
         portalId,
         formId: form,
         target,
-        locale: 'en',
-        translations: {
-            en: {
-                missingOptionSelection: "Please select at least one option.",
-            }
-        },
         onFormReady: function(form) {
             addCustomValidate(form);
             addEvents(form, index);
@@ -276,7 +271,7 @@ const addCustomValidate = (form) => {
 
     function globalInputsOnChangeHandler() {
         for (var i = 0; i < input.length; i += 1) {
-            let typeCheck = input[i].hasAttribute('required')
+            let typeCheck = input[i].getAttribute('type') == 'checkbox' || input[i].getAttribute('type') == 'tel' ? true : input[i].hasAttribute('required')
             if (error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck ) {
                 let changedElement = input[i];
                 setTimeout(function() {  
@@ -285,33 +280,37 @@ const addCustomValidate = (form) => {
                         let errorDiv = parentElement.querySelector('.hs-error-msg');
                         if(errorDiv) errorDiv.innerHTML = `<span>&#9888;</span> ${error_messages[changedElement.getAttribute('name')]}`
                     }
-
-                    let complete_all_fields = form.find('.hs_error_rollup');
-                    if (complete_all_fields) {
-                        complete_all_fields[0].style.display = 'none';
-                    }
                 }, 50)
             }
         }
+        let complete_all_fields = form.find('.hs_error_rollup');
+        if (complete_all_fields) {
+            complete_all_fields[0].style.display = 'none';
+        }
     }
 
-    /*var observer = new MutationObserver(function(e) {
+    var observer = new MutationObserver(function(e) {
         globalInputsOnChangeHandler()
     });
 
     for (var i = 0; i < input.length; i += 1) {
-        let typeCheck = input[i].hasAttribute('required')
-        if (error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck) {
+        let typeCheck = input[i].getAttribute('type') == 'checkbox' || input[i].getAttribute('type') == 'tel' ? true : input[i].hasAttribute('required')
+        if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck) {
             var target = form.find(`input[name=${input[i].getAttribute('name')}]`);
+            var targetTel = form.find('input[type="tel"]');
             if (target) {             
                 observer.observe(target[0], {
                     attributes: true
                 });
+            } else if (targetTel) {
+                observer.observe(targetTel[0], {
+                    attributes: true
+                });
             }
         }
-    }*/
+    }
 
-    form.find('input[type="submit"]').on('click', globalInputsOnChangeHandler());
+    //form.find('input[type="submit"]').on('click', globalInputsOnChangeHandler());
 }
 
 const multiStepForm = () => {
