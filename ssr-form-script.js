@@ -310,14 +310,19 @@ const addCustomValidate = (form) => {
     });
 
     for (var i = 0; i < input.length; i += 1) {
+        console.log('passou aqui');
         let typeCheck = input[i].getAttribute('type') == 'checkbox' ? true : input[i].hasAttribute('required')
-        if( error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck ){
+        console.log('typeCheck: ', typeCheck);
+        console.log('input attribute: ', input[i].getAttribute('name'));
+        if (error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck) {
+            console.log('passou aqui 2');
             var target = form.find(`input[name=${input[i].getAttribute('name')}]`);
+            console.log('target: ', target);
             observer.observe(target, {
                 attributes: true
             })
         }  
-        if( input[i].getAttribute('type') == 'checkbox' ){
+        if (input[i].getAttribute('type') == 'checkbox') {
             ['keyup', 'mouseleave', 'click','mouseout', 'onfocusout'].forEach(function(e) {
                 input[i].addEventListener(e, globalInputsOnChangeHandler)
             })
