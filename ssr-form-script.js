@@ -65,6 +65,11 @@ const generateFormOptions = (form, index) => {
         portalId,
         formId: form,
         target,
+        translations: {
+            en: {
+                software_type_requested: "Please enter your business email address"
+            }
+        },
         onFormReady: function(form) {
             addEvents(form, index);
             addCustomCss(form);
