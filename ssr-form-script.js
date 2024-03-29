@@ -31,6 +31,9 @@ const options = [];
 const solutionValues = [];
 const formKeys = Object.keys(formInformation);
 
+const hubspotCalender = document.getElementById('hubspotCalender');
+hubspotCalender.style.display = 'none';
+
 let error_messages = {
     firstname: 'Please provide your first name',
     lastname: 'Please provide your last name',
@@ -64,6 +67,7 @@ const updateProgressBar = (nextForm) => {
 
         const timerContainer = document.getElementById('timer-container');
         timerContainer.style.display = 'none';
+        hubspotCalender.style.display = 'block';
     }
 };
 
@@ -122,6 +126,10 @@ const generateFormOptions = (form, index) => {
             if (index === 2) {
                 const form3 = $(form).serializeArray();
                 data.push(...form3);
+            }
+            if (index === 3) {
+                const hubspotSuccessMessage = document.getElementById('multistep-form');
+                hubspotSuccessMessage.style.display = 'none';
             }
         },
         onFormSubmitted: function(form) {
