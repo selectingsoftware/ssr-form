@@ -69,7 +69,6 @@ const generateFormOptions = (form, index) => {
         translations: {
             en: {
                 missingOptionSelection: "Please select at least one option.",
-                forbiddenEmailDomain: "Please provide your business email",
             }
         },
         onFormReady: function(form) {
@@ -94,6 +93,9 @@ const generateFormOptions = (form, index) => {
             }
         },
         onFormSubmit: function(form) {
+            form.find('div[class="hs_error_rollup"]')
+                .css('display', 'none');
+
             if (index === 0) {
                 const form1 = $(form).serializeArray();
                 data.push(form1[0]);
@@ -110,9 +112,6 @@ const generateFormOptions = (form, index) => {
             }
         },
         onFormSubmitted: function(form) {
-            form.find('div[class="hs_error_rollup"]')
-                .css('display', 'none');
-                
             if (index < formKeys.length - 1) {
                 hbspt.forms.create(options[index + 1]);
                 
