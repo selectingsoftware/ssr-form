@@ -295,7 +295,7 @@ const addCustomValidate = (form) => {
         }
     }
 
-    var observer = new MutationObserver(function(e) {
+    /*var observer = new MutationObserver(function(e) {
         globalInputsOnChangeHandler()
     });
 
@@ -308,13 +308,8 @@ const addCustomValidate = (form) => {
                     attributes: true
                 });
             }
-        }  
-        if (input[i].getAttribute('type') == 'checkbox') {
-            ['keyup', 'mouseleave', 'click','mouseout', 'onfocusout'].forEach(function(e) {
-                input[i].addEventListener(e, globalInputsOnChangeHandler)
-            })
-        } 
-    }
+        }
+    }*/
 
     form.find('input[type="submit"]').on('click', globalInputsOnChangeHandler());
 }
