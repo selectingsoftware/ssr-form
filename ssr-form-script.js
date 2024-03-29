@@ -105,6 +105,10 @@ const generateFormOptions = (form, index) => {
                 const form3 = $(form).serializeArray();
                 data.push(...form3);
             }
+            if (index === 3) {
+                const hubspotSuccessMessage = document.getElementById('multistep-form');
+                hubspotSuccessMessage.style.display = 'none';
+            }
         },
         onFormSubmitted: function(form) {
             if (index < formKeys.length - 1) {
@@ -119,7 +123,7 @@ const generateFormOptions = (form, index) => {
                 const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
 
                 $(document).ready(function() {
-                    $(form).append(meetingsDivElement);
+                     $(form).append(meetingsDivElement);
                     $(form).append(meetingsScriptElement);
                 });
                 
