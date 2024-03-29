@@ -296,14 +296,10 @@ const addCustomValidate = (form) => {
                     let complete_all_fields = document.querySelector('.hs_error_rollup');
                     let complete_all_fields2 = form.find('.hs_error_rollup');
 
-                    console.log('complete_all_fields: ', complete_all_fields);
                     console.log('complete_all_fields2: ', complete_all_fields2);
 
-                    if (complete_all_fields) {
-                        complete_all_fields.style.display = 'none';
-                    }
                     if (complete_all_fields2) {
-                        complete_all_fields2.style.display = 'none';
+                        complete_all_fields2[0].style.display = 'none';
                     }
                 }, 50)
             }
