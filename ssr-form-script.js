@@ -83,12 +83,11 @@ const generateFormOptions = (form, index) => {
             }
         },
         onFormReady: function(form) {
+            addCustomValidate(form);
             addEvents(form, index);
             addCustomCss(form);
 
             if (index === 2) {
-                addCustomValidate(form);
-
                 form.find('.hs_' + solutionField).hide();
                 form.find('input[name="' + employeeField + '"]').val(data[0].value).change();
 
@@ -275,31 +274,21 @@ const addCustomValidate = (form) => {
     let input = form.find('input[required]');
     let submit = form.find('input[type="submit"]');
 
-    console.log('Input: ', input);
-
     function globalInputsOnChangeHandler() {
         for (var i = 0; i < input.length; i += 1) {
-            console.log('passou aqui');
             let typeCheck = input[i].hasAttribute('required')
             if (error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck ) {
-                console.log('passou aqui 2');
                 let changedElement = input[i];
                 setTimeout(function() {  
                     if (changedElement.classList.contains('invalid') || changedElement.classList.contains('error') || changedElement.getAttribute('type') == 'checkbox') {
                         let parentElement = changedElement.closest('.field');
-                        console.log('parent element: ', parentElement);
                         let errorDiv = parentElement.querySelector('.hs-error-msg');
-                        console.log('erro div: ', errorDiv);
                         if(errorDiv) errorDiv.innerHTML = `<span>&#9888;</span> ${error_messages[changedElement.getAttribute('name')]}`
                     }
 
-                    let complete_all_fields = document.querySelector('.hs_error_rollup');
-                    let complete_all_fields2 = form.find('.hs_error_rollup');
-
-                    console.log('complete_all_fields2: ', complete_all_fields2);
-
-                    if (complete_all_fields2) {
-                        complete_all_fields2[0].style.display = 'none';
+                    let complete_all_fields = form.find('.hs_error_rollup');
+                    if (complete_all_fields) {
+                        complete_all_fields[0].style.display = 'none';
                     }
                 }, 50)
             }
@@ -312,19 +301,12 @@ const addCustomValidate = (form) => {
 
     for (var i = 0; i < input.length; i += 1) {
         let typeCheck = input[i].hasAttribute('required')
-        console.log('typeCheck: ', typeCheck);
-        console.log('input: ', input[i]);
-        console.log('input attribute: ', input[i].getAttribute('name'));
         if (error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck) {
             var target = form.find(`input[name=${input[i].getAttribute('name')}]`);
-            if (target) {
-                console.log('Target: ', target[0]);
-                console.log('Target type:', typeof target);                
+            if (target) {             
                 observer.observe(target[0], {
                     attributes: true
                 });
-            } else {
-                console.error('Target is not a valid Node:', target);
             }
         }  
         if (input[i].getAttribute('type') == 'checkbox') {
