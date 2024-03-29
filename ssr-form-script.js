@@ -71,6 +71,8 @@ const generateFormOptions = (form, index) => {
                 missingOptionSelection: "Please select at least one option.",
             }
         },
+        css: '',
+        cssRequired: '',
         onFormReady: function(form) {
             addEvents(form, index);
             addCustomCss(form);
@@ -93,9 +95,6 @@ const generateFormOptions = (form, index) => {
             }
         },
         onFormSubmit: function(form) {
-            form.find('div[class="hs_error_rollup"]')
-                .css('display', 'none');
-
             if (index === 0) {
                 const form1 = $(form).serializeArray();
                 data.push(form1[0]);
