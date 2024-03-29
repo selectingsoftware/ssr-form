@@ -272,7 +272,7 @@ const addEvents = (form, index) => {
 };
 
 const addCustomValidate = (form) => {
-    let input = form.find('input[type="text"]');
+    let input = form.find('input[required]');
     let submit = form.find('input[type="submit"]');
 
     console.log('Input: ', input);
@@ -293,9 +293,17 @@ const addCustomValidate = (form) => {
                         if(errorDiv) errorDiv.innerHTML = `<span>&#9888;</span> ${error_messages[changedElement.getAttribute('name')]}`
                     }
 
-                    let complete_all_fields = document.querySelector('.hs_error_rollup label.hs-main-font-element');
-                    if (document.body.contains(complete_all_fields)) {
-                        complete_all_fields.innerHTML = `<span>&#9888;</span> ${error_messages['complete_all_fields']}`
+                    let complete_all_fields = document.querySelector('.hs_error_rollup');
+                    let complete_all_fields2 = form.find('.hs_error_rollup');
+
+                    console.log('complete_all_fields: ', complete_all_fields);
+                    console.log('complete_all_fields2: ', complete_all_fields2);
+
+                    if (complete_all_fields) {
+                        complete_all_fields.style.display = 'none';
+                    }
+                    if (complete_all_fields2) {
+                        complete_all_fields2.style.display = 'none';
                     }
                 }, 50)
             }
@@ -331,8 +339,6 @@ const addCustomValidate = (form) => {
     }
 
     form.find('input[type="submit"]').on('click', globalInputsOnChangeHandler());
-
-    //submit.addEventListener('click', globalInputsOnChangeHandler)
 }
 
 const multiStepForm = () => {
