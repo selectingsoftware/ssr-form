@@ -272,7 +272,7 @@ const addEvents = (form, index) => {
 };
 
 const addCustomValidate = (form) => {
-    let input = form.find('input');
+    let input = form.find('input[type="text"]');
     let submit = form.find('input[type="submit"]');
 
     console.log('Input: ', input);
@@ -280,7 +280,7 @@ const addCustomValidate = (form) => {
     function globalInputsOnChangeHandler() {
         for (var i = 0; i < input.length; i += 1) {
             console.log('passou aqui');
-            let typeCheck = input[i].getAttribute('type') == 'checkbox' ? true : input[i].hasAttribute('required')
+            let typeCheck = input[i].hasAttribute('required')
             if (error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck ) {
                 console.log('passou aqui 2');
                 let changedElement = input[i];
@@ -307,17 +307,16 @@ const addCustomValidate = (form) => {
     });
 
     for (var i = 0; i < input.length; i += 1) {
-        let typeCheck = input[i].getAttribute('type') == 'checkbox' ? true : input[i].hasAttribute('required')
+        let typeCheck = input[i].hasAttribute('required')
         console.log('typeCheck: ', typeCheck);
         console.log('input: ', input[i]);
         console.log('input attribute: ', input[i].getAttribute('name'));
         if (error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck) {
-            console.log('passou aqui 2');
             var target = form.find(`input[name=${input[i].getAttribute('name')}]`);
-            console.log('Target: ', target);
-            console.log('Target type:', typeof target);
-            if (target instanceof Node) {
-                observer.observe(target, {
+            if (target) {
+                console.log('Target: ', target[0]);
+                console.log('Target type:', typeof target);                
+                observer.observe(target[0], {
                     attributes: true
                 });
             } else {
