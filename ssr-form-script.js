@@ -31,6 +31,13 @@ const options = [];
 const solutionValues = [];
 const formKeys = Object.keys(formInformation);
 
+let error_messages = {
+    firstname: 'Please provide your first name',
+    lastname: 'Please provide your last name',
+    email: 'Please provide your business email',
+    company: 'Please provide your company name'
+}
+
 const updateProgressBar = (nextForm) => {
     const progressBar = document.getElementById('progress-bar');
     const progressBarFilled = document.getElementById('progress-bar-filled');
@@ -71,15 +78,13 @@ const generateFormOptions = (form, index) => {
                 missingOptionSelection: "Please select at least one option.",
             }
         },
-        cssRequired: "[hs_error_rollup {display: none};]",
         onFormReady: function(form) {
-            form.find('div[class="hs_error_rollup"]')
-                .css('display', 'none');
-
             addEvents(form, index);
             addCustomCss(form);
 
             if (index === 2) {
+                addCustomValidate(form);
+
                 form.find('.hs_' + solutionField).hide();
                 form.find('input[name="' + employeeField + '"]').val(data[0].value).change();
 
@@ -257,6 +262,55 @@ const addEvents = (form, index) => {
         $(this).css('box-shadow', '');
     });
 };
+
+const addCustomValidate = (form) => {
+    let input = form.find('.input');
+    let submit = form.find('input[type="submit"]');
+    //let input = document.querySelectorAll('input');
+    //let submit = document.querySelector('form input[type=submit]');
+
+    function globalInputsOnChangeHandler() {
+        for (var i = 0; i < input.length; i += 1) {
+            let typeCheck = input[i].hasAttribute('required')
+            if (error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck ) {
+                let changedElement = input[i];
+                setTimeout(function(){  
+                    if (changedElement.classList.contains('invalid') || changedElement.classList.contains('error') || changedElement.getAttribute('type') == 'checkbox') {
+                        let parentElement = changedElement.closest('.field');
+                        let errorDiv = parentElement.querySelector('.hs-error-msg')
+                        if(errorDiv) errorDiv.innerHTML = `<span>&#9888;</span> ${error_messages[changedElement.getAttribute('name')]}`
+                    }
+
+                    let complete_all_fields = document.querySelector('.hs_error_rollup label.hs-main-font-element');
+                    if (document.body.contains( complete_all_fields )) {
+                        complete_all_fields.innerHTML = `<span>&#9888;</span> ${error_messages['complete_all_fields']}`
+                    }
+                }, 50)
+            }  
+        }
+    }
+
+    var observer = new MutationObserver(function(e) {
+        globalInputsOnChangeHandler()
+    });
+
+    for (var i = 0; i < input.length; i += 1) {
+        let typeCheck = input[i].hasAttribute('required')
+        if( error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck ){
+            var target = document.querySelector(`form input[name=${input[i].getAttribute('name')}]`);
+            observer.observe(target, {
+                attributes: true
+            })
+        }  
+        if( input[i].getAttribute('type') == 'checkbox' ){
+            ['keyup', 'mouseleave', 'click','mouseout', 'onfocusout'].forEach(function(e) {
+                input[i].addEventListener(e, globalInputsOnChangeHandler)
+            })
+        } 
+    }
+    
+    submit.addEventListener('click', globalInputsOnChangeHandler)
+}
 
 const multiStepForm = () => {
     formKeys.forEach((form, index) => {
