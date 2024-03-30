@@ -266,8 +266,7 @@ const addEvents = (form, index) => {
 };
 
 const addCustomValidate = (form) => {
-    let input = form.find('input');
-    //let submit = form.find('input[type="submit"]');
+    let input = form.find('input[type="text"], input[type="tel"], input[type="email"]');
 
     console.log('input: ', input);
 
@@ -302,22 +301,20 @@ const addCustomValidate = (form) => {
         console.log('typeCheck: ', typeCheck);
         if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck) {
             var target = form.find(`input[name=${input[i].getAttribute('name')}]`);
+            console.log('target: ', target);          
             var targetTel = form.find('input[type="tel"]');
+            console.log('targetTel: ', targetTel);  
             if (target) {   
-                console.log('target: ', target);          
                 observer.observe(target[0], {
                     attributes: true
                 });
             } else if (targetTel) {
-                console.log('targetTel: ', targetTel);  
                 observer.observe(targetTel[0], {
                     attributes: true
                 });
             }
         }
     }
-
-    //form.find('input[type="submit"]').on('click', globalInputsOnChangeHandler());
 }
 
 const multiStepForm = () => {
