@@ -145,7 +145,7 @@ const generateFormOptions = (form, index) => {
 
                     setTimeout(() => {
                         loadingContainer.style.display = 'none';
-                        createFormAndUpdateProgressBar(nextForm, index + 1);
+                        createFormAndUpdateProgressBar(nextForm, index + 1, true);
                     }, 2000);
                 } else {
                     createFormAndUpdateProgressBar(nextForm, index + 1);
@@ -171,11 +171,11 @@ const createDivElement = (className, dataSrc) => {
     return div;
 };
 
-const createFormAndUpdateProgressBar = (form, index) => {
+const createFormAndUpdateProgressBar = (form, index, loader) => {
     hbspt.forms.create(options[index]);
 
     if (form) {
-        updateProgressBar(form);
+        updateProgressBar(form, loader);
     }
 };
 
