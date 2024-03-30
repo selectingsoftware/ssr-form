@@ -302,19 +302,24 @@ const addCustomValidate = (form) => {
         console.log('input: ', input[i]);
         console.log('typeCheck: ', typeCheck);
         if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck) {
-            var target = form.find(`input[name=${input[i].getAttribute('name')}]`);
-            console.log('target: ', target);          
-            var targetTel = form.find('input[type="tel"]');
-            console.log('targetTel: ', targetTel);  
-            if (target) {   
-                observer.observe(target[0], {
-                    attributes: true
-                });
-            } else if (targetTel) {
-                observer.observe(targetTel[0], {
-                    attributes: true
-                });
-            }
+            attributeName = input[i].getAttribute('name')
+            if (attributeName) {
+                var target = form.find(`input[name=${attributeName}]`);
+                console.log('target: ', target);          
+                if (target) {   
+                    observer.observe(target[0], {
+                        attributes: true
+                    });
+                }
+            } else {
+                var targetTel = form.find('input[type="tel"]');
+                console.log('targetTel: ', targetTel);  
+                if (targetTel) {
+                    observer.observe(targetTel[0], {
+                        attributes: true
+                    });
+                }
+            }    
         }
     }
 
