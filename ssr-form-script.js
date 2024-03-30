@@ -87,6 +87,9 @@ const generateFormOptions = (form, index) => {
             addEvents(form, index);
             addCustomCss(form);
 
+            console.log('Data:', data);
+            console.log('Index:', index);
+
             if (index === 2) {
                 form.find('.hs_' + solutionField).hide();
                 form.find('input[name="' + employeeField + '"]').val(data[0].value).change();
@@ -133,7 +136,7 @@ const generateFormOptions = (form, index) => {
                     setTimeout(() => {
                         loadingContainer.style.display = 'none';
                         createFormAndUpdateProgressBar(nextForm, index + 1);
-                    }, 50000);
+                    }, 240000);
                 } else {
                     createFormAndUpdateProgressBar(nextForm, index + 1);
                 }
