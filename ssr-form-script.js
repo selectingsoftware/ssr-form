@@ -126,7 +126,7 @@ const generateFormOptions = (form, index) => {
                 const nextForm = formKeys[index + 1];
                 const nextFormStep = formInformation[nextForm].step;
 
-                if (nextFormStep === 3) {
+                if (nextFormStep === 2) {
                     const loadingContainer = document.getElementById('loading-container');
                     loadingContainer.style.display = 'block';
 
