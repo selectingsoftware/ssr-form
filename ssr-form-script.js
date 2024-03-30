@@ -267,8 +267,10 @@ const addEvents = (form, index) => {
 
 const addCustomValidate = (form) => {
     let input = form.find('input[type="text"], input[type="tel"], input[type="email"]');
+    let inputCheckbox = form.find('.input ul');
 
     console.log('input: ', input);
+    console.log('inputCheckbox: ', inputCheckbox);
 
     function globalInputsOnChangeHandler() {
         for (var i = 0; i < input.length; i += 1) {
@@ -315,6 +317,10 @@ const addCustomValidate = (form) => {
             }
         }
     }
+
+    observer.observe(inputCheckbox[0], {
+        attributes: true
+    });
 }
 
 const multiStepForm = () => {
