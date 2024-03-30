@@ -280,7 +280,7 @@ const addCustomValidate = (form) => {
             }
         }
         let complete_all_fields = form.find('.hs_error_rollup');
-        if (complete_all_fields) {
+        if (complete_all_fields.length > 0) {
             complete_all_fields[0].style.display = 'none';
         }
     }
