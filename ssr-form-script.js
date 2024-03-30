@@ -272,17 +272,12 @@ const addCustomValidate = (form) => {
     let input = form.find('input[type="text"], input[type="tel"], input[type="email"]');
     let inputCheckbox = form.find('.input ul');
 
-    console.log('input: ', input);
-    console.log('inputCheckbox: ', inputCheckbox);
-
     function globalInputsOnChangeHandler() {
         for (var i = 0; i < input.length; i += 1) {
             let typeCheck = input[i].getAttribute('type') == 'checkbox' || input[i].getAttribute('type') == 'tel' ? true : input[i].hasAttribute('required')
             if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck ) {
                 let changedElement = input[i];
-                console.log('changedElement: ', changedElement);
                 setTimeout(function() {
-                    console.log('attribute type: ', changedElement.getAttribute('type'));
                     if (changedElement.classList.contains('invalid') || changedElement.classList.contains('error')) {
                         let parentElement = changedElement.closest('.field');
                         let errorDiv = parentElement.querySelector('.hs-error-msg');
@@ -307,13 +302,10 @@ const addCustomValidate = (form) => {
 
     for (var i = 0; i < input.length; i += 1) {
         let typeCheck = input[i].getAttribute('type') == 'checkbox' || input[i].getAttribute('type') == 'tel' ? true : input[i].hasAttribute('required')
-        console.log('input: ', input[i]);
-        console.log('typeCheck: ', typeCheck);
         if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck) {
             attributeName = input[i].getAttribute('name')
             if (attributeName) {
-                var target = form.find(`input[name=${attributeName}]`);
-                console.log('target: ', target);          
+                var target = form.find(`input[name=${attributeName}]`);       
                 if (target) {   
                     observer.observe(target[0], {
                         attributes: true
@@ -321,7 +313,6 @@ const addCustomValidate = (form) => {
                 }
             } else {
                 var targetTel = form.find('input[type="tel"]');
-                console.log('targetTel: ', targetTel);  
                 if (targetTel) {
                     observer.observe(targetTel[0], {
                         attributes: true
