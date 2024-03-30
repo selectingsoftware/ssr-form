@@ -6,18 +6,18 @@ const formInformation = {
     },
     "77cdf42b-3eec-4bc8-8219-0310a41d5924": {
         step: 1,  // 1.1 Requirements
-        progressBarPercentage: 25,
+        progressBarPercentage: 18,
         timeRemaining: "45"
     },
     "0bdcee61-bc3f-4450-b5d4-5453268fde89": {
         step: 2, // 2 Your Info
-        progressBarPercentage: 50,
-        timeRemaining: "30"
+        progressBarPercentage: 73,
+        timeRemaining: "15"
     },
     "347762a3-e6f8-4c4a-b4a2-e11b560fd6e3": {
         step: 3, // 3 Get advice
-        progressBarPercentage: 75,
-        timeRemaining: "15"
+        progressBarPercentage: 91,
+        timeRemaining: "5"
     }
 };
 
@@ -39,7 +39,7 @@ let error_messages = {
     tel: 'Please provide your phone number'
 }
 
-const updateProgressBar = (nextForm) => {
+const updateProgressBar = (nextForm, loader) => {
     const progressBar = document.getElementById('progress-bar');
     const progressBarFilled = document.getElementById('progress-bar-filled');
     const progressText = document.getElementById('progress-text');
@@ -49,6 +49,16 @@ const updateProgressBar = (nextForm) => {
         const percentage = formInformation[nextForm].progressBarPercentage;
         const timeRemaining = formInformation[nextForm].timeRemaining;
     
+        progressBar.setAttribute('aria-valuenow', percentage);
+        progressText.innerText = `Progress: ${percentage}%`;
+        timerText.innerText = timeRemaining;
+
+        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : 0;
+        progressBarFilled.style.transform = `translateX(${translateXValue})`;
+    } else if (loader) {
+        const percentage = 50
+        const timeRemaining = '30';
+
         progressBar.setAttribute('aria-valuenow', percentage);
         progressText.innerText = `Progress: ${percentage}%`;
         timerText.innerText = timeRemaining;
