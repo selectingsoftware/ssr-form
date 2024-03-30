@@ -143,9 +143,11 @@ const generateFormOptions = (form, index) => {
                     const loadingContainer = document.getElementById('loading-container');
                     loadingContainer.style.display = 'block';
 
+                    updateProgressBar(undefined, true);
+
                     setTimeout(() => {
                         loadingContainer.style.display = 'none';
-                        createFormAndUpdateProgressBar(nextForm, index + 1, true);
+                        createFormAndUpdateProgressBar(nextForm, index + 1);
                     }, 2000);
                 } else {
                     createFormAndUpdateProgressBar(nextForm, index + 1);
@@ -171,11 +173,11 @@ const createDivElement = (className, dataSrc) => {
     return div;
 };
 
-const createFormAndUpdateProgressBar = (form, index, loader) => {
+const createFormAndUpdateProgressBar = (form, index) => {
     hbspt.forms.create(options[index]);
 
     if (form) {
-        updateProgressBar(form, loader);
+        updateProgressBar(form);
     }
 };
 
