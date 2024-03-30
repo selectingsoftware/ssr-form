@@ -116,18 +116,15 @@ const generateFormOptions = (form, index) => {
             if (index === 0) {
                 const form1 = $(form).serializeArray();
                 data.push(form1[0]);
-            }
-            if (index === 1) {
+            } else if (index === 1) {
                 const form2 = $(form).serializeArray();
                 solutionValues.push(...form2
                     .filter(item => item.name === solutionField)
                     .map(item => item.value));
-            }
-            if (index === 2) {
+            } else if (index === 2) {
                 const form3 = $(form).serializeArray();
                 data.push(...form3);
-            }
-            if (index === 3) {
+            } else if (index === 3) {
                 const hubspotSuccessMessage = document.getElementById('multistep-form');
                 hubspotSuccessMessage.style.display = 'none';
             }
@@ -285,17 +282,15 @@ const addCustomValidate = (form) => {
                 let changedElement = input[i];
                 console.log('changedElement: ', changedElement);
                 setTimeout(function() {
+                    console.log('attribute type: ', changedElement.getAttribute('type'));
                     if (changedElement.classList.contains('invalid') || changedElement.classList.contains('error')) {
                         let parentElement = changedElement.closest('.field');
                         let errorDiv = parentElement.querySelector('.hs-error-msg');
-                        if(errorDiv) errorDiv.innerHTML = `<span>&#9888;</span> ${error_messages[changedElement.getAttribute('name')]}`
-                    } else if (changedElement.getAttribute('type') == 'tel') {
-                        console.log('passou aqui');
-                        let parentElement = changedElement.closest('.field');
-                        console.log('parentElement: ', parentElement);
-                        let errorDiv = parentElement.querySelector('.hs-error-msg');
-                        console.log('errorDiv: ', errorDiv);
-                        if(errorDiv) errorDiv.innerHTML = `<span>&#9888;</span> ${error_messages['tel']}`
+                        if (errorDiv && changedElement.getAttribute('type') == 'tel') {
+                            errorDiv.innerHTML = `<span>&#9888;</span> ${error_messages['tel']}`
+                        } else if (errorDiv) {
+                            errorDiv.innerHTML = `<span>&#9888;</span> ${error_messages[changedElement.getAttribute('name')]}`
+                        }
                     }
                 }, 50)
             }
@@ -336,8 +331,7 @@ const addCustomValidate = (form) => {
         }
     }
 
-    if (inputCheckbox) {
-        console.log('inputCheckbox[0]: ', inputCheckbox[0]);
+    if (inputCheckbox.length > 0) {
         observer.observe(inputCheckbox[0], {
             attributes: true
         });
