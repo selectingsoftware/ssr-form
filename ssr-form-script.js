@@ -133,7 +133,7 @@ const generateFormOptions = (form, index) => {
                     setTimeout(() => {
                         loadingContainer.style.display = 'none';
                         createFormAndUpdateProgressBar(nextForm, index + 1);
-                    }, 2000);
+                    }, 50000);
                 } else {
                     createFormAndUpdateProgressBar(nextForm, index + 1);
                 }
