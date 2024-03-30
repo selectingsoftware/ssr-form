@@ -35,11 +35,11 @@ const hubspotCalender = document.getElementById('hubspotCalender');
 hubspotCalender.style.display = 'none';
 
 let error_messages = {
-    software_type_requested: 'Please select at least one option',
     firstname: 'Please provide your first name',
     lastname: 'Please provide your last name',
     email: 'Please provide your business email',
-    company: 'Please provide your company name'
+    company: 'Please provide your company name',
+    tel: 'Please provide your phone number'
 }
 
 const updateProgressBar = (nextForm) => {
@@ -285,10 +285,17 @@ const addCustomValidate = (form) => {
                 let changedElement = input[i];
                 console.log('changedElement: ', changedElement);
                 setTimeout(function() {
-                    if (changedElement.classList.contains('invalid') || changedElement.classList.contains('error') || changedElement.getAttribute('type') == 'checkbox') {
+                    if (changedElement.classList.contains('invalid') || changedElement.classList.contains('error')) {
                         let parentElement = changedElement.closest('.field');
                         let errorDiv = parentElement.querySelector('.hs-error-msg');
                         if(errorDiv) errorDiv.innerHTML = `<span>&#9888;</span> ${error_messages[changedElement.getAttribute('name')]}`
+                    } else if (changedElement.getAttribute('type') == 'tel') {
+                        console.log('passou aqui');
+                        let parentElement = changedElement.closest('.field');
+                        console.log('parentElement: ', parentElement);
+                        let errorDiv = parentElement.querySelector('.hs-error-msg');
+                        console.log('errorDiv: ', errorDiv);
+                        if(errorDiv) errorDiv.innerHTML = `<span>&#9888;</span> ${error_messages['tel']}`
                     }
                 }, 50)
             }
@@ -330,6 +337,7 @@ const addCustomValidate = (form) => {
     }
 
     if (inputCheckbox) {
+        console.log('inputCheckbox[0]: ', inputCheckbox[0]);
         observer.observe(inputCheckbox[0], {
             attributes: true
         });
