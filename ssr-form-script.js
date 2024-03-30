@@ -77,6 +77,12 @@ const generateFormOptions = (form, index) => {
         portalId,
         formId: form,
         target,
+        locale: 'en',
+        translations: {
+            en: {
+                missingOptionSelection: "Please select at least one option.",
+            }
+        },
         onFormReady: function(form) {
             addCustomValidate(form);
             addEvents(form, index);
