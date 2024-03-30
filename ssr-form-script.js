@@ -266,7 +266,7 @@ const addEvents = (form, index) => {
 };
 
 const addCustomValidate = (form) => {
-    let input = form.find('input[required]');
+    let input = form.find('input');
     let submit = form.find('input[type="submit"]');
 
     function globalInputsOnChangeHandler() {
