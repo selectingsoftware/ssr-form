@@ -267,14 +267,17 @@ const addEvents = (form, index) => {
 
 const addCustomValidate = (form) => {
     let input = form.find('input');
-    let submit = form.find('input[type="submit"]');
+    //let submit = form.find('input[type="submit"]');
+
+    console.log('input: ', input);
 
     function globalInputsOnChangeHandler() {
         for (var i = 0; i < input.length; i += 1) {
             let typeCheck = input[i].getAttribute('type') == 'checkbox' || input[i].getAttribute('type') == 'tel' ? true : input[i].hasAttribute('required')
-            if (error_messages.hasOwnProperty(input[i].getAttribute('name')) && typeCheck ) {
+            if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck ) {
                 let changedElement = input[i];
-                setTimeout(function() {  
+                console.log('changedElement: ', changedElement);
+                setTimeout(function() {
                     if (changedElement.classList.contains('invalid') || changedElement.classList.contains('error') || changedElement.getAttribute('type') == 'checkbox') {
                         let parentElement = changedElement.closest('.field');
                         let errorDiv = parentElement.querySelector('.hs-error-msg');
@@ -295,14 +298,18 @@ const addCustomValidate = (form) => {
 
     for (var i = 0; i < input.length; i += 1) {
         let typeCheck = input[i].getAttribute('type') == 'checkbox' || input[i].getAttribute('type') == 'tel' ? true : input[i].hasAttribute('required')
+        console.log('input: ', input[i]);
+        console.log('typeCheck: ', typeCheck);
         if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck) {
             var target = form.find(`input[name=${input[i].getAttribute('name')}]`);
             var targetTel = form.find('input[type="tel"]');
-            if (target) {             
+            if (target) {   
+                console.log('target: ', target);          
                 observer.observe(target[0], {
                     attributes: true
                 });
             } else if (targetTel) {
+                console.log('targetTel: ', targetTel);  
                 observer.observe(targetTel[0], {
                     attributes: true
                 });
