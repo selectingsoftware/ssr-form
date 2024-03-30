@@ -329,9 +329,11 @@ const addCustomValidate = (form) => {
         }
     }
 
-    observer.observe(inputCheckbox[0], {
-        attributes: true
-    });
+    if (inputCheckbox) {
+        observer.observe(inputCheckbox[0], {
+            attributes: true
+        });
+    }
 }
 
 const multiStepForm = () => {
