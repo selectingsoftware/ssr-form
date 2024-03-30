@@ -31,9 +31,6 @@ const options = [];
 const solutionValues = [];
 const formKeys = Object.keys(formInformation);
 
-const hubspotCalender = document.getElementById('hubspotCalender');
-hubspotCalender.style.display = 'none';
-
 let error_messages = {
     firstname: 'Please provide your first name',
     lastname: 'Please provide your last name',
@@ -68,6 +65,8 @@ const updateProgressBar = (nextForm) => {
 
         const timerContainer = document.getElementById('timer-container');
         timerContainer.style.display = 'none';
+
+        const hubspotCalender = document.getElementById('hubspotCalender');
         hubspotCalender.style.display = 'block';
     }
 };
@@ -105,14 +104,7 @@ const generateFormOptions = (form, index) => {
                 });
             }
         },
-        onBeforeFormSubmit: function(form) {
-            form.find('div[class="hs_error_rollup"]')
-                .css('display', 'none');
-        },
         onFormSubmit: function(form) {
-            form.find('div[class="hs_error_rollup"]')
-                .css('display', 'none');
-
             if (index === 0) {
                 const form1 = $(form).serializeArray();
                 data.push(form1[0]);
@@ -130,25 +122,22 @@ const generateFormOptions = (form, index) => {
             }
         },
         onFormSubmitted: function(form) {
-            form.find('div[class="hs_error_rollup"]')
-                .css('display', 'none');
-                
             if (index < formKeys.length - 1) {
-                hbspt.forms.create(options[index + 1]);
-                
                 const nextForm = formKeys[index + 1];
-                if (nextForm) {
-                    updateProgressBar(nextForm);
+                const nextFormStep = formInformation[nextForm].step;
+
+                if (nextFormStep === 3) {
+                    const loadingContainer = document.getElementById('loading-container');
+                    loadingContainer.style.display = 'block';
+
+                    setTimeout(() => {
+                        loadingContainer.style.display = 'none';
+                        createFormAndUpdateProgressBar(nextForm, index + 1);
+                    }, 2000);
+                } else {
+                    createFormAndUpdateProgressBar(nextForm, index + 1);
                 }
             } else {
-                const meetingsDivElement = createDivElement('meetings-iframe-container', 'https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true');
-                const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
-
-                $(document).ready(function() {
-                    $(form).append(meetingsDivElement);
-                    $(form).append(meetingsScriptElement);
-                });
-                
                 updateProgressBar();
             }            
         }
