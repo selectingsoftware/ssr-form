@@ -31,7 +31,15 @@ const options = [];
 const solutionValues = [];
 const formKeys = Object.keys(formInformation);
 
-const updateProgressBar = (nextForm) => {
+let error_messages = {
+    firstname: 'Please provide your first name',
+    lastname: 'Please provide your last name',
+    email: 'Please provide your business email',
+    company: 'Please provide your company name',
+    tel: 'Please provide your phone number'
+}
+
+const updateProgressBar = (nextForm, loader) => {
     const progressBar = document.getElementById('progress-bar');
     const progressBarFilled = document.getElementById('progress-bar-filled');
     const progressText = document.getElementById('progress-text');
@@ -45,18 +53,31 @@ const updateProgressBar = (nextForm) => {
         progressText.innerText = `Progress: ${percentage}%`;
         timerText.innerText = timeRemaining;
 
-        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : 0;
+        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : '-100%';
+        progressBarFilled.style.transform = `translateX(${translateXValue})`;
+    } else if (loader) {
+        const percentage = 50
+        const timeRemaining = '30';
+
+        progressBar.setAttribute('aria-valuenow', percentage);
+        progressText.innerText = `Progress: ${percentage}%`;
+        timerText.innerText = timeRemaining;
+
+        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : '-100%';
         progressBarFilled.style.transform = `translateX(${translateXValue})`;
     } else {
         const percentage = 100
         progressBar.setAttribute('aria-valuenow', percentage);
         progressText.innerText = `Progress: ${percentage}%`;
 
-        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : 0;
+        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : '-100%';
         progressBarFilled.style.transform = `translateX(${translateXValue})`;
 
         const timerContainer = document.getElementById('timer-container');
         timerContainer.style.display = 'none';
+
+        const hubspotCalender = document.getElementById('hubspotCalender');
+        hubspotCalender.style.display = 'block';
     }
 };
 
@@ -65,9 +86,19 @@ const generateFormOptions = (form, index) => {
         portalId,
         formId: form,
         target,
+        locale: 'en',
+        translations: {
+            en: {
+                missingOptionSelection: "Please select at least one option.",
+            }
+        },
         onFormReady: function(form) {
+            addCustomValidate(form);
             addEvents(form, index);
             addCustomCss(form);
+
+            console.log('Data:', data);
+            console.log('Index:', index);
 
             if (index === 2) {
                 form.find('.hs_' + solutionField).hide();
@@ -90,16 +121,17 @@ const generateFormOptions = (form, index) => {
             if (index === 0) {
                 const form1 = $(form).serializeArray();
                 data.push(form1[0]);
-            }
-            if (index === 1) {
+            } else if (index === 1) {
                 const form2 = $(form).serializeArray();
                 solutionValues.push(...form2
                     .filter(item => item.name === solutionField)
                     .map(item => item.value));
-            }
-            if (index === 2) {
+            } else if (index === 2) {
                 const form3 = $(form).serializeArray();
                 data.push(...form3);
+            } else if (index === 3) {
+                const hubspotSuccessMessage = document.getElementById('multistep-form');
+                hubspotSuccessMessage.style.display = 'none';
             }
         },
         onFormSubmitted: function(form) {
@@ -107,9 +139,11 @@ const generateFormOptions = (form, index) => {
                 const nextForm = formKeys[index + 1];
                 const nextFormStep = formInformation[nextForm].step;
 
-                if (nextFormStep === 3) {
+                if (nextFormStep === 2) {
                     const loadingContainer = document.getElementById('loading-container');
                     loadingContainer.style.display = 'block';
+
+                    updateProgressBar(undefined, true);
 
                     setTimeout(() => {
                         loadingContainer.style.display = 'none';
@@ -119,15 +153,8 @@ const generateFormOptions = (form, index) => {
                     createFormAndUpdateProgressBar(nextForm, index + 1);
                 }
             } else {
-                const meetingsDivElement = createDivElement('meetings-iframe-container', 'https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true');
-                const meetingsScriptElement = createScriptElement('https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js');
-
-                $(document).ready(function() {
-                    $(form).append(meetingsDivElement).append(meetingsScriptElement);;          
-                });
-                
                 updateProgressBar();
-            }
+            }            
         }
     };
 };
@@ -186,7 +213,7 @@ const addCustomCss = (form) => {
     form.find('button[class="hs-back-button"]')
         .css('color', 'rgb(0, 0, 0)')
         .css('background-colorn', 'rgb(237, 237, 237)')
-        .css('min-width', '45px')
+        .css('min-width', '52px')
         .css('border-radius', '4px')
         .css('border', '0px')
         .css('padding', '6px 8px')
@@ -242,6 +269,67 @@ const addEvents = (form, index) => {
         form.find('.actions').prepend(backButton);
     }
 };
+
+const addCustomValidate = (form) => {
+    let input = form.find('input[type="text"], input[type="tel"], input[type="email"]');
+    let inputCheckbox = form.find('.input ul');
+
+    function globalInputsOnChangeHandler() {
+        for (var i = 0; i < input.length; i += 1) {
+            let typeCheck = input[i].getAttribute('type') == 'checkbox' || input[i].getAttribute('type') == 'tel' ? true : input[i].hasAttribute('required')
+            if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck ) {
+                let changedElement = input[i];
+                setTimeout(function() {
+                    if (changedElement.classList.contains('invalid') || changedElement.classList.contains('error')) {
+                        let parentElement = changedElement.closest('.field');
+                        let errorDiv = parentElement.querySelector('.hs-error-msg');
+                        if (errorDiv && changedElement.getAttribute('type') == 'tel') {
+                            errorDiv.innerHTML = `<span>&#9888;</span> ${error_messages['tel']}`
+                        } else if (errorDiv) {
+                            errorDiv.innerHTML = `<span>&#9888;</span> ${error_messages[changedElement.getAttribute('name')]}`
+                        }
+                    }
+                }, 50)
+            }
+        }
+        let complete_all_fields = form.find('.hs_error_rollup');
+        if (complete_all_fields.length > 0) {
+            complete_all_fields[0].style.display = 'none';
+        }
+    }
+
+    var observer = new MutationObserver(function(e) {
+        globalInputsOnChangeHandler()
+    });
+
+    for (var i = 0; i < input.length; i += 1) {
+        let typeCheck = input[i].getAttribute('type') == 'checkbox' || input[i].getAttribute('type') == 'tel' ? true : input[i].hasAttribute('required')
+        if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck) {
+            attributeName = input[i].getAttribute('name')
+            if (attributeName) {
+                var target = form.find(`input[name=${attributeName}]`);       
+                if (target) {   
+                    observer.observe(target[0], {
+                        attributes: true
+                    });
+                }
+            } else {
+                var targetTel = form.find('input[type="tel"]');
+                if (targetTel) {
+                    observer.observe(targetTel[0], {
+                        attributes: true
+                    });
+                }
+            }    
+        }
+    }
+
+    if (inputCheckbox.length > 0) {
+        observer.observe(inputCheckbox[0], {
+            attributes: true
+        });
+    }
+}
 
 const multiStepForm = () => {
     formKeys.forEach((form, index) => {

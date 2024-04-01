@@ -8,7 +8,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <style>
+    <style type="text/css">
         body {
             display: flex;
             align-items: center;
@@ -184,13 +184,28 @@
             color: rgb(0, 0, 0);
         }
 
+        #loading-container {
+            text-align: center;
+        }
+
         .loader {
-            border: 16px solid #f3f3f3; /* Light grey */
-            border-top: 16px solid #3498db; /* Blue */
-            border-radius: 50%;
-            width: 120px;
-            height: 120px;
-            animation: spin 2s linear infinite;
+            overflow: hidden;
+            transition: height 500ms ease 0s;
+            min-width: 300px;
+            border-radius: inherit;
+            border-style: none;
+            height: 300px;
+            max-width: 710px 
+        }
+
+        .loading-text {
+            margin: 0px 0px 25px 0px;
+            font-family: Lato, sans-serif;
+            font-size: 1.3rem;
+            line-height: 1.5;
+            color: rgb(0, 0, 0);
+            font-weight: 700;
+            text-align: center;
         }
 
         @keyframes spin {
@@ -214,8 +229,12 @@
         </div>
         <div id="multistep-form"></div>
         <div id="loading-container" style="display: none;">
-            <div class="loader"></div>
-            <p>Hold on - we're finding suppliers that best match your needs!</p>
+            <iframe class="loader" src="https://lottie.host/embed/fa227226-0e57-4675-93a1-c84bd08bd327/vaCcpWJtKB.json"></iframe>
+            <p class="loading-text">Hold on - we're finding suppliers that best match your needs!</p>
+        </div>
+        <div id="hubspotCalender" style="display: none;">
+            <p style="text-align: center;">Thank you! Our Software Advisor will reach out to you shortly. You can also book a 1:1 meeting with our Software Advisor:</p>            </p>
+            <div class="meetings-iframe-container" data-src="https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true"></div>
         </div>
         <div id="timer-container">
             <p id="timer-text">
@@ -231,6 +250,7 @@
 
     <script charset="utf-8" type="text/javascript" src="https://js.hsforms.net/forms/v2.js"></script>
     <script src="https://selectingsoftware.github.io/ssr-form/ssr-form-script-test.js"></script>
+    <script type="text/javascript" src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"></script>
 </body>
 
 </html>
