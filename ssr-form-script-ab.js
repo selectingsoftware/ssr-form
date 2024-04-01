@@ -165,7 +165,7 @@ const createFormAndUpdateProgressBar = (form, index) => {
 };
 
 const serializeMap = (form) => {
-    const formData = new FormData(form);
+    const formData = $(form).serializeArray();
     formData.forEach((value, key) => {
         dataMap.set(key, value);
     });
