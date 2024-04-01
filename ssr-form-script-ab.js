@@ -110,7 +110,7 @@ const generateFormOptions = (form, index) => {
                 });
 
                 form.find('.hs_' + solutionField).hide();
-                form.find('input[name="' + employeeField + '"]').val(data[0].value).change();
+                form.find('input[name="' + employeeField + '"]').val(dataMap.get(employeeField)).change();
 
                 solutionValues.forEach(value => {
                     form.find('input[name="' + solutionField + '"][value="' + value + '"]').prop('checked', true);
