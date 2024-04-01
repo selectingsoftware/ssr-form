@@ -26,7 +26,7 @@ const target = '#multistep-form';
 const solutionField = 'software_type_requested';
 const employeeField = "annualrevenue"
 
-const data = [];
+let dataMap = new Map();
 const options = [];
 const solutionValues = [];
 const formKeys = Object.keys(formInformation);
@@ -118,38 +118,20 @@ const generateFormOptions = (form, index) => {
         },
         onFormSubmit: function(form) {
             console.log('onFormSubmit - Index: ', index);
-            if (index === 0) {
-                const form1 = $(form).serializeArray();
-                console.log('Form 1: ', form1);
-                data.push(form1[0]);
+            if (index === 0 || index === 2) {
+                serializeMap(form);
             } else if (index === 1) {
                 const form2 = $(form).serializeArray();
                 console.log('Form 2: ', form2);
                 solutionValues.push(...form2
                     .filter(item => item.name === solutionField)
                     .map(item => item.value));
-            } else if (index === 2) {
-                const form3 = $(form).serializeArray();
-                console.log('Form 3: ', form3);
-                data.push(...form3);
             } else if (index === 3) {
                 const hubspotSuccessMessage = document.getElementById('multistep-form');
                 hubspotSuccessMessage.style.display = 'none';
             }
         },
-        onBeforeFormSubmit: function(form, submissionValues) {
-            console.log('onBeforeFormSubmit - Index: ', index);
-            console.log('onBeforeFormSubmit - SubmissionValues: ', submissionValues);
-            console.log('onBeforeFormSubmit - Form Serialized: ', $(form).serializeArray());
-        },
         onFormSubmitted: function(form) {
-            console.log('onFormSubmitted - Index: ', index);
-            if (index === 0) {
-                const form1 = $(form).serializeArray();
-                console.log('Form 1: ', form1);
-                data.push(form1[0]);
-            }
-
             if (index < formKeys.length - 1) {
                 const nextForm = formKeys[index + 1];
                 const nextFormStep = formInformation[nextForm].step;
@@ -174,26 +156,19 @@ const generateFormOptions = (form, index) => {
     };
 };
 
-const createScriptElement = (src) => {
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = src;
-    return script;
-};
-
-const createDivElement = (className, dataSrc) => {
-    const div = document.createElement('div');
-    div.className = className;
-    div.setAttribute('data-src', dataSrc);
-    return div;
-};
-
 const createFormAndUpdateProgressBar = (form, index) => {
     hbspt.forms.create(options[index]);
 
     if (form) {
         updateProgressBar(form);
     }
+};
+
+const serializeMap = (form) => {
+    const formData = new FormData(form);
+    formData.forEach((value, key) => {
+        dataMap.set(key, value);
+    });
 };
 
 const extractValueByName = (array, name) => {
@@ -268,9 +243,8 @@ const addEvents = (form, index) => {
                 console.log('input: ', input);
     
                 if (input.length > 0) {
-                    const form1 = $(form).serializeArray();
-                    console.log('Form 1: ', form1);
-                    data.push(form1[0]);
+                    serializeMap(form);
+                    console.log('Data Map: ', dataMap);
                     form.submit();
                 }
             }
