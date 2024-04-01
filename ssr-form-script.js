@@ -24,7 +24,8 @@ const formInformation = {
 const portalId = '22035903';
 const target = '#multistep-form';
 const solutionField = 'software_type_requested';
-const employeeField = "annualrevenue"
+const employeeField = 'annualrevenue';
+const firstnameField = 'firstname';
 
 const data = [];
 const options = [];
@@ -102,7 +103,7 @@ const generateFormOptions = (form, index) => {
 
             if (index === 2) {
                 form.find('.hs_' + solutionField).hide();
-                form.find('input[name="' + employeeField + '"]').val(data[0].value).change();
+                form.find('input[name="' + employeeField + '"]').val(dataMap.get(employeeField)).change();
 
                 solutionValues.forEach(value => {
                     form.find('input[name="' + solutionField + '"][value="' + value + '"]').prop('checked', true);
@@ -110,25 +111,21 @@ const generateFormOptions = (form, index) => {
             }
 
             if (index === 3) {
-                var userName = extractValueByName(data, 'firstname');
+                var firstname = dataMap.get(firstnameField);
 
                 form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
-                    return oldHtml.replace('{FirstName}', userName);
+                    return oldHtml.replace('{FirstName}', firstname);
                 });
             }
         },
         onFormSubmit: function(form) {
-            if (index === 0) {
-                const form1 = $(form).serializeArray();
-                data.push(form1[0]);
+            if (index === 0 || index === 2) {
+                serializeMap(form);
             } else if (index === 1) {
                 const form2 = $(form).serializeArray();
-                solutionValues.push(...form2
+                solutionValues = form2
                     .filter(item => item.name === solutionField)
-                    .map(item => item.value));
-            } else if (index === 2) {
-                const form3 = $(form).serializeArray();
-                data.push(...form3);
+                    .map(item => item.value);
             } else if (index === 3) {
                 const hubspotSuccessMessage = document.getElementById('multistep-form');
                 hubspotSuccessMessage.style.display = 'none';
@@ -159,20 +156,6 @@ const generateFormOptions = (form, index) => {
     };
 };
 
-const createScriptElement = (src) => {
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = src;
-    return script;
-};
-
-const createDivElement = (className, dataSrc) => {
-    const div = document.createElement('div');
-    div.className = className;
-    div.setAttribute('data-src', dataSrc);
-    return div;
-};
-
 const createFormAndUpdateProgressBar = (form, index) => {
     hbspt.forms.create(options[index]);
 
@@ -181,13 +164,11 @@ const createFormAndUpdateProgressBar = (form, index) => {
     }
 };
 
-const extractValueByName = (array, name) => {
-    for (var i = 0; i < array.length; i++) {
-        if (array[i].name === name) {
-            return array[i].value;
-        }
-    }
-    return null;
+const serializeMap = (form) => {
+    const formData = $(form).serializeArray();
+    formData.forEach((field, i) => {
+        dataMap.set(field.name, field.value);
+    });
 };
 
 const addCustomCss = (form) => {
@@ -246,13 +227,10 @@ const addEvents = (form, index) => {
         var labels = form.find('label');
         labels.on('click', function() {
             var inputId = $(this).attr('for');
-            console.log('inputID: ', inputId);
-    
             if (inputId) {
                 var input = form.find('#' + inputId);
-                console.log('input: ', input);
-    
                 if (input.length > 0) {
+                    serializeMap(form);
                     form.submit();
                 }
             }

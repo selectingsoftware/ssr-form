@@ -28,10 +28,9 @@ const employeeField = 'annualrevenue';
 const firstnameField = 'firstname';
 const lastnameField = 'lastname';
 
-console.log('Carregando script');
 const dataMap = new Map();
 const options = [];
-let solutionValues = [];
+const solutionValues = [];
 const formKeys = Object.keys(formInformation);
 
 let error_messages = {
@@ -122,14 +121,13 @@ const generateFormOptions = (form, index) => {
             }
         },
         onFormSubmit: function(form) {
-            console.log('onFormSubmit - Index: ', index);
             if (index === 0 || index === 2) {
                 serializeMap(form);
             } else if (index === 1) {
                 const form2 = $(form).serializeArray();
-                solutionValues = solutionValues.push(...form2
+                solutionValues = form2
                     .filter(item => item.name === solutionField)
-                    .map(item => item.value));
+                    .map(item => item.value);
             } else if (index === 3) {
                 const hubspotSuccessMessage = document.getElementById('multistep-form');
                 hubspotSuccessMessage.style.display = 'none';
@@ -173,15 +171,6 @@ const serializeMap = (form) => {
     formData.forEach((field, i) => {
         dataMap.set(field.name, field.value);
     });
-};
-
-const extractValueByName = (array, name) => {
-    for (var i = 0; i < array.length; i++) {
-        if (array[i].name === name) {
-            return array[i].value;
-        }
-    }
-    return null;
 };
 
 const addCustomCss = (form) => {
@@ -240,12 +229,8 @@ const addEvents = (form, index) => {
         var labels = form.find('label');
         labels.on('click', function() {
             var inputId = $(this).attr('for');
-            console.log('inputID: ', inputId);
-    
             if (inputId) {
                 var input = form.find('#' + inputId);
-                console.log('input: ', input);
-    
                 if (input.length > 0) {
                     serializeMap(form);
                     form.submit();
