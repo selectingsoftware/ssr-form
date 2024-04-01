@@ -26,6 +26,9 @@ const target = '#multistep-form';
 const solutionField = 'software_type_requested';
 const employeeField = 'annualrevenue';
 const firstnameField = 'firstname';
+const lastnameField = 'lastname';
+const emailField = 'email';
+const companyField = 'company';
 
 const dataMap = new Map();
 const options = [];
@@ -102,20 +105,22 @@ const generateFormOptions = (form, index) => {
             console.log('Index:', index);
             console.log('Solution Values:', solutionValues);
 
-            if (index === 2) {
-                form.find('.hs_' + solutionField).hide();
-                form.find('input[name="' + employeeField + '"]').val(dataMap.get(employeeField)).change();
-
-                solutionValues.forEach(value => {
-                    form.find('input[name="' + solutionField + '"][value="' + value + '"]').prop('checked', true);
-                });
-            }
-
             if (index === 3) {
                 var firstname = dataMap.get(firstnameField);
 
                 form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
                     return oldHtml.replace('{FirstName}', firstname);
+                });
+
+                form.find('.hs_' + solutionField).hide();
+                form.find('input[name="' + employeeField + '"]').val(dataMap.get(employeeField)).change();
+                form.find('input[name="' + firstnameField + '"]').val(dataMap.get(firstnameField)).change();
+                form.find('input[name="' + lastnameField + '"]').val(dataMap.get(lastnameField)).change();
+                form.find('input[name="' + emailField + '"]').val(dataMap.get(emailField)).change();
+                form.find('input[name="' + companyField + '"]').val(dataMap.get(companyField)).change();
+
+                solutionValues.forEach(value => {
+                    form.find('input[name="' + solutionField + '"][value="' + value + '"]').prop('checked', true);
                 });
             }
         },
