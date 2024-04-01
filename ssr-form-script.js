@@ -27,7 +27,7 @@ const solutionField = 'software_type_requested';
 const employeeField = 'annualrevenue';
 const firstnameField = 'firstname';
 
-const data = [];
+const dataMap = new Map();
 const options = [];
 let solutionValues = [];
 const formKeys = Object.keys(formInformation);
@@ -98,8 +98,9 @@ const generateFormOptions = (form, index) => {
             addEvents(form, index);
             addCustomCss(form);
 
-            console.log('Data:', data);
+            console.log('Data Map:', dataMap);
             console.log('Index:', index);
+            console.log('Solution Values:', solutionValues);
 
             if (index === 2) {
                 form.find('.hs_' + solutionField).hide();
