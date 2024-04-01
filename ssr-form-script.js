@@ -54,7 +54,7 @@ const updateProgressBar = (nextForm, loader) => {
         timerText.innerText = timeRemaining;
 
         console.log('percentage: ', percentage);
-        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : -100;
+        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : '-100%';
         console.log('translateXValue: ', translateXValue);
         progressBarFilled.style.transform = `translateX(${translateXValue})`;
     } else if (loader) {
@@ -65,7 +65,7 @@ const updateProgressBar = (nextForm, loader) => {
         progressText.innerText = `Progress: ${percentage}%`;
         timerText.innerText = timeRemaining;
 
-        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : 0;
+        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : '-100%';
         progressBarFilled.style.transform = `translateX(${translateXValue})`;
     } else {
         const percentage = 100
@@ -73,7 +73,7 @@ const updateProgressBar = (nextForm, loader) => {
         progressText.innerText = `Progress: ${percentage}%`;
 
         console.log('percentage 2: ', percentage);
-        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : 0;
+        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : '-100%';
         console.log('translateXValue 2: ', translateXValue);
         progressBarFilled.style.transform = `translateX(${translateXValue})`;
 
