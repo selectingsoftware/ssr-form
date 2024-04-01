@@ -26,6 +26,7 @@ const target = '#multistep-form';
 const solutionField = 'software_type_requested';
 const employeeField = "annualrevenue"
 
+console.log('Carregando script');
 const dataMap = new Map();
 const options = [];
 const solutionValues = [];
