@@ -137,6 +137,11 @@ const generateFormOptions = (form, index) => {
                 hubspotSuccessMessage.style.display = 'none';
             }
         },
+        onBeforeFormSubmit: function(form, submissionValues) {
+            console.log('onBeforeFormSubmit - Index: ', index);
+            console.log('onBeforeFormSubmit - SubmissionValues: ', submissionValues);
+            console.log('onBeforeFormSubmit - Form Serialized: ', $(form).serializeArray());
+        },
         onFormSubmitted: function(form) {
             console.log('onFormSubmitted - Index: ', index);
             if (index === 0) {
