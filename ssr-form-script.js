@@ -217,6 +217,14 @@ const addCustomCss = (form) => {
         .css('padding', '6px 8px')
         .css('transition', 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;')
         .css('cursor', 'pointer');
+
+    form.find('label[class="hs-form-checkbox-display"]')
+        .css('display', 'flex')
+        .css('align-items', 'center');
+    
+    form.find('label[class="hs-input"]')
+        .css('width', '20px')
+        .css('height', '20px');
 }
 
 const addEvents = (form, index) => {
