@@ -97,7 +97,7 @@ const generateFormOptions = (form, index) => {
             addEvents(form, index);
             addCustomCss(form);
 
-            console.log('Data:', data);
+            console.log('Data Map:', dataMap);
             console.log('Index:', index);
             console.log('Solution Values:', solutionValues);
 
