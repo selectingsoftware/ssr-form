@@ -118,14 +118,17 @@ const generateFormOptions = (form, index) => {
         onFormSubmit: function(form) {
             if (index === 0) {
                 const form1 = $(form).serializeArray();
+                console.log(form1);
                 data.push(form1[0]);
             } else if (index === 1) {
                 const form2 = $(form).serializeArray();
+                console.log(form2);
                 solutionValues.push(...form2
                     .filter(item => item.name === solutionField)
                     .map(item => item.value));
             } else if (index === 2) {
                 const form3 = $(form).serializeArray();
+                console.log(form3);
                 data.push(...form3);
             } else if (index === 3) {
                 const hubspotSuccessMessage = document.getElementById('multistep-form');
