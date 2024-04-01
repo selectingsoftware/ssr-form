@@ -24,7 +24,9 @@ const formInformation = {
 const portalId = '22035903';
 const target = '#multistep-form';
 const solutionField = 'software_type_requested';
-const employeeField = "annualrevenue"
+const employeeField = 'annualrevenue';
+const firstnameField = 'firstname';
+const lastnameField = 'lastname';
 
 console.log('Carregando script');
 const dataMap = new Map();
@@ -103,8 +105,7 @@ const generateFormOptions = (form, index) => {
             console.log('Solution Values:', solutionValues);
 
             if (index === 3) {
-                var firstname = dataMap.get('firstname')
-                //var userName = extractValueByName(data, 'firstname');
+                var firstname = dataMap.get(firstnameField);
 
                 form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
                     return oldHtml.replace('{FirstName}', firstname);
@@ -112,6 +113,8 @@ const generateFormOptions = (form, index) => {
 
                 form.find('.hs_' + solutionField).hide();
                 form.find('input[name="' + employeeField + '"]').val(dataMap.get(employeeField)).change();
+                form.find('input[name="' + firstnameField + '"]').val(dataMap.get(firstnameField)).change();
+                form.find('input[name="' + lastnameField + '"]').val(dataMap.get(lastnameField)).change();
 
                 solutionValues.forEach(value => {
                     form.find('input[name="' + solutionField + '"][value="' + value + '"]').prop('checked', true);
