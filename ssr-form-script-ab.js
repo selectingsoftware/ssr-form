@@ -30,7 +30,7 @@ const lastnameField = 'lastname';
 
 const dataMap = new Map();
 const options = [];
-const solutionValues = [];
+let solutionValues = [];
 const formKeys = Object.keys(formInformation);
 
 let error_messages = {

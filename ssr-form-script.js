@@ -29,7 +29,7 @@ const firstnameField = 'firstname';
 
 const data = [];
 const options = [];
-const solutionValues = [];
+let solutionValues = [];
 const formKeys = Object.keys(formInformation);
 
 let error_messages = {
