@@ -53,7 +53,9 @@ const updateProgressBar = (nextForm, loader) => {
         progressText.innerText = `Progress: ${percentage}%`;
         timerText.innerText = timeRemaining;
 
+        console.log('percentage: ', percentage);
         const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : -100;
+        console.log('translateXValue: ', translateXValue);
         progressBarFilled.style.transform = `translateX(${translateXValue})`;
     } else if (loader) {
         const percentage = 50
@@ -70,7 +72,9 @@ const updateProgressBar = (nextForm, loader) => {
         progressBar.setAttribute('aria-valuenow', percentage);
         progressText.innerText = `Progress: ${percentage}%`;
 
+        console.log('percentage 2: ', percentage);
         const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : 0;
+        console.log('translateXValue 2: ', translateXValue);
         progressBarFilled.style.transform = `translateX(${translateXValue})`;
 
         const timerContainer = document.getElementById('timer-container');
