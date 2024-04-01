@@ -6,18 +6,18 @@ const formInformation = {
     },
     "1847fccb-4e07-46fd-b987-5abd688303d2": {
         step: 1,  // 1.1 Requirements
-        progressBarPercentage: 25,
+        progressBarPercentage: 18,
         timeRemaining: "45"
     },
     "b1ded006-4c7d-4192-ba18-a08eeda6081c": {
         step: 2, // 2 Your Info
-        progressBarPercentage: 50,
-        timeRemaining: "30"
+        progressBarPercentage: 73,
+        timeRemaining: "15"
     },
     "d6ed34de-f6d8-4408-8f8f-0472d4ceee59": {
         step: 3, // 3 Get advice
-        progressBarPercentage: 75,
-        timeRemaining: "15"
+        progressBarPercentage: 91,
+        timeRemaining: "5"
     }
 };
 
@@ -26,9 +26,9 @@ const target = '#multistep-form';
 const solutionField = '0-2/solution';
 const employeeField = '0-2/employees';
 
-const data = [];
+const dataMap = new Map();
 const options = [];
-const solutionValues = [];
+let solutionValues = [];
 const formKeys = Object.keys(formInformation);
 
 let error_messages = {
@@ -97,38 +97,33 @@ const generateFormOptions = (form, index) => {
             addEvents(form, index);
             addCustomCss(form);
 
-            console.log('Data:', data);
-            console.log('Index:', index);
+            if (index === 3) {
+                var firstname = dataMap.get(firstnameField);
 
-            if (index === 2) {
+                form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
+                    return oldHtml.replace('{FirstName}', firstname);
+                });
+
                 form.find('.hs_' + solutionField).hide();
-                form.find('input[name="' + employeeField + '"]').val(data[0].value).change();
+                form.find('input[name="' + employeeField + '"]').val(dataMap.get(employeeField)).change();
+                form.find('input[name="' + firstnameField + '"]').val(dataMap.get(firstnameField)).change();
+                form.find('input[name="' + lastnameField + '"]').val(dataMap.get(lastnameField)).change();
+                form.find('input[name="' + emailField + '"]').val(dataMap.get(emailField)).change();
+                form.find('input[name="' + companyField + '"]').val(dataMap.get(companyField)).change();
 
                 solutionValues.forEach(value => {
                     form.find('input[name="' + solutionField + '"][value="' + value + '"]').prop('checked', true);
                 });
             }
-
-            if (index === 3) {
-                var userName = extractValueByName(data, 'firstname');
-
-                form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
-                    return oldHtml.replace('{FirstName}', userName);
-                });
-            }
         },
         onFormSubmit: function(form) {
-            if (index === 0) {
-                const form1 = $(form).serializeArray();
-                data.push(form1[0]);
+            if (index === 0 || index === 2) {
+                serializeMap(form);
             } else if (index === 1) {
                 const form2 = $(form).serializeArray();
-                solutionValues.push(...form2
+                solutionValues = form2
                     .filter(item => item.name === solutionField)
-                    .map(item => item.value));
-            } else if (index === 2) {
-                const form3 = $(form).serializeArray();
-                data.push(...form3);
+                    .map(item => item.value);
             } else if (index === 3) {
                 const hubspotSuccessMessage = document.getElementById('multistep-form');
                 hubspotSuccessMessage.style.display = 'none';
@@ -159,20 +154,6 @@ const generateFormOptions = (form, index) => {
     };
 };
 
-const createScriptElement = (src) => {
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = src;
-    return script;
-};
-
-const createDivElement = (className, dataSrc) => {
-    const div = document.createElement('div');
-    div.className = className;
-    div.setAttribute('data-src', dataSrc);
-    return div;
-};
-
 const createFormAndUpdateProgressBar = (form, index) => {
     hbspt.forms.create(options[index]);
 
@@ -181,13 +162,11 @@ const createFormAndUpdateProgressBar = (form, index) => {
     }
 };
 
-const extractValueByName = (array, name) => {
-    for (var i = 0; i < array.length; i++) {
-        if (array[i].name === name) {
-            return array[i].value;
-        }
-    }
-    return null;
+const serializeMap = (form) => {
+    const formData = $(form).serializeArray();
+    formData.forEach((field, i) => {
+        dataMap.set(field.name, field.value);
+    });
 };
 
 const addCustomCss = (form) => {
@@ -246,13 +225,10 @@ const addEvents = (form, index) => {
         var labels = form.find('label');
         labels.on('click', function() {
             var inputId = $(this).attr('for');
-            console.log('inputID: ', inputId);
-    
             if (inputId) {
                 var input = form.find('#' + inputId);
-                console.log('input: ', input);
-    
                 if (input.length > 0) {
+                    serializeMap(form);
                     form.submit();
                 }
             }

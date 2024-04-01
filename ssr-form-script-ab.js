@@ -99,10 +99,6 @@ const generateFormOptions = (form, index) => {
             addEvents(form, index);
             addCustomCss(form);
 
-            console.log('Data Map:', dataMap);
-            console.log('Index:', index);
-            console.log('Solution Values:', solutionValues);
-
             if (index === 3) {
                 var firstname = dataMap.get(firstnameField);
 
