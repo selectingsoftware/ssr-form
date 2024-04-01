@@ -138,6 +138,13 @@ const generateFormOptions = (form, index) => {
             }
         },
         onFormSubmitted: function(form) {
+            console.log('onFormSubmitted - Index: ', index);
+            if (index === 0) {
+                const form1 = $(form).serializeArray();
+                console.log('Form 1: ', form1);
+                data.push(form1[0]);
+            }
+
             if (index < formKeys.length - 1) {
                 const nextForm = formKeys[index + 1];
                 const nextFormStep = formInformation[nextForm].step;
