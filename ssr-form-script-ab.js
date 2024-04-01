@@ -127,8 +127,7 @@ const generateFormOptions = (form, index) => {
                 serializeMap(form);
             } else if (index === 1) {
                 const form2 = $(form).serializeArray();
-                console.log('Form 2: ', form2);
-                solutionValues.push(...form2
+                solutionValues = solutionValues.push(...form2
                     .filter(item => item.name === solutionField)
                     .map(item => item.value));
             } else if (index === 3) {
