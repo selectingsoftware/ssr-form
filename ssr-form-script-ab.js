@@ -100,20 +100,18 @@ const generateFormOptions = (form, index) => {
             console.log('Data:', data);
             console.log('Index:', index);
 
-            if (index === 2) {
-                form.find('.hs_' + solutionField).hide();
-                form.find('input[name="' + employeeField + '"]').val(data[0].value).change();
-
-                solutionValues.forEach(value => {
-                    form.find('input[name="' + solutionField + '"][value="' + value + '"]').prop('checked', true);
-                });
-            }
-
             if (index === 3) {
                 var userName = extractValueByName(data, 'firstname');
 
                 form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
                     return oldHtml.replace('{FirstName}', userName);
+                });
+
+                form.find('.hs_' + solutionField).hide();
+                form.find('input[name="' + employeeField + '"]').val(data[0].value).change();
+
+                solutionValues.forEach(value => {
+                    form.find('input[name="' + solutionField + '"][value="' + value + '"]').prop('checked', true);
                 });
             }
         },
