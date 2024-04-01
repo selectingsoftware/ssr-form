@@ -266,18 +266,6 @@ const addEvents = (form, index) => {
         });
         form.find('.actions').prepend(backButton);
     }
-
-    form.find('button[class="hs-back-button"]').on('mouseover', function(event) {
-        event.preventDefault();
-    
-        $(this).css('box-shadow', 'rgba(0, 0, 0, 0.4) 2px 4px 10px 1px');
-    });
-
-    form.find('button[class="hs-back-button"]').on('mouseout', function(event) {
-        event.preventDefault();
-
-        $(this).css('box-shadow', '');
-    });
 };
 
 const addCustomValidate = (form) => {
