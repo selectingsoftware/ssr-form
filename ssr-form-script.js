@@ -202,7 +202,9 @@ const addCustomCss = (form) => {
         .css('cursor', 'pointer')
         .css('position', 'relative')
         .css('overflow', 'visible')
-        .css('padding', '5px');
+        .css('padding', '5px')
+        .css('display', 'flex')
+        .css('align-items', 'center');
 
     form.find('div[class="actions"]')
         .css('display', 'flex')
