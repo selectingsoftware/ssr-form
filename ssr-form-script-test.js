@@ -197,7 +197,7 @@ const addCustomCss = (form) => {
         .css('display', 'flex')
         .css('align-items', 'center');
     
-    form.find('label[class="hs-input"]')
+    form.find('input[class="hs-input"]')
         .css('width', '20px')
         .css('height', '20px');
 }
