@@ -53,7 +53,7 @@ const updateProgressBar = (nextForm, loader) => {
         progressText.innerText = `Progress: ${percentage}%`;
         timerText.innerText = timeRemaining;
 
-        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : 0;
+        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : -100;
         progressBarFilled.style.transform = `translateX(${translateXValue})`;
     } else if (loader) {
         const percentage = 50
