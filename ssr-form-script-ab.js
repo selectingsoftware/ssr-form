@@ -268,6 +268,9 @@ const addEvents = (form, index) => {
                 console.log('input: ', input);
     
                 if (input.length > 0) {
+                    const form1 = $(form).serializeArray();
+                    console.log('Form 1: ', form1);
+                    data.push(form1[0]);
                     form.submit();
                 }
             }
