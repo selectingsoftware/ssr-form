@@ -26,7 +26,7 @@ const target = '#multistep-form';
 const solutionField = 'software_type_requested';
 const employeeField = "annualrevenue"
 
-let dataMap = new Map();
+const dataMap = new Map();
 const options = [];
 const solutionValues = [];
 const formKeys = Object.keys(formInformation);
@@ -102,10 +102,11 @@ const generateFormOptions = (form, index) => {
             console.log('Solution Values:', solutionValues);
 
             if (index === 3) {
-                var userName = extractValueByName(data, 'firstname');
+                var firstname = meuMapa.get('firstname')
+                //var userName = extractValueByName(data, 'firstname');
 
                 form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
-                    return oldHtml.replace('{FirstName}', userName);
+                    return oldHtml.replace('{FirstName}', firstname);
                 });
 
                 form.find('.hs_' + solutionField).hide();
