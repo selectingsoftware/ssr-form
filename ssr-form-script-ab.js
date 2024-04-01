@@ -99,6 +99,7 @@ const generateFormOptions = (form, index) => {
 
             console.log('Data:', data);
             console.log('Index:', index);
+            console.log('Solution Values:', solutionValues);
 
             if (index === 3) {
                 var userName = extractValueByName(data, 'firstname');
@@ -119,17 +120,17 @@ const generateFormOptions = (form, index) => {
             console.log('onFormSubmit - Index: ', index);
             if (index === 0) {
                 const form1 = $(form).serializeArray();
-                console.log(form1);
+                console.log('Form 1: ', form1);
                 data.push(form1[0]);
             } else if (index === 1) {
                 const form2 = $(form).serializeArray();
-                console.log(form2);
+                console.log('Form 2: ', form2);
                 solutionValues.push(...form2
                     .filter(item => item.name === solutionField)
                     .map(item => item.value));
             } else if (index === 2) {
                 const form3 = $(form).serializeArray();
-                console.log(form3);
+                console.log('Form 3: ', form3);
                 data.push(...form3);
             } else if (index === 3) {
                 const hubspotSuccessMessage = document.getElementById('multistep-form');
