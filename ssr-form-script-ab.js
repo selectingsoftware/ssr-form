@@ -102,7 +102,7 @@ const generateFormOptions = (form, index) => {
             console.log('Solution Values:', solutionValues);
 
             if (index === 3) {
-                var firstname = meuMapa.get('firstname')
+                var firstname = dataMap.get('firstname')
                 //var userName = extractValueByName(data, 'firstname');
 
                 form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
@@ -245,7 +245,6 @@ const addEvents = (form, index) => {
     
                 if (input.length > 0) {
                     serializeMap(form);
-                    console.log('Data Map: ', dataMap);
                     form.submit();
                 }
             }
