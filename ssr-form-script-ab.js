@@ -116,6 +116,7 @@ const generateFormOptions = (form, index) => {
             }
         },
         onFormSubmit: function(form) {
+            console.log('onFormSubmit - Index: ', index);
             if (index === 0) {
                 const form1 = $(form).serializeArray();
                 console.log(form1);
