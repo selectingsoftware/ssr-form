@@ -224,7 +224,7 @@ const addCustomCss = (form) => {
         .css('display', 'flex')
         .css('align-items', 'center');
     
-    form.find('input[class="hs-input"]')
+    form.find('input.hs-input[type="checkbox"], input.hs-input[type="radio"]')
         .css('width', '20px')
         .css('height', '20px');
 }
