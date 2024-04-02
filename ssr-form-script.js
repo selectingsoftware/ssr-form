@@ -105,7 +105,7 @@ const generateFormOptions = (form, index) => {
             addCustomValidate(form);
             addEvents(form, index);
             addCustomCss(form, index);
-            
+
             setValueAndChange(form, employeeField, dataMap);
             setValueAndChange(form, firstnameField, dataMap);
             setValueAndChange(form, lastnameField, dataMap);
@@ -117,13 +117,12 @@ const generateFormOptions = (form, index) => {
             });
 
             if (index === 4) {
-                var firstname = dataMap.get(firstnameField);
+                form.find('.hs_' + solutionField).hide();
+                const firstname = dataMap.get(firstnameField);
 
                 form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
                     return oldHtml.replace('{FirstName}', firstname);
                 });
-
-                form.find('.hs_' + solutionField).hide();
             }
         },
         onFormSubmit: function(form) {
@@ -179,10 +178,11 @@ const serializeMap = (form) => {
     });
 };
 
-function setValueAndChange(form, fieldName, dataMap) {
-    var field = form.find('input[name="' + fieldName + '"]');
-    if (field.length > 0) {
-        field.val(dataMap.get(fieldName)).change();
+const setValueAndChange = (form, fieldName, dataMap) => {
+    const field = form.find('input[name="' + fieldName + '"]');
+    const value = dataMap.get(fieldName);
+    if (field.length > 0 && value) {
+        field.val(value).change();
     }
 }
 
