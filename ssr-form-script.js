@@ -121,6 +121,7 @@ const generateFormOptions = (form, index) => {
             }
         },
         onFormSubmit: function(form) {
+            console.log('Index: ', index);
             if (index === 0 || index === 2) {
                 serializeMap(form);
             } else if (index === 1) {
@@ -130,6 +131,7 @@ const generateFormOptions = (form, index) => {
                     .map(item => item.value);
             } else if (index === 2) {
                 const headline = document.getElementById('headline');
+                console.log('Headline: ', headline);
                 headline.style.display = 'block';
             } else if (index === 3) {
                 const hubspotSuccessMessage = document.getElementById('multistep-form');
@@ -218,7 +220,7 @@ const addCustomCss = (form) => {
     form.find('li[class="hs-form-radio"]')
         .css('padding-bottom', '6px');
 
-    form.find('div.hs-form-field label span')
+    form.find('div.hs-form-field + label + span')
         .css('font-size', '24px')
         .css('font-weight', 'bold');
 }
