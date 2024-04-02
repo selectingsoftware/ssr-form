@@ -212,7 +212,7 @@ const addCustomCss = (form) => {
         .css('width', '20px')
         .css('height', '20px');
 
-    form.find('label[class="hs-form-radio"]')
+    form.find('li[class="hs-form-radio"]')
         .css('padding-bottom', '6px');
 }
 
