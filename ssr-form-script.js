@@ -106,7 +106,7 @@ const generateFormOptions = (form, index) => {
             addEvents(form, index);
             addCustomCss(form, index);
 
-            if (index === 3) {
+            if (index === 4) {
                 var firstname = dataMap.get(firstnameField);
 
                 form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
@@ -126,14 +126,14 @@ const generateFormOptions = (form, index) => {
             }
         },
         onFormSubmit: function(form) {
-            if (index === 0 || index === 2) {
+            if (index === 0 || index === 3) {
                 serializeMap(form);
             } else if (index === 1) {
                 const form2 = $(form).serializeArray();
                 solutionValues = form2
                     .filter(item => item.name === solutionField)
                     .map(item => item.value);
-            } else if (index === 3) {
+            } else if (index === 4) {
                 const hubspotSuccessMessage = document.getElementById('multistep-form');
                 hubspotSuccessMessage.style.display = 'none';
             }
@@ -222,8 +222,7 @@ const addCustomCss = (form, index) => {
 
     if (index < 2) {
         form.find('div.hs-form-field > label > span')
-            .css('font-size', '24px')
-            .css('font-weight', 'bold');
+            .css('font-size', '24px');
     }
 }
 
