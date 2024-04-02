@@ -43,6 +43,8 @@ let error_messages = {
     tel: 'Please provide your phone number'
 }
 
+const headline = document.getElementById('headline');
+
 const updateProgressBar = (nextForm, loader) => {
     const progressBar = document.getElementById('progress-bar');
     const progressBarFilled = document.getElementById('progress-bar-filled');
@@ -104,7 +106,6 @@ const generateFormOptions = (form, index) => {
             console.log('Index: ', index);
             if (index === 2) {
                 const headline = document.getElementById('headline');
-                console.log('Headline: ', headline);
                 headline.style.display = 'block';
             }
             if (index === 3) {
@@ -180,6 +181,8 @@ const serializeMap = (form) => {
 };
 
 const addCustomCss = (form) => {
+    headline.style.display = 'none';
+
     form.find('label[class="hs-form-radio-display"]')
         .css('color', 'rgba(0, 0, 0, 0.87)')
         .css('transition', 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms')
