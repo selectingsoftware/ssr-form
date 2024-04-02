@@ -101,9 +101,8 @@ const generateFormOptions = (form, index) => {
         onFormReady: function(form) {
             addCustomValidate(form);
             addEvents(form, index);
-            addCustomCss(form);
+            addCustomCss(form, index);
 
-            console.log('Index: ', index);
             if (index === 2) {
                 const headline = document.getElementById('headline');
                 headline.style.display = 'block';
@@ -180,7 +179,7 @@ const serializeMap = (form) => {
     });
 };
 
-const addCustomCss = (form) => {
+const addCustomCss = (form, index) => {
     headline.style.display = 'none';
 
     form.find('label[class="hs-form-radio-display"]')
@@ -226,8 +225,8 @@ const addCustomCss = (form) => {
 
     if (index < 2) {
         form.find('div.hs-form-field > label > span')
-        .css('font-size', '24px')
-        .css('font-weight', 'bold');
+            .css('font-size', '24px')
+            .css('font-weight', 'bold');
     }
 }
 
