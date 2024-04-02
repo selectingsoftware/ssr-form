@@ -211,9 +211,11 @@ const addCustomCss = (form) => {
     form.find('li[class="hs-form-radio"]')
         .css('padding-bottom', '6px');
 
-    form.find('div.hs-form-field > label > span')
+    if (index < 2) {
+        form.find('div.hs-form-field > label > span')
         .css('font-size', '24px')
         .css('font-weight', 'bold');
+    }
 }
 
 const addEvents = (form, index) => {
