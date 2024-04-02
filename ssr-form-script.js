@@ -126,16 +126,16 @@ const generateFormOptions = (form, index) => {
             }
         },
         onFormSubmit: function(form) {
-            if (index === 0 || index === 3) {
-                serializeMap(form);
+            if (index === 4) {
+                const hubspotSuccessMessage = document.getElementById('multistep-form');
+                hubspotSuccessMessage.style.display = 'none';
             } else if (index === 1) {
                 const form2 = $(form).serializeArray();
                 solutionValues = form2
                     .filter(item => item.name === solutionField)
                     .map(item => item.value);
-            } else if (index === 4) {
-                const hubspotSuccessMessage = document.getElementById('multistep-form');
-                hubspotSuccessMessage.style.display = 'none';
+            } else {
+                serializeMap(form);
             }
         },
         onFormSubmitted: function(form) {
