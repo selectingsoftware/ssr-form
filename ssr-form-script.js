@@ -105,6 +105,16 @@ const generateFormOptions = (form, index) => {
             addCustomValidate(form);
             addEvents(form, index);
             addCustomCss(form, index);
+            
+            setValueAndChange(form, employeeField, dataMap);
+            setValueAndChange(form, firstnameField, dataMap);
+            setValueAndChange(form, lastnameField, dataMap);
+            setValueAndChange(form, emailField, dataMap);
+            setValueAndChange(form, companyField, dataMap);
+
+            solutionValues.forEach(value => {
+                form.find('input[name="' + solutionField + '"][value="' + value + '"]').prop('checked', true);
+            });
 
             if (index === 4) {
                 var firstname = dataMap.get(firstnameField);
@@ -114,15 +124,6 @@ const generateFormOptions = (form, index) => {
                 });
 
                 form.find('.hs_' + solutionField).hide();
-                form.find('input[name="' + employeeField + '"]').val(dataMap.get(employeeField)).change();
-                form.find('input[name="' + firstnameField + '"]').val(dataMap.get(firstnameField)).change();
-                form.find('input[name="' + lastnameField + '"]').val(dataMap.get(lastnameField)).change();
-                form.find('input[name="' + emailField + '"]').val(dataMap.get(emailField)).change();
-                form.find('input[name="' + companyField + '"]').val(dataMap.get(companyField)).change();
-
-                solutionValues.forEach(value => {
-                    form.find('input[name="' + solutionField + '"][value="' + value + '"]').prop('checked', true);
-                });
             }
         },
         onFormSubmit: function(form) {
@@ -177,6 +178,13 @@ const serializeMap = (form) => {
         dataMap.set(field.name, field.value);
     });
 };
+
+function setValueAndChange(form, fieldName, dataMap) {
+    var field = form.find('input[name="' + fieldName + '"]');
+    if (field.length > 0) {
+        field.val(dataMap.get(fieldName)).change();
+    }
+}
 
 const addCustomCss = (form, index) => {
     form.find('label[class="hs-form-radio-display"]')
