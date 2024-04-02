@@ -191,7 +191,8 @@ const addCustomCss = (form) => {
 
     form.find('div[class="actions"]')
         .css('display', 'flex')
-        .css('flex-direction', 'row');
+        .css('flex-direction', 'row')
+        .css('padding', '0px');
 
     form.find('button[class="hs-back-button"]')
         .css('color', 'rgb(0, 0, 0)')
@@ -210,6 +211,9 @@ const addCustomCss = (form) => {
     form.find('input.hs-input[type="checkbox"], input.hs-input[type="radio"]')
         .css('width', '20px')
         .css('height', '20px');
+
+    form.find('label[class="hs-form-radio"]')
+        .css('padding-bottom', '6px');
 }
 
 const addEvents = (form, index) => {
