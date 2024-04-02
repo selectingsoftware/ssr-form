@@ -128,6 +128,9 @@ const generateFormOptions = (form, index) => {
                 solutionValues = form2
                     .filter(item => item.name === solutionField)
                     .map(item => item.value);
+            } else if (index === 2) {
+                const headline = document.getElementById('headline');
+                headline.style.display = 'block';
             } else if (index === 3) {
                 const hubspotSuccessMessage = document.getElementById('multistep-form');
                 hubspotSuccessMessage.style.display = 'none';
