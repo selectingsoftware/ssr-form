@@ -1,22 +1,27 @@
 const formInformation = {
     "69dba9c6-a008-435d-866e-3d8f23ce936d": {
-        step: 1,  // 1 Requirements
+        step: 1,  // How many employees are in your company?
         progressBarPercentage: 0,
         timeRemaining: "60"
     },
     "77cdf42b-3eec-4bc8-8219-0310a41d5924": {
-        step: 1,  // 1.1 Requirements
-        progressBarPercentage: 18,
+        step: 2,  // What kind of solutions are you looking for?
+        progressBarPercentage: 25,
         timeRemaining: "45"
     },
+    "ab08f443-4da2-4cd6-bb81-9bab35772677": {
+        step: 3,  // Where should we send your HR software advice?
+        progressBarPercentage: 70,
+        timeRemaining: "20"
+    },
     "0bdcee61-bc3f-4450-b5d4-5453268fde89": {
-        step: 2, // 2 Your Info
-        progressBarPercentage: 73,
-        timeRemaining: "15"
+        step: 4, // How should we get in touch?
+        progressBarPercentage: 80,
+        timeRemaining: "10"
     },
     "347762a3-e6f8-4c4a-b4a2-e11b560fd6e3": {
-        step: 3, // 3 Get advice
-        progressBarPercentage: 91,
+        step: 5, // Can we get your Phone Number?
+        progressBarPercentage: 95,
         timeRemaining: "5"
     }
 };
@@ -42,8 +47,6 @@ let error_messages = {
     company: 'Please provide your company name',
     tel: 'Please provide your phone number'
 }
-
-const headline = document.getElementById('headline');
 
 const updateProgressBar = (nextForm, loader) => {
     const progressBar = document.getElementById('progress-bar');
@@ -103,10 +106,6 @@ const generateFormOptions = (form, index) => {
             addEvents(form, index);
             addCustomCss(form, index);
 
-            if (index === 2) {
-                const headline = document.getElementById('headline');
-                headline.style.display = 'block';
-            }
             if (index === 3) {
                 var firstname = dataMap.get(firstnameField);
 
@@ -144,7 +143,7 @@ const generateFormOptions = (form, index) => {
                 const nextForm = formKeys[index + 1];
                 const nextFormStep = formInformation[nextForm].step;
 
-                if (nextFormStep === 2) {
+                if (nextFormStep === 3) {
                     const loadingContainer = document.getElementById('loading-container');
                     loadingContainer.style.display = 'block';
 
@@ -180,8 +179,6 @@ const serializeMap = (form) => {
 };
 
 const addCustomCss = (form, index) => {
-    headline.style.display = 'none';
-
     form.find('label[class="hs-form-radio-display"]')
         .css('color', 'rgba(0, 0, 0, 0.87)')
         .css('transition', 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms')
