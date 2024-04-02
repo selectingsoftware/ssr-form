@@ -101,6 +101,12 @@ const generateFormOptions = (form, index) => {
             addEvents(form, index);
             addCustomCss(form);
 
+            console.log('Index: ', index);
+            if (index === 2) {
+                const headline = document.getElementById('headline');
+                console.log('Headline: ', headline);
+                headline.style.display = 'block';
+            }
             if (index === 3) {
                 var firstname = dataMap.get(firstnameField);
 
@@ -121,7 +127,6 @@ const generateFormOptions = (form, index) => {
             }
         },
         onFormSubmit: function(form) {
-            console.log('Index: ', index);
             if (index === 0 || index === 2) {
                 serializeMap(form);
             } else if (index === 1) {
@@ -129,10 +134,6 @@ const generateFormOptions = (form, index) => {
                 solutionValues = form2
                     .filter(item => item.name === solutionField)
                     .map(item => item.value);
-            } else if (index === 2) {
-                const headline = document.getElementById('headline');
-                console.log('Headline: ', headline);
-                headline.style.display = 'block';
             } else if (index === 3) {
                 const hubspotSuccessMessage = document.getElementById('multistep-form');
                 hubspotSuccessMessage.style.display = 'none';
