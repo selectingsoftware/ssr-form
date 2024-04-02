@@ -182,6 +182,7 @@ const setValueAndChange = (form, fieldName, dataMap) => {
     const field = form.find('input[name="' + fieldName + '"]');
     const value = dataMap.get(fieldName);
     console.log('Field: ', field);
+    console.log('Field Name: ', fieldName);
     console.log('Value: ', value);
     if (field.length > 0 && value) {
         field.val(value).change();
