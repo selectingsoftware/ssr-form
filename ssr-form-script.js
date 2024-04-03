@@ -48,12 +48,6 @@ let error_messages = {
     tel: 'Please provide your phone number'
 }
 
-gtag('event', 'page_view', {
-    page_title: document.title,
-    page_location: encodeURIComponent(window.location.href),
-    send_to: 'GTM-5KJD4QXH'
-});
-
 const updateProgressBar = (nextForm, loader) => {
     const progressBar = document.getElementById('progress-bar');
     const progressBarFilled = document.getElementById('progress-bar-filled');
