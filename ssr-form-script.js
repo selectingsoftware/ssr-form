@@ -113,7 +113,7 @@ const generateFormOptions = (form, index) => {
             setValueAndChange(form, companyField, dataMap);
 
             const solutionValuesField = form.find('input[name="' + solutionField + '"][value="' + value + '"]');
-            if (solutionValuesField.lengt > 0 && solutionValues.length > 0) {
+            if (solutionValuesField.length > 0 && solutionValues.length > 0) {
                 solutionValues.forEach(value => {
                     solutionValuesField.prop('checked', true).change();
                 });
