@@ -112,9 +112,12 @@ const generateFormOptions = (form, index) => {
             setValueAndChange(form, emailField, dataMap);
             setValueAndChange(form, companyField, dataMap);
 
-            solutionValues.forEach(value => {
-                form.find('input[name="' + solutionField + '"][value="' + value + '"]').prop('checked', true).change();
-            });
+            const solutionValuesField = form.find('input[name="' + solutionField + '"][value="' + value + '"]');
+            if (solutionValuesField.lengt > 0 && solutionValues.length > 0) {
+                solutionValues.forEach(value => {
+                    solutionValuesField.prop('checked', true).change();
+                });
+            }
 
             if (index === 4) {
                 form.find('.hs_' + solutionField).hide();
