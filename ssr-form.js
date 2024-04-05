@@ -638,7 +638,8 @@ const injectHtmlIntoHeader = () => {
     document.head.appendChild(linkElement);
     document.head.appendChild(styleElement);
     document.head.appendChild(googleTagManager);
-    document.head.appendChild(googleAnalytics);
+    document.head.appendChild(googleAnalytics1);
+    document.head.appendChild(googleAnalytics2);
 };
 
 window.onload = function() {
