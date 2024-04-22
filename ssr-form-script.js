@@ -34,6 +34,7 @@ const firstnameField = 'firstname';
 const lastnameField = 'lastname';
 const emailField = 'email';
 const companyField = 'company';
+const websiteField = 'website';
 const utmButtonField = 'utm_button';
 const utmMediumField = 'utm_medium';
 const utmSourceField = 'utm_source';
@@ -132,6 +133,7 @@ const generateFormOptions = (form, index) => {
             setValueAndChange(form, lastnameField, dataMap);
             setValueAndChange(form, emailField, dataMap);
             setValueAndChange(form, companyField, dataMap);
+            setValueAndChange(form, website, dataMap);
             setValueAndChange(form, utmButtonField, dataMap);
             setValueAndChange(form, utmMediumField, dataMap);
             setValueAndChange(form, utmSourceField, dataMap);
@@ -192,12 +194,9 @@ const serializeMap = (form) => {
 
 const setUrlParameters = (dataMap) => {
     var url = window.location.href;
-    console.log(url);
     var searchParams = new URLSearchParams(url.split('#')[1]);
     
-    console.log('Search Params: ', searchParams);
     for (let param of searchParams) {
-        console.log('Param: ', param);
         dataMap.set(param[0], param[1]);
     }
 };
