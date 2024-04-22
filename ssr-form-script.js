@@ -192,9 +192,12 @@ const serializeMap = (form) => {
 
 const setUrlParameters = (dataMap) => {
     var url = window.location.href;
+    console.log(url);
     var searchParams = new URLSearchParams(url.split('?')[1]);
     
+    console.log('Search Params: ', searchParams);
     for (let param of searchParams) {
+        console.log('Param: ', param);
         dataMap.set(param[0], param[1]);
     }
 };
