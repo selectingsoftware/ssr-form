@@ -110,16 +110,6 @@ const generateFormOptions = (form, index) => {
             addEvents(form, index);
             addCustomCss(form, index);
 
-            setValueAndChange(form, employeeField, dataMap);
-            setValueAndChange(form, firstnameField, dataMap);
-            setValueAndChange(form, lastnameField, dataMap);
-            setValueAndChange(form, emailField, dataMap);
-            setValueAndChange(form, companyField, dataMap);
-            setValueAndChange(form, utmButtonField, dataMap);
-            setValueAndChange(form, utmMediumField, dataMap);
-            setValueAndChange(form, utmSourceField, dataMap);
-            setValueAndChange(form, utmCampaignField, dataMap);
-
             if (index === 1 || index === 4) {
                 solutionValues.forEach(value => {
                     form.find('input[name="' + solutionField + '"][value="' + value + '"]').prop('checked', true).change();
@@ -136,6 +126,16 @@ const generateFormOptions = (form, index) => {
 
                 setUrlParameters(dataMap);
             }
+
+            setValueAndChange(form, employeeField, dataMap);
+            setValueAndChange(form, firstnameField, dataMap);
+            setValueAndChange(form, lastnameField, dataMap);
+            setValueAndChange(form, emailField, dataMap);
+            setValueAndChange(form, companyField, dataMap);
+            setValueAndChange(form, utmButtonField, dataMap);
+            setValueAndChange(form, utmMediumField, dataMap);
+            setValueAndChange(form, utmSourceField, dataMap);
+            setValueAndChange(form, utmCampaignField, dataMap);
         },
         onFormSubmit: function(form) {
             if (index === 4) {
