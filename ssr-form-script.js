@@ -34,6 +34,10 @@ const firstnameField = 'firstname';
 const lastnameField = 'lastname';
 const emailField = 'email';
 const companyField = 'company';
+const utmButtonField = 'utm_button';
+const utmMediumField = 'utm_medium';
+const utmSourceField = 'utm_source';
+const utmCampaignField = 'utm_campaign';
 
 const dataMap = new Map();
 const options = [];
@@ -111,6 +115,10 @@ const generateFormOptions = (form, index) => {
             setValueAndChange(form, lastnameField, dataMap);
             setValueAndChange(form, emailField, dataMap);
             setValueAndChange(form, companyField, dataMap);
+            setValueAndChange(form, utmButtonField, dataMap);
+            setValueAndChange(form, utmMediumField, dataMap);
+            setValueAndChange(form, utmSourceField, dataMap);
+            setValueAndChange(form, utmCampaignField, dataMap);
 
             if (index === 1 || index === 4) {
                 solutionValues.forEach(value => {
@@ -125,6 +133,8 @@ const generateFormOptions = (form, index) => {
                 form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
                     return oldHtml.replace('{FirstName}', firstname);
                 });
+
+                setUrlParameters(dataMap);
             }
         },
         onFormSubmit: function(form) {
@@ -178,6 +188,15 @@ const serializeMap = (form) => {
     formData.forEach((field, i) => {
         dataMap.set(field.name, field.value);
     });
+};
+
+const setUrlParameters = (dataMap) => {
+    var url = window.location.href;
+    var searchParams = new URLSearchParams(url.split('?')[1]);
+    
+    for (let param of searchParams) {
+        dataMap.set(param[0], param[1]);
+    }
 };
 
 const setValueAndChange = (form, fieldName, dataMap) => {
