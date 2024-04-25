@@ -39,6 +39,7 @@ const utmButtonField = 'utm_button';
 const utmMediumField = 'utm_medium';
 const utmSourceField = 'utm_source';
 const utmCampaignField = 'utm_campaign';
+const utmTermField = 'utm_term';
 
 const dataMap = new Map();
 const options = [];
@@ -138,6 +139,7 @@ const generateFormOptions = (form, index) => {
             setValueAndChange(form, utmMediumField, dataMap);
             setValueAndChange(form, utmSourceField, dataMap);
             setValueAndChange(form, utmCampaignField, dataMap);
+            setValueAndChange(form, utmTermField, dataMap);
         },
         onFormSubmit: function(form) {
             if (index === 4) {
