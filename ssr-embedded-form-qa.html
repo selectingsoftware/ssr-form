@@ -26,7 +26,7 @@
       <!-- <link rel="stylesheet" type="text/css" href="old-style.css"> -->
       <style type="text/css">
          body{
-         margin:0;
+        margin: 0px;
          padding: 0px;
          font-family: Lato;
          color: #00162A;
@@ -36,6 +36,7 @@
          background: #FFF;
          box-shadow: 0px 12px 44px 0px rgba(17, 24, 28, 0.08);
          overflow: hidden;
+         height: 550px;
          }
          .progressWrap {
          text-align: center;
@@ -93,8 +94,13 @@
          display: inline-block;
          margin: 0px 4px;
          }
+         .mainBody {
+            width: 100%;
+            height: 350px;
+            overflow-y: scroll;
+         }
          .formBody {
-         margin: 30px 50px;
+            margin: 30px 40px;
          }
          .footerWrap {
          display: flex;
@@ -276,7 +282,8 @@
             <p class="progressCount" id="progress-text">Progress: 0%</p>
             <p class="readyToMeet" style="display:none">We are ready to meet</p>
          </div>
-         <div class="formBody" id="formMain" aria-valuenow="0">
+         <div class="mainBody">
+            <div class="formBody" id="formMain" aria-valuenow="0">
             <div class="formWrap">
                <div class="formHolder">
                   <div id="multistep-form"></div>
@@ -325,12 +332,6 @@
                         </svg>
                         <span>Answer industry-specific questions</span>
                      </li>
-                     <li>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
-                           <path d="M5.83366 9.34953L11.1959 3.9873L12.0208 4.81226L5.83366 10.9994L2.12134 7.28715L2.94629 6.4622L5.83366 9.34953Z" fill="white"/>
-                        </svg>
-                        <span>Your information is secure with us. We never share your email without your consent.</span>
-                     </li>
                   </ul>
                   <h5>HOW WE WON'T USE YOUR INFORMATION:</h5>
                   <ul class="error">
@@ -338,7 +339,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                            <path d="M7.00042 6.17559L9.88792 3.28809L10.7128 4.11292L7.82525 7.00042L10.7128 9.88792L9.88792 10.7128L7.00042 7.82525L4.11292 10.7128L3.28809 9.88792L6.17559 7.00042L3.28809 4.11292L4.11292 3.28809L7.00042 6.17559Z" fill="white"/>
                         </svg>
-                        <span>Send you spam from anyone outside of SelectSoftware Reviews and the vendors we work with</span>
+                        <span>Send you spam from anyone outside of SelectSoftware Reviews</span>
                      </li>
                   </ul>
                </div>
@@ -358,6 +359,8 @@
                <div class="meetings-iframe-container" data-src="https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true"></div>
             </div>
          </div>
+         </div>
+         
       </div>
       <!--[if lte IE 8]>
       <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
