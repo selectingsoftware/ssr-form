@@ -36,7 +36,6 @@
          background: #FFF;
          box-shadow: 0px 12px 44px 0px rgba(17, 24, 28, 0.08);
          overflow: hidden;
-         height: 550px;
          }
          .progressWrap {
          text-align: center;
@@ -72,6 +71,10 @@
          transform-origin: left center;
          background: linear-gradient(90deg, #FFF 0%, #13D36B 57.5%);
          border-radius: 100px;
+        -webkit-transition: width 1s ease-in-out;
+        -moz-transition: width 1s ease-in-out;
+        -o-transition: width 1s ease-in-out;
+        transition: width 1s ease-in-out;
          }
          .progress-bar {
          overflow: hidden;
@@ -82,6 +85,8 @@
          background: rgba(255, 255, 255, 0.20);
          border-radius: 100px;
          height: 16px;
+
+         transition: transform 0.4s linear 2s;
          }
          .timerWrap p {
          display: flex;
@@ -93,11 +98,6 @@
          .timerWrap p span {
          display: inline-block;
          margin: 0px 4px;
-         }
-         .mainBody {
-            width: 100%;
-            height: 430px;
-            overflow-y: scroll;
          }
          .formBody {
             margin: 30px 40px;
@@ -182,7 +182,7 @@
          flex: 35% 0;
          border-radius: 24px;
          border: 1px dashed #13D36B;
-         background: #E8FBF0;
+         background: #F2F3F7;
          padding: 30px 34px;
          }
          .rightInfo ul {
@@ -282,7 +282,6 @@
             <p class="progressCount" id="progress-text">Progress: 0%</p>
             <p class="readyToMeet" style="display:none">We are ready to meet</p>
          </div>
-         <div class="mainBody">
             <div class="formBody" id="formMain" aria-valuenow="0">
             <div class="formWrap">
                <div class="formHolder">
@@ -358,7 +357,6 @@
                <h3 style="text-align: center;">Book your 1:1 meeting with our Software Advisor</h3>
                <div class="meetings-iframe-container" data-src="https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true"></div>
             </div>
-         </div>
          </div>
          
       </div>
