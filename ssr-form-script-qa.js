@@ -65,7 +65,7 @@ const updateProgressBar = (nextForm, loader) => {
     if (nextForm) {
         const percentage = formInformation[nextForm].progressBarPercentage;
         const timeRemaining = formInformation[nextForm].timeRemaining;
-    
+
         progressBar.setAttribute('aria-valuenow', percentage);
         progressText.innerText = `Progress: ${percentage}%`;
         timerText.innerText = timeRemaining;
@@ -131,7 +131,7 @@ const generateFormOptions = (form, index) => {
                 missingOptionSelection: "Please select at least one option.",
             }
         },
-        onFormReady: function(form) {
+        onFormReady: function (form) {
             addCustomValidate(form);
             addEvents(form, index);
             addCustomCss(form, index);
@@ -165,7 +165,7 @@ const generateFormOptions = (form, index) => {
             setValueAndChange(form, utmCampaignField, dataMap);
             setValueAndChange(form, utmTermField, dataMap);
         },
-        onFormSubmit: function(form) {
+        onFormSubmit: function (form) {
             if (index === 4) {
                 const hubspotSuccessMessage = document.getElementById('multistep-form');
                 hubspotSuccessMessage.style.display = 'none';
@@ -178,7 +178,7 @@ const generateFormOptions = (form, index) => {
                 serializeMap(form);
             }
         },
-        onFormSubmitted: function(form) {
+        onFormSubmitted: function (form) {
             if (index < formKeys.length - 1) {
                 const nextForm = formKeys[index + 1];
                 const nextFormStep = formInformation[nextForm].step;
@@ -198,7 +198,7 @@ const generateFormOptions = (form, index) => {
                 }
             } else {
                 updateProgressBar();
-            }            
+            }
         }
 
     };
@@ -222,7 +222,7 @@ const serializeMap = (form) => {
 const setUrlParameters = (dataMap) => {
     var url = window.location.href;
     var searchParams = new URLSearchParams(url.split('#')[1]);
-    
+
     for (let param of searchParams) {
         dataMap.set(param[0], param[1]);
     }
@@ -237,15 +237,15 @@ const setValueAndChange = (form, fieldName, dataMap) => {
 }
 
 const addCustomCss = (form, index) => {
-    form.find('label[class="hs-form-radio-display"]').css({ 
-        'color' : '#3D475C',
-        'background-color' : '#F4F5F8',
-        'border' : '1px solid #D0D4DD',
-        'border-radius' : '8px',
-        'box-sizing' : 'border-box',
-        'cursor' : 'pointer',
-        'position' : 'relative',
-        'overflow' : 'visible',
+    form.find('label[class="hs-form-radio-display"]').css({
+        'color': '#3D475C',
+        'background-color': '#F4F5F8',
+        'border': '1px solid #D0D4DD',
+        'border-radius': '8px',
+        'box-sizing': 'border-box',
+        'cursor': 'pointer',
+        'position': 'relative',
+        'overflow': 'visible',
         'padding': '5px',
         'text-align': 'center',
         'height': '95px',
@@ -255,31 +255,31 @@ const addCustomCss = (form, index) => {
         'align-items': 'center',
         'margin-right': '5px',
         'margin-bottom': '0px'
-            });
-    form.find('.input > .inputs-list  label > span').css({ 
-             "color": "#3D475C",
-             "font-size": "14px",
-             "font-weight": "400",
-        });
-    form.find('.input > .inputs-list  label .hs-input').css({ 
-             'margin':'0px 0px 5px'
-        });
+    });
+    form.find('.input > .inputs-list  label > span').css({
+        "color": "#3D475C",
+        "font-size": "14px",
+        "font-weight": "400",
+    });
+    form.find('.input > .inputs-list  label .hs-input').css({
+        'margin': '0px 0px 5px'
+    });
 
-    form.find('div[class="actions"]').css({ 
-            'display' : 'flex',
-            'flex-direction' : 'row',
-            'padding' : '0px'
-        });
+    form.find('div[class="actions"]').css({
+        'display': 'flex',
+        'flex-direction': 'row',
+        'padding': '0px'
+    });
 
-    form.find('.input .hs-form-checkbox > label').css({ 
-        'color' : '#3D475C',
-        'background-color' : '#F4F5F8',
-        'border' : '1px solid #D0D4DD',
-        'border-radius' : '8px',
-        'box-sizing' : 'border-box',
-        'cursor' : 'pointer',
-        'position' : 'relative',
-        'overflow' : 'visible',
+    form.find('.input .hs-form-checkbox > label').css({
+        'color': '#3D475C',
+        'background-color': '#F4F5F8',
+        'border': '1px solid #D0D4DD',
+        'border-radius': '8px',
+        'box-sizing': 'border-box',
+        'cursor': 'pointer',
+        'position': 'relative',
+        'overflow': 'visible',
         'padding': '5px',
         'text-align': 'center',
         'height': '95px',
@@ -289,132 +289,139 @@ const addCustomCss = (form, index) => {
         'align-items': 'center',
         'margin-right': '5px',
         'margin-bottom': '0px'
-            });
-    form.find('button[class="hs-back-button"]').css({ 
-            "background": "#F2F2F7", 
-            "color": "rgb(0, 0, 0)", 
-            "padding" : '16px',
-            'border' : '1px solid #E9E9EC',
-            'border-radius': '8px',
-            'cursor' : 'pointer'
-        });
+    });
+    form.find('button[class="hs-back-button"]').css({
+        "background": "#F2F2F7",
+        "color": "rgb(0, 0, 0)",
+        "padding": '16px',
+        'border': '1px solid #E9E9EC',
+        'border-radius': '8px',
+        'cursor': 'pointer'
+    });
 
-    form.find('input[type="submit"]').css({ 
-            "background": "#0266FD", 
-            "color": "#fff", 
-            "padding" : '16px 24px',
-            'border-radius': '8px',
-            'font-size': '14px',
-            'font-style': 'normal',
-            'font-weight': '600',
-            'border' : 'none',
-            'display' : 'block',
-            'margin-bottom': '0px',
-            'height': '55px'
-        });
+    form.find('input[type="submit"]').css({
+        "background": "#0266FD",
+        "color": "#fff",
+        "padding": '16px 24px',
+        'border-radius': '8px',
+        'font-size': '14px',
+        'font-style': 'normal',
+        'font-weight': '600',
+        'border': 'none',
+        'display': 'block',
+        'margin-bottom': '0px',
+        'height': '55px'
+    });
 
-    form.find('.hs_annualrevenue > label').css({ 
-             "color": "#00162A",
-             "font-size": "20px",
-             "font-weight": "700",
-        });
-    form.find('.hs-richtext > p > span').css({ 
-             "color": "#00162A",
-             "font-size": "20px",
-             "font-weight": "700",
-             'margin' : '0px'
-        });
-    
-    form.find('.hs-richtext > p').css({ 
-             'margin-bottom' : '5px',
-             'margin-top' : '0px'
-        });
-    form.find('.hs_email > label').css({ 
-             "color": "#3D475C",
-             "font-size": "14px",
-             "font-weight": "400",
-             'margin-top': '15px',
-             'margin-bottom': '10px'
-        });
-    form.find('.input > input').css({ 
-             'height': '48px',
-            'border-radius': '8px',
-            'background': '#F4F5F8',
-            'border': '1px solid #D0D4DD'
-        });
+    form.find('.hs_annualrevenue > label').css({
+        "color": "#00162A",
+        "font-size": "20px",
+        "font-weight": "700",
+    });
+    form.find('.hs-richtext > p > span').css({
+        "color": "#00162A",
+        "font-size": "20px",
+        "font-weight": "700",
+        'margin': '0px'
+    });
 
-    form.find('.multi-container').css({ 
-             'padding': '0px',
-             'margin' : '0px'
-        });
-    form.find('.input > ul').css({ 
-             'margin-top': '25px'
-        });
-    form.find('.input > .inputs-list').css({ 
-             'display' : 'flex',
-             'align-items' : 'center'
-        });
-    form.find('.input > .inputs-list > li').css({ 
-             'max-width': '100px',
-        });
-    form.find('.input > .inputs-list > li > label > span').css({ 
-             'display': 'block',
-        });
-    form.find('.form-columns-2 label, .form-columns-1 label').css({ 
-             'font-size': '14px',
-             'font-weight': '400'
-        });
-    form.find('.form-columns-2 .hs-richtext p').css({ 
-             "color": "#00162A",
-             "font-size": "20px",
-             "font-weight": "700",
-             'margin-bottom' : '20px'
-        });
-    form.find('.form-columns-2 .hs-form-field').css({ 
-                'max-width': '100%',
-                'float': 'none !important',
-                'width': '100%'
-        });
-    form.find('.form-columns-2 .hs-input').css({ 
-                'width': '100%'
-        });
-    form.find('.form-columns-2 .field').css({ 
-                'margin-bottom': '10px'
-        });
-    form.find('fieldset.form-columns-0 h1').css({ 
-                'margin': '0px',
-                'font-size': '20px',
-                'color': '#00162A',
-                'margin-bottom': '20px'
-        });
-    form.find('fieldset.form-columns-0 .hs-richtext p span').css({ 
-                'font-size': '14px',
-                'margin-bottom': '10px',
-                'display': 'block'
-        });
-    form.find('label[class="hs-form-checkbox-display"]').css({ 
-        'display' : 'flex',
-        'align-items' : 'center'
-        });
-    
-    form.find('input.hs-input[type="checkbox"], input.hs-input[type="radio"]').css({ 
-        'width':  '20px',
-        'height' : '20px'
-         });
-    form.find('.form-columns-1 input, .form-columns-1 select').css({ 
-             'height': '48px',
-            'border-radius': '8px',
-            'background': '#F4F5F8',
-            'border': '1px solid #D0D4DD'
-        });
-    form.find('fieldset:nth-child(14).form-columns-0 .hs-richtext p span').css({ 
-                'font-size': '11px',
-                'margin-bottom': '0px',
-                'display': 'block',
-                'color': '#687076',
-                'font-weight': '100',
-                'line-height': '120%'
-        });
+    form.find('.hs-richtext > p').css({
+        'margin-bottom': '5px',
+        'margin-top': '0px'
+    });
+    form.find('.hs_email > label').css({
+        "color": "#3D475C",
+        "font-size": "14px",
+        "font-weight": "400",
+        'margin-top': '15px',
+        'margin-bottom': '10px'
+    });
+    form.find('.input > input').css({
+        'height': '48px',
+        'border-radius': '8px',
+        'background': '#F4F5F8',
+        'border': '1px solid #D0D4DD'
+    });
+
+    form.find('.multi-container').css({
+        'padding': '0px',
+        'margin': '0px'
+    });
+    form.find('.input > ul').css({
+        'margin-top': '25px'
+    });
+    form.find('.input > .inputs-list').css({
+        'display': 'flex',
+        'align-items': 'center'
+    });
+    form.find('.input > .inputs-list > li').css({
+        'max-width': '100px',
+    });
+    form.find('.input > .inputs-list > li > label > span').css({
+        'display': 'block',
+    });
+    form.find('.form-columns-2 label, .form-columns-1 label').css({
+        'font-size': '14px',
+        'font-weight': '400'
+    });
+    form.find('.form-columns-2 .hs-richtext p').css({
+        "color": "#00162A",
+        "font-size": "20px",
+        "font-weight": "700",
+        'margin-bottom': '20px'
+    });
+    form.find('.form-columns-2 .hs-form-field').css({
+        'max-width': '100%',
+        'float': 'none !important',
+        'width': '100%'
+    });
+    form.find('.form-columns-2 .hs-input').css({
+        'width': '100%'
+    });
+    form.find('.form-columns-2 .field').css({
+        'margin-bottom': '10px'
+    });
+    form.find('fieldset.form-columns-0 h1').css({
+        'margin': '0px',
+        'font-size': '20px',
+        'color': '#00162A',
+        'margin-bottom': '20px'
+    });
+    form.find('fieldset.form-columns-0 .hs-richtext p span').css({
+        'font-size': '14px',
+        'margin-bottom': '10px',
+        'display': 'block'
+    });
+    form.find('label[class="hs-form-checkbox-display"]').css({
+        'display': 'flex',
+        'align-items': 'center'
+    });
+
+    form.find('input.hs-input[type="checkbox"], input.hs-input[type="radio"]').css({
+        'width': '20px',
+        'height': '20px'
+    });
+    form.find('.form-columns-1 input, .form-columns-1 select').css({
+        'height': '48px',
+        'border-radius': '8px',
+        'background': '#F4F5F8',
+        'border': '1px solid #D0D4DD'
+    });
+    form.find('fieldset:nth-child(14).form-columns-0 .hs-richtext p span').css({
+        'font-size': '11px',
+        'margin-bottom': '0px',
+        'display': 'block',
+        'color': '#687076',
+        'font-weight': '100',
+        'line-height': '120%'
+    });
+    form.find('.hs-input.hs-fieldtype-intl-phone input.hs-input').css({
+        'margin-top': '15px',
+    });
+
+
+
+
     // form.find('li[class="hs-form-radio"]')
     //     .css('padding-bottom', '6px');
 
@@ -437,7 +444,7 @@ const addEvents = (form, index) => {
 
     if (index === 0) {
         var labels = form.find('label');
-        labels.on('click', function() {
+        labels.on('click', function () {
             var inputId = $(this).attr('for');
             if (inputId) {
                 var input = form.find('#' + inputId);
@@ -451,7 +458,7 @@ const addEvents = (form, index) => {
 
     if (index > 0) {
         const backButton = $(`<div style="height: 100%;margin-right:5px;"><button class="hs-back-button" tabindex="0" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6.52239 9.16414H16.6654V10.8308H6.52239L10.9924 15.3007L9.81387 16.4792L3.33203 9.99747L9.81387 3.51562L10.9924 4.69413L6.52239 9.16414Z" fill="black"/></svg></button></div>`);
-        backButton.on('click', function(event) {
+        backButton.on('click', function (event) {
             event.preventDefault();
             const previousForm = formKeys[index - 1];
             createFormAndUpdateProgressBar(previousForm, index - 1);
@@ -467,9 +474,9 @@ const addCustomValidate = (form) => {
     function globalInputsOnChangeHandler() {
         for (var i = 0; i < input.length; i += 1) {
             let typeCheck = input[i].getAttribute('type') == 'checkbox' || input[i].getAttribute('type') == 'tel' ? true : input[i].hasAttribute('required')
-            if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck ) {
+            if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck) {
                 let changedElement = input[i];
-                setTimeout(function() {
+                setTimeout(function () {
                     if (changedElement.classList.contains('invalid') || changedElement.classList.contains('error')) {
                         let parentElement = changedElement.closest('.field');
                         let errorDiv = parentElement.querySelector('.hs-error-msg');
@@ -488,7 +495,7 @@ const addCustomValidate = (form) => {
         }
     }
 
-    var observer = new MutationObserver(function(e) {
+    var observer = new MutationObserver(function (e) {
         globalInputsOnChangeHandler()
     });
 
@@ -497,8 +504,8 @@ const addCustomValidate = (form) => {
         if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck) {
             attributeName = input[i].getAttribute('name')
             if (attributeName) {
-                var target = form.find(`input[name=${attributeName}]`);       
-                if (target) {   
+                var target = form.find(`input[name=${attributeName}]`);
+                if (target) {
                     observer.observe(target[0], {
                         attributes: true
                     });
@@ -510,7 +517,7 @@ const addCustomValidate = (form) => {
                         attributes: true
                     });
                 }
-            }    
+            }
         }
     }
 

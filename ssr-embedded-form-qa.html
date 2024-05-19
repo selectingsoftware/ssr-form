@@ -1,376 +1,521 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Talk to an Advisor SSR Site</title>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-      <!-- Google tag (gtag.js) -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-41DMX9N3MF"></script>
-      <script>
-         window.dataLayer = window.dataLayer || [];
-         function gtag(){dataLayer.push(arguments);}
-         gtag('js', new Date());
-         
-         gtag('config', 'G-41DMX9N3MF');
-      </script>
-      <!-- Google Tag Manager -->
-      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-         })(window,document,'script','dataLayer','GTM-NL23BB7');
-      </script>
-      <!-- End Google Tag Manager -->
-      <!-- <link rel="stylesheet" type="text/css" href="old-style.css"> -->
-      <style type="text/css">
-         body{
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Talk to an Advisor SSR Site</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:400,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-41DMX9N3MF"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-41DMX9N3MF");
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-NL23BB7");
+    </script>
+    <!-- End Google Tag Manager -->
+    <!-- <link rel="stylesheet" type="text/css" href="old-style.css"> -->
+    <style type="text/css">
+      body {
         margin: 0px;
-         padding: 0px;
-         font-family: Lato;
-         color: #00162A;
-         }
-         .ssr-form-container {
-         border-radius: 24px;
-         background: #FFF;
-         box-shadow: 0px 12px 44px 0px rgba(17, 24, 28, 0.08);
-         overflow: hidden;
-         }
-         .progressWrap {
-         text-align: center;
-         padding: 16px 60px;
-         background:#0266FD;
-         color: #fff;
-         }
-         .progressWrap h2 {
-         font-size: 28px;
-         font-weight: 700;
-         margin: 0;
-         line-height: 34px;
-         }
-         .progressWrap p {
-         color: #fff;
-         font-size: 16px;
-         font-weight: 500;
-         line-height: 120%;
-         letter-spacing: 0.8px;
-         text-transform: uppercase;
-         margin: 0;
-         }
-         .progress-bar-root {
-         margin: 12px 0px 8px 0px;
-         }
-         .progress-bar-filled {
-         width: 100%;
-         position: absolute;
-         left: 0px;
-         bottom: 0px;
-         top: 0px;
-         transition: transform 0.4s linear 0s;
-         transform-origin: left center;
-         background: linear-gradient(90deg, #FFF 0%, #13D36B 57.5%);
-         border-radius: 100px;
+        padding: 0px;
+        font-family: Lato;
+        color: #00162a;
+      }
+      .ssr-form-container {
+        border-radius: 24px;
+        background: #fff;
+        box-shadow: 0px 12px 44px 0px rgba(17, 24, 28, 0.08);
+        overflow: hidden;
+      }
+      .progressWrap {
+        text-align: center;
+        padding: 16px 60px;
+        background: #0266fd;
+        color: #fff;
+      }
+      .progressWrap h2 {
+        font-size: 28px;
+        font-weight: 700;
+        margin: 0;
+        line-height: 34px;
+      }
+      .progressWrap p {
+        color: #fff;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 120%;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        margin: 0;
+      }
+      .progress-bar-root {
+        margin: 12px 0px 8px 0px;
+      }
+      .progress-bar-filled {
+        width: 100%;
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+        top: 0px;
+        transition: transform 0.4s linear 0s;
+        transform-origin: left center;
+        background: linear-gradient(90deg, #fff 0%, #13d36b 57.5%);
+        border-radius: 100px;
         -webkit-transition: width 1s ease-in-out;
         -moz-transition: width 1s ease-in-out;
         -o-transition: width 1s ease-in-out;
         transition: width 1s ease-in-out;
-         }
-         .progress-bar {
-         overflow: hidden;
-         display: block;
-         z-index: 0;
-         height: 100%;
-         position: relative;
-         background: rgba(255, 255, 255, 0.20);
-         border-radius: 100px;
-         height: 16px;
+      }
+      .progress-bar {
+        overflow: hidden;
+        display: block;
+        z-index: 0;
+        height: 100%;
+        position: relative;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 100px;
+        height: 16px;
 
-         transition: transform 0.4s linear 2s;
-         }
-         .timerWrap p {
-         display: flex;
-         align-items: center;
-         color: #3D475C;
-         font-size: 14px;
-         margin: 0;
-         }
-         .timerWrap p span {
-         display: inline-block;
-         margin: 0px 4px;
-         }
+        transition: transform 0.4s linear 2s;
+      }
+      .timerWrap p {
+        display: flex;
+        align-items: center;
+        color: #3d475c;
+        font-size: 14px;
+        margin: 0;
+      }
+      .timerWrap p span {
+        display: inline-block;
+        margin: 0px 4px;
+      }
+      .formBody {
+        margin: 30px 40px;
+      }
+      .footerWrap {
+        display: flex;
+        align-items: center;
+        margin-top: 24px;
+      }
+      .stepIndicator {
+        margin-right: 10px;
+      }
+      .stepIndicator ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+      }
+      .stepIndicator ul li {
+        width: 8px;
+        height: 8px;
+        background: #d0d4dd;
+        border-radius: 20px;
+        margin-right: 5px;
+      }
+      .formBody[aria-valuenow="0"] .stepIndicator ul li:nth-child(1) {
+        background: #0266fd;
+      }
+      .formBody[aria-valuenow="25"] .stepIndicator ul li:nth-child(2) {
+        background: #0266fd;
+      }
+      .formBody[aria-valuenow="70"] .stepIndicator ul li:nth-child(3) {
+        background: #0266fd;
+      }
+      .formBody[aria-valuenow="80"] .stepIndicator ul li:nth-child(4) {
+        background: #0266fd;
+      }
+      .formBody[aria-valuenow="95"] .stepIndicator ul li:nth-child(5) {
+        background: #0266fd;
+      }
+      .formBody[aria-valuenow="50"] .footerWrap,
+      .formBody[aria-valuenow="100"] .footerWrap {
+        display: none;
+      }
+
+      .formBody[aria-valuenow="0"] .rightImg,
+      .formBody[aria-valuenow="25"] .rightImg {
+        display: block !important;
+      }
+      .formBody[aria-valuenow="70"] .rightInfo,
+      .formBody[aria-valuenow="80"] .rightInfo,
+      .formBody[aria-valuenow="95"] .rightInfo {
+        display: block !important;
+      }
+      iframe.loader {
+        border: 0;
+        width: 100%;
+      }
+      .formWrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .rightImg {
+        width: 35%;
+        flex: 35% 0;
+        text-align: center;
+      }
+      .formHolder {
+        width: 65%;
+        flex: 65% 0;
+        padding-right: 20px;
+      }
+      .rightImg img {
+        border-radius: 50%;
+        max-width: 100%;
+      }
+      .rightInfo {
+        width: 35%;
+        flex: 35% 0;
+        border-radius: 24px;
+        border: 1px dashed #13d36b;
+        background: #f2f3f7;
+        padding: 30px 34px;
+        box-sizing: border-box;
+      }
+      .rightInfo ul {
+        list-style: none;
+        padding: 0;
+      }
+      .rightInfo ul.error {
+        margin-bottom: 0px;
+      }
+      .rightInfo ul.error li {
+        margin-bottom: 0px;
+      }
+      .rightInfo h5 {
+        color: #00162a;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        margin: 0;
+      }
+      .rightInfo ul li {
+        color: #3d475c;
+        font-size: 14px;
+        font-weight: 400;
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 8px;
+      }
+      .rightInfo ul li svg {
+        width: 10%;
+        flex: 10% 0;
+      }
+      .rightInfo ul li span {
+        width: 90%;
+        flex: 90% 0;
+      }
+      .rightInfo ul.success li svg,
+      .rightInfo ul.error li svg {
+        width: 18px;
+        flex: 18px 0;
+        background: #13d36b;
+        height: 18px;
+        border-radius: 50%;
+        padding: 0px;
+        margin-right: 9px;
+      }
+      .rightInfo ul.error li svg {
+        background: #f82e2e;
+      }
+      div#thanks-loading {
+        text-align: center;
+      }
+      div#thanks-loading h4 {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 120%;
+        margin: 0;
+      }
+      div#thanks-loading p {
+        color: #3d475c;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 120%;
+      }
+      div#thanks-loading iframe {
+        height: 300px;
+      }
+      .meetings-iframe-container iframe {
+        height: 700px !important;
+      }
+      .progressWrap[aria-valuenow="100"] .progressCount {
+        display: none;
+      }
+      .progressWrap[aria-valuenow="100"] .readyToMeet {
+        display: block !important;
+      }
+      div#hubspotCalender h3 {
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        margin: 10px 0px 10px;
+      }
+
+      .formBody[aria-valuenow="0"], 
+      .formBody[aria-valuenow="25"],
+      .formBody[aria-valuenow="50"],
+      .formBody[aria-valuenow="75"] {
+ 
+      }
+  
+
+      /* Media query support */
+      @media (max-width: 650px) {
          .formBody {
-            margin: 30px 40px;
-         }
-         .footerWrap {
-         display: flex;
-         align-items: center;
-         margin-top: 24px;
-         }
-         .stepIndicator {
-         margin-right: 10px;
-         }
-         .stepIndicator ul {
-         list-style: none;
-         padding: 0;
-         margin: 0;
-         display: flex;
-         }
-         .stepIndicator ul li {
-         width: 8px;
-         height: 8px;
-         background: #D0D4DD;
-         border-radius: 20px;
-         margin-right: 5px;
-         }
-         .formBody[aria-valuenow="0"] .stepIndicator ul li:nth-child(1) {
-         background: #0266FD;
-         }
-         .formBody[aria-valuenow="25"] .stepIndicator ul li:nth-child(2) {
-         background: #0266FD;
-         }
-         .formBody[aria-valuenow="70"] .stepIndicator ul li:nth-child(3) {
-         background: #0266FD;
-         }
-         .formBody[aria-valuenow="80"] .stepIndicator ul li:nth-child(4) {
-         background: #0266FD;
-         }
-         .formBody[aria-valuenow="95"] .stepIndicator ul li:nth-child(5) {
-         background: #0266FD;
-         }
-         .formBody[aria-valuenow="50"] .footerWrap,
-         .formBody[aria-valuenow="100"] .footerWrap{
-            display: none;
-         }
-
-         .formBody[aria-valuenow="0"] .rightImg,
-         .formBody[aria-valuenow="25"] .rightImg{
-             display: block !important;
-         }
-         .formBody[aria-valuenow="70"] .rightInfo,
-         .formBody[aria-valuenow="80"] .rightInfo,
-         .formBody[aria-valuenow="95"] .rightInfo{
-             display: block !important;
-         }
-         iframe.loader {
-         border: 0;
-         width: 100%;
-         }
-         .formWrap {
-         display: flex;
-         justify-content: space-between;
-         align-items: center;
-         }
-         .rightImg {
-         width: 35%;
-         flex: 35% 0;
-         text-align: center;
+            margin: 16px 16px;
          }
          .formHolder {
-         width: 65%;
-         flex: 65% 0;
-         padding-right: 35px;
+            padding-right: 16px;
          }
-         .rightImg img {
-         border-radius: 50%;
-         border: 12px solid #B8D4FF;
-         outline: 12px solid #E6F0FF;
-         max-width: 100%;
-         }
-         .rightInfo{
-         width: 35%;
-         flex: 35% 0;
-         border-radius: 24px;
-         border: 1px dashed #13D36B;
-         background: #F2F3F7;
-         padding: 30px 34px;
-         }
-         .rightInfo ul {
-         list-style: none;
-         padding: 0;
-         }
-         .rightInfo ul.error {
-            margin-bottom: 0px;
-         }
-         .rightInfo ul.error li {
-            margin-bottom: 0px;
-         }
-         .rightInfo h5 {
-         color: #00162A;
-         font-size: 14px;
-         font-style: normal;
-         font-weight: 700;
-         margin: 0;
-         }
-         .rightInfo ul li {
-         color: #3D475C;
-         font-size: 14px;
-         font-weight: 400;
-         display: flex;
-         align-items: flex-start;
-         margin-bottom: 8px;
-         }
-         .rightInfo ul li svg {
-         width: 10%;
-         flex: 10% 0;
-         }
-         .rightInfo ul li span {
-         width: 90%;
-         flex: 90% 0;
-         }
-         .rightInfo ul.success li svg,
-         .rightInfo ul.error li svg {
-         width: 18px;
-         flex: 18px 0;
-         background: #13D36B;
-         height: 18px;
-         border-radius: 50%;
-         padding: 0px;
-         margin-right: 9px;
-         }
-         .rightInfo ul.error li svg {
-         background: #F82E2E;
-         }
-         div#thanks-loading {
-            text-align: center;
+        .formWrap {
+          flex-direction: column;
         }
-        div#thanks-loading h4 {
-            font-size: 20px;
-            font-weight: 700;
-            line-height: 120%;
-            margin: 0;
+        .rightImg {
+          width: 100%;
+          order: 1;
+          margin-bottom: 16px;   
         }
-        div#thanks-loading p {
-            color: #3D475C;
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 120%;
+        .formHolder {
+          width: 100%;
+          order: 2;
+          padding-right: inherit;
         }
-        div#thanks-loading iframe {
-            height: 300px;
+        .formBody[aria-valuenow="70"] .rightInfo,
+        .formBody[aria-valuenow="80"] .rightInfo,
+        .formBody[aria-valuenow="95"] .rightInfo {
+          order: 2;
+          margin-top: 16px; 
+          margin-bottom: 0px; 
         }
-        .meetings-iframe-container iframe {
-            height: 700px !important;
-        }
-        .progressWrap[aria-valuenow="100"] .progressCount {
-            display: none;
-        }
-        .progressWrap[aria-valuenow="100"] .readyToMeet {
-            display: block !important;
-        }
-        div#hubspotCalender h3 {
-            font-size: 20px;
-            font-style: normal;
-            font-weight: 700;
-            margin: 10px 0px 10px;
+        .formBody[aria-valuenow="70"] .formHolder,
+        .formBody[aria-valuenow="80"] .formHolder,
+        .formBody[aria-valuenow="95"] .formHolder {
+          order: 1;
         }
 
-        
-      </style>
-   </head>
-   <body>
-      <!-- Google Tag Manager (noscript) -->
-      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NL23BB7"
-         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-      <!-- End Google Tag Manager (noscript) -->
-      <div class="ssr-form-container">
-         <div class="progressWrap" id="progress-bar-container" aria-valuenow="0">
-            <div class="progressHeading">
-               <h2>Talk to an HR Software Advisor</h2>
-            </div>
-            <div class="progress-bar-root">
-               <span id="progress-bar" class="color-primary progress-bar" aria-valuenow="0" aria-valuemin="0"
-                  aria-valuemax="100">
-               <span id="progress-bar-filled" class="bar-color-primary progress-bar-filled"
-                  style="width:0%;"></span>
-               </span>
-            </div>
-            <p class="progressCount" id="progress-text">Progress: 0%</p>
-            <p class="readyToMeet" style="display:none">We are ready to meet</p>
-         </div>
-            <div class="formBody" id="formMain" aria-valuenow="0">
-            <div class="formWrap">
-               <div class="formHolder">
-                  <div id="multistep-form"></div>
-                  <div class="footerWrap">
-                     <div class="stepIndicator">
-                        <ul>
-                           <li></li>
-                           <li></li>
-                           <li></li>
-                           <li></li>
-                           <li></li>
-                        </ul>
-                     </div>
-                     <div class="timerWrap" id="timer-container">
-                        <p id="timer-text">
-                           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M11.7451 3.98394L12.7141 3.01502L13.6569 3.95783L12.6879 4.92675C13.509 5.9532 14 7.25521 14 8.67188C14 11.9856 11.3137 14.6719 8 14.6719C4.68629 14.6719 2 11.9856 2 8.67188C2 5.35817 4.68629 2.67188 8 2.67188C9.41667 2.67188 10.7187 3.16286 11.7451 3.98394ZM8 13.3385C10.5773 13.3385 12.6667 11.2492 12.6667 8.67188C12.6667 6.09455 10.5773 4.00521 8 4.00521C5.42267 4.00521 3.33333 6.09455 3.33333 8.67188C3.33333 11.2492 5.42267 13.3385 8 13.3385ZM7.33333 5.33854H8.66667V9.33854H7.33333V5.33854ZM5.33333 0.671875H10.6667V2.00521H5.33333V0.671875Z" fill="#3D475C"/>
-                           </svg>
-                           <span id="timer-text-replaced">60</span> seconds left
-                        </p>
-                     </div>
-                  </div>
-               </div>
-
-               <div class="rightImg" style="display:none">
-                  <img src="images/businesswoman.png">
-               </div>
-               <div class="rightInfo" style="display:none">
-                  <h5>HOW WE WILL USE YOUR INFORMATION:</h5>
-                  <ul class="success">
-                     <li>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
-                           <path d="M5.83366 9.34953L11.1959 3.9873L12.0208 4.81226L5.83366 10.9994L2.12134 7.28715L2.94629 6.4622L5.83366 9.34953Z" fill="white"/>
-                        </svg>
-                        <span>Connect you with a real person</span>
-                     </li>
-                     <li>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
-                           <path d="M5.83366 9.34953L11.1959 3.9873L12.0208 4.81226L5.83366 10.9994L2.12134 7.28715L2.94629 6.4622L5.83366 9.34953Z" fill="white"/>
-                        </svg>
-                        <span>Share pricing information</span>
-                     </li>
-                     <li>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
-                           <path d="M5.83366 9.34953L11.1959 3.9873L12.0208 4.81226L5.83366 10.9994L2.12134 7.28715L2.94629 6.4622L5.83366 9.34953Z" fill="white"/>
-                        </svg>
-                        <span>Answer industry-specific questions</span>
-                     </li>
-                  </ul>
-                  <h5>HOW WE WON'T USE YOUR INFORMATION:</h5>
-                  <ul class="error">
-                     <li>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                           <path d="M7.00042 6.17559L9.88792 3.28809L10.7128 4.11292L7.82525 7.00042L10.7128 9.88792L9.88792 10.7128L7.00042 7.82525L4.11292 10.7128L3.28809 9.88792L6.17559 7.00042L3.28809 4.11292L4.11292 3.28809L7.00042 6.17559Z" fill="white"/>
-                        </svg>
-                        <span>Send you spam from anyone outside of SelectSoftware Reviews</span>
-                     </li>
-                  </ul>
-               </div>
-            </div>
-            <div id="loading-container" style="display: none;">
-               <iframe class="loader" src="https://lottie.host/embed/672fa010-82ef-4270-9af4-9e229bcd97f9/bBB2AWEXr9.json"></iframe>
-               <!-- <p class="loading-text">Hold on - we're finding vendors that best match your needs!</p> -->
-               <!-- <iframe src="https://lottie.host/embed/3ccc55f9-7d3a-4b4d-8fc9-b8fed1eda3c3/IMBfJVN67R.json"></iframe> -->
-            </div>
-            <div id="thanks-loading" style="display: none;">
-                <h4>Thank You!</h4>
-                <p>We will reach out to you shortly!</p>
-               <iframe class="loader" src="https://lottie.host/embed/3ccc55f9-7d3a-4b4d-8fc9-b8fed1eda3c3/IMBfJVN67R.json"></iframe>
-            </div>
-            <div id="hubspotCalender" style="display: none;">
-               <h3 style="text-align: center;">Book your 1:1 meeting with our Software Advisor</h3>
-               <div class="meetings-iframe-container" data-src="https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true"></div>
-            </div>
-         </div>
-         
+        .rightInfo {
+            width: 100%;
+            flex: 100% 0;
+            padding: 16px 16px;
+            margin-bottom: 16px;
+         }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-NL23BB7"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="ssr-form-container">
+      <div class="progressWrap" id="progress-bar-container" aria-valuenow="0">
+        <div class="progressHeading">
+          <h2>Talk to an HR Software Advisor</h2>
+        </div>
+        <div class="progress-bar-root">
+          <span
+            id="progress-bar"
+            class="color-primary progress-bar"
+            aria-valuenow="0"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            <span
+              id="progress-bar-filled"
+              class="bar-color-primary progress-bar-filled"
+              style="width: 0%"
+            ></span>
+          </span>
+        </div>
+        <p class="progressCount" id="progress-text">Progress: 0%</p>
+        <p class="readyToMeet" style="display: none">We are ready to meet</p>
       </div>
-      <!--[if lte IE 8]>
-      <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
-      <![endif]-->
-      <script charset="utf-8" type="text/javascript" src="https://js.hsforms.net/forms/v2.js"></script>
-      <script src="ssr-form-script-qa.js"></script>
-      <script type="text/javascript" src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"></script>
-   </body>
+      <div class="formBody" id="formMain" aria-valuenow="0">
+        <div class="formWrap">
+          <div class="formHolder">
+            <div id="multistep-form"></div>
+            <div class="footerWrap">
+              <div class="stepIndicator">
+                <ul>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <div class="timerWrap" id="timer-container">
+                <p id="timer-text">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M11.7451 3.98394L12.7141 3.01502L13.6569 3.95783L12.6879 4.92675C13.509 5.9532 14 7.25521 14 8.67188C14 11.9856 11.3137 14.6719 8 14.6719C4.68629 14.6719 2 11.9856 2 8.67188C2 5.35817 4.68629 2.67188 8 2.67188C9.41667 2.67188 10.7187 3.16286 11.7451 3.98394ZM8 13.3385C10.5773 13.3385 12.6667 11.2492 12.6667 8.67188C12.6667 6.09455 10.5773 4.00521 8 4.00521C5.42267 4.00521 3.33333 6.09455 3.33333 8.67188C3.33333 11.2492 5.42267 13.3385 8 13.3385ZM7.33333 5.33854H8.66667V9.33854H7.33333V5.33854ZM5.33333 0.671875H10.6667V2.00521H5.33333V0.671875Z"
+                      fill="#3D475C"
+                    />
+                  </svg>
+                  <span id="timer-text-replaced">60</span> seconds left
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rightImg" style="display: none">
+            <img src="images/businesswoman.png" />
+          </div>
+          <div class="rightInfo" style="display: none">
+            <h5>HOW WE WILL USE YOUR INFORMATION:</h5>
+            <ul class="success">
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="15"
+                  viewBox="0 0 14 15"
+                  fill="none"
+                >
+                  <path
+                    d="M5.83366 9.34953L11.1959 3.9873L12.0208 4.81226L5.83366 10.9994L2.12134 7.28715L2.94629 6.4622L5.83366 9.34953Z"
+                    fill="white"
+                  />
+                </svg>
+                <span>Connect you with a real person</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="15"
+                  viewBox="0 0 14 15"
+                  fill="none"
+                >
+                  <path
+                    d="M5.83366 9.34953L11.1959 3.9873L12.0208 4.81226L5.83366 10.9994L2.12134 7.28715L2.94629 6.4622L5.83366 9.34953Z"
+                    fill="white"
+                  />
+                </svg>
+                <span>Share pricing information</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="15"
+                  viewBox="0 0 14 15"
+                  fill="none"
+                >
+                  <path
+                    d="M5.83366 9.34953L11.1959 3.9873L12.0208 4.81226L5.83366 10.9994L2.12134 7.28715L2.94629 6.4622L5.83366 9.34953Z"
+                    fill="white"
+                  />
+                </svg>
+                <span>Answer industry-specific questions</span>
+              </li>
+            </ul>
+            <h5>HOW WE WON'T USE YOUR INFORMATION:</h5>
+            <ul class="error">
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                >
+                  <path
+                    d="M7.00042 6.17559L9.88792 3.28809L10.7128 4.11292L7.82525 7.00042L10.7128 9.88792L9.88792 10.7128L7.00042 7.82525L4.11292 10.7128L3.28809 9.88792L6.17559 7.00042L3.28809 4.11292L4.11292 3.28809L7.00042 6.17559Z"
+                    fill="white"
+                  />
+                </svg>
+                <span
+                  >Send you spam from anyone outside of SelectSoftware
+                  Reviews</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="loading-container" style="display: none">
+          <iframe
+            class="loader"
+            src="https://lottie.host/embed/672fa010-82ef-4270-9af4-9e229bcd97f9/bBB2AWEXr9.json"
+          ></iframe>
+          <!-- <p class="loading-text">Hold on - we're finding vendors that best match your needs!</p> -->
+          <!-- <iframe src="https://lottie.host/embed/3ccc55f9-7d3a-4b4d-8fc9-b8fed1eda3c3/IMBfJVN67R.json"></iframe> -->
+        </div>
+        <div id="thanks-loading" style="display: none">
+          <h4>Thank You!</h4>
+          <p>We will reach out to you shortly!</p>
+          <iframe
+            class="loader"
+            src="https://lottie.host/embed/3ccc55f9-7d3a-4b4d-8fc9-b8fed1eda3c3/IMBfJVN67R.json"
+          ></iframe>
+        </div>
+        <div id="hubspotCalender" style="display: none">
+          <h3 style="text-align: center">
+            Book your 1:1 meeting with our Software Advisor
+          </h3>
+          <div
+            class="meetings-iframe-container"
+            data-src="https://meetings.hubspot.com/zach-mason/zach-advisor-calls?embed=true"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <!--[if lte IE 8]>
+      <script
+        charset="utf-8"
+        type="text/javascript"
+        src="//js.hsforms.net/forms/v2-legacy.js"
+      ></script>
+    <![endif]-->
+    <script
+      charset="utf-8"
+      type="text/javascript"
+      src="https://js.hsforms.net/forms/v2.js"
+    ></script>
+    <script src="ssr-form-script-qa.js"></script>
+    <script
+      type="text/javascript"
+      src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"
+    ></script>
+  </body>
 </html>
