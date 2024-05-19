@@ -415,9 +415,9 @@ const addCustomCss = (form, index) => {
         'font-weight': '100',
         'line-height': '120%'
     });
-    form.find('.hs-input.hs-fieldtype-intl-phone input.hs-input').css({
-        'margin-top': '15px',
-    });
+    // form.find('.hs-input.hs-fieldtype-intl-phone input.hs-input').css({
+    //     'margin-top': '15px',
+    // });
 
 
 
