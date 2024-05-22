@@ -415,6 +415,9 @@ const addCustomCss = (form, index) => {
         'font-weight': '100',
         'line-height': '120%'
     });
+    form.find('.hs_software_type_requested label span strong').css({
+        'color': 'black'
+    })
     // form.find('.hs-input.hs-fieldtype-intl-phone input.hs-input').css({
     //     'margin-top': '15px',
     // });
