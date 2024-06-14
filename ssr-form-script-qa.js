@@ -1,25 +1,25 @@
 const formInformation = {
-    "69dba9c6-a008-435d-866e-3d8f23ce936d": {
+    "ebec4765-c966-4e8b-a83e-b5845e218453": {
         step: 1,  // How many employees are in your company?
         progressBarPercentage: 0,
         timeRemaining: "60"
     },
-    "77cdf42b-3eec-4bc8-8219-0310a41d5924": {
+    "3c93a097-2653-44d8-88a4-4ae49c44bd62": {
         step: 2,  // What kind of solutions are you looking for?
         progressBarPercentage: 25,
         timeRemaining: "45"
     },
-    "ab08f443-4da2-4cd6-bb81-9bab35772677": {
+    "cfb92103-bc3b-4ed9-8048-5183459974e5": {
         step: 3,  // Where should we send your HR software advice?
         progressBarPercentage: 70,
         timeRemaining: "20"
     },
-    "0bdcee61-bc3f-4450-b5d4-5453268fde89": {
+    "0059a2ff-f49f-446c-a6f2-527dec8ea32b": {
         step: 4, // How should we get in touch?
         progressBarPercentage: 80,
         timeRemaining: "10"
     },
-    "347762a3-e6f8-4c4a-b4a2-e11b560fd6e3": {
+    "0f630ad9-c6a0-4d0e-bdfd-0f73f9a3ddba": {
         step: 5, // Can we get your Phone Number?
         progressBarPercentage: 95,
         timeRemaining: "5"
@@ -417,33 +417,10 @@ const addCustomCss = (form, index) => {
     });
     form.find('.hs_software_type_requested label span strong').css({
         'color': 'black'
-    })
-    // form.find('.hs-input.hs-fieldtype-intl-phone input.hs-input').css({
-    //     'margin-top': '15px',
-    // });
-
-
-
-
-    // form.find('li[class="hs-form-radio"]')
-    //     .css('padding-bottom', '6px');
-
-    // if (index < 2) {
-    //     form.find('div.hs-form-field > label > span')
-    //         .css('font-size', '24px');
-    // }
+    });
 }
 
 const addEvents = (form, index) => {
-    // form.find('input[type="submit"]').on('mouseover', function(event) {
-    //     event.preventDefault();
-    //     $(this).css('box-shadow', 'rgba(0, 0, 0, 0.4) 2px 4px 10px 1px');
-    // });
-
-    // form.find('input[type="submit"]').on('mouseout', function(event) {
-    //     event.preventDefault();
-    //     $(this).css('box-shadow', '');
-    // });
 
     if (index === 0) {
         var labels = form.find('label');

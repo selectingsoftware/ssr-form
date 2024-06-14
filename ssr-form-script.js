@@ -417,33 +417,10 @@ const addCustomCss = (form, index) => {
     });
     form.find('.hs_software_type_requested label span strong').css({
         'color': 'black'
-    })
-    // form.find('.hs-input.hs-fieldtype-intl-phone input.hs-input').css({
-    //     'margin-top': '15px',
-    // });
-
-
-
-
-    // form.find('li[class="hs-form-radio"]')
-    //     .css('padding-bottom', '6px');
-
-    // if (index < 2) {
-    //     form.find('div.hs-form-field > label > span')
-    //         .css('font-size', '24px');
-    // }
+    });
 }
 
 const addEvents = (form, index) => {
-    // form.find('input[type="submit"]').on('mouseover', function(event) {
-    //     event.preventDefault();
-    //     $(this).css('box-shadow', 'rgba(0, 0, 0, 0.4) 2px 4px 10px 1px');
-    // });
-
-    // form.find('input[type="submit"]').on('mouseout', function(event) {
-    //     event.preventDefault();
-    //     $(this).css('box-shadow', '');
-    // });
 
     if (index === 0) {
         var labels = form.find('label');
