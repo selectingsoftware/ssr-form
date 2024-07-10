@@ -149,7 +149,10 @@ const generateFormOptions = (form, index) => {
                 form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
                     return oldHtml.replace('{FirstName}', firstname);
                 });
+                // setUrlParameters(dataMap);
+            }
 
+            if (index > 0) {
                 setUrlParameters(dataMap);
             }
 
