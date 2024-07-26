@@ -1,7 +1,7 @@
 const formInformation = {
     "69dba9c6-a008-435d-866e-3d8f23ce936d": {
         step: 1,  // How many employees are in your company?
-        progressBarPercentage: 0,
+        progressBarPercentage: 10,
         timeRemaining: "60"
     },
     "77cdf42b-3eec-4bc8-8219-0310a41d5924": {
@@ -54,14 +54,23 @@ let error_messages = {
     tel: 'Please provide your phone number'
 }
 
-const updateProgressBar = (nextForm, loader) => {
-    const progressBar = document.getElementById('progress-bar');
-    const progressBarFilled = document.getElementById('progress-bar-filled');
-    const progressText = document.getElementById('progress-text');
-    const timerText = document.getElementById('timer-text-replaced');
-    const stepByForm = document.getElementById('formMain');
-    const stepByprogress = document.getElementById('progress-bar-container');
+let progressBar = document.getElementById('progress-bar');
+let progressBarFilled = document.getElementById('progress-bar-filled');
+let progressText = document.getElementById('progress-text');
+let timerText = document.getElementById('timer-text-replaced');
+let stepByForm = document.getElementById('formMain');
+let stepByprogress = document.getElementById('progress-bar-container');
 
+(function () {
+    const percentage = 10;
+    progressBar.setAttribute('aria-valuenow', percentage);
+    progressText.innerText = `Progress: ${percentage}%`;
+    progressBarFilled.style.width = `${percentage}%`;
+    stepByForm.setAttribute('aria-valuenow', percentage);
+    stepByprogress.setAttribute('aria-valuenow', percentage);
+})();
+
+const updateProgressBar = (nextForm, loader) => {
     if (nextForm) {
         const percentage = formInformation[nextForm].progressBarPercentage;
         const timeRemaining = formInformation[nextForm].timeRemaining;
@@ -203,7 +212,6 @@ const generateFormOptions = (form, index) => {
                 updateProgressBar();
             }
         }
-
     };
 };
 
