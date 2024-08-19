@@ -7,7 +7,7 @@ const formInformation = {
     "77cdf42b-3eec-4bc8-8219-0310a41d5924": {
         step: 2,  // What kind of solutions are you looking for?
         progressBarPercentage: 25,
-        timeRemaining: "45"
+        timeRemaining: "50"
     },
     "ab08f443-4da2-4cd6-bb81-9bab35772677": {
         step: 3,  // Where should we send your HR software advice?
@@ -55,17 +55,6 @@ let error_messages = {
 }
 
 
-// (function () {
-//     const percentage = 10;
-//     progressBar.setAttribute('aria-valuenow', percentage);
-//     progressText.innerText = `Progress: ${percentage}%`;
-//     progressBarFilled.style.width = `${percentage}%`;
-//     stepByForm.setAttribute('aria-valuenow', percentage);
-//     stepByprogress.setAttribute('aria-valuenow', percentage);
-// })();
-
-const updateProgressBar = (nextForm, loader) => {
-
 let progressBar = document.getElementById('progress-bar');
 let progressBarFilled = document.getElementById('progress-bar-filled');
 let progressText = document.getElementById('progress-text');
@@ -73,6 +62,16 @@ let timerText = document.getElementById('timer-text-replaced');
 let stepByForm = document.getElementById('formMain');
 let stepByprogress = document.getElementById('progress-bar-container');
 
+(function () {
+    const percentage = 10;
+    progressBar.setAttribute('aria-valuenow', percentage);
+    progressText.innerText = `Progress: ${percentage}%`;
+    progressBarFilled.style.width = `${percentage}%`;
+    stepByForm.setAttribute('aria-valuenow', percentage);
+    stepByprogress.setAttribute('aria-valuenow', percentage);
+})();
+
+const updateProgressBar = (nextForm, loader) => {
 
     let hideThanksLoaderTimeout, showCalendarTimeout;
     let thanksLoader = document.getElementById('thanks-loading');
@@ -134,9 +133,9 @@ let stepByprogress = document.getElementById('progress-bar-container');
     }
 
     if (!nextForm && !loader) {
-        hideThanksLoaderTimeout = setTimeout(() => {
-            thanksLoader.style.display = 'none';
-        }, 3000);
+        // hideThanksLoaderTimeout = setTimeout(() => {
+        //     thanksLoader.style.display = 'none';
+        // }, 3000);
 
         showCalendarTimeout = setTimeout(() => {
             hubspotCalender.style.display = 'block';
