@@ -237,7 +237,7 @@ const createFormAndUpdateProgressBar = (form, index) => {
     cleanupFunctions.forEach(cleanup => cleanup());
     cleanupFunctions = [];
 
-    if (observer) observer.disconnect();
+    if (observer) {observer.disconnect()};
 
     hbspt.forms.create(options[index]);
 
@@ -531,7 +531,7 @@ const addCustomValidate = (form) => {
         }
     }
 
-    var observer = new MutationObserver(function (e) {
+    let observer = new MutationObserver(function (e) {
         globalInputsOnChangeHandler()
     });
 
