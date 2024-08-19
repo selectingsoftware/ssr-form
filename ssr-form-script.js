@@ -7,7 +7,7 @@ const formInformation = {
     "77cdf42b-3eec-4bc8-8219-0310a41d5924": {
         step: 2,  // What kind of solutions are you looking for?
         progressBarPercentage: 25,
-        timeRemaining: "50"
+        timeRemaining: "45"
     },
     "ab08f443-4da2-4cd6-bb81-9bab35772677": {
         step: 3,  // Where should we send your HR software advice?
@@ -86,7 +86,6 @@ const updateProgressBar = (nextForm, loader) => {
         progressText.innerText = `Progress: ${percentage}%`;
         timerText.innerText = timeRemaining;
 
-        // const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : '-100%';
         progressBarFilled.style.width = `${percentage}%`;
         stepByForm.setAttribute('aria-valuenow', percentage);
         stepByprogress.setAttribute('aria-valuenow', percentage);
@@ -99,7 +98,6 @@ const updateProgressBar = (nextForm, loader) => {
         progressText.innerText = `Progress: ${percentage}%`;
         timerText.innerText = timeRemaining;
 
-        // const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : '-100%';
         progressBarFilled.style.width = `${percentage}%`;
         stepByForm.setAttribute('aria-valuenow', percentage);
         stepByprogress.setAttribute('aria-valuenow', percentage);
@@ -108,7 +106,6 @@ const updateProgressBar = (nextForm, loader) => {
         progressBar.setAttribute('aria-valuenow', percentage);
         progressText.innerText = `Progress: ${percentage}%`;
 
-        // const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : '-100%';
         progressBarFilled.style.width = `${percentage}%`;
 
         timerContainer.style.display = 'none';
@@ -233,6 +230,7 @@ const generateFormOptions = (form, index) => {
         }
     };
 };
+
 let cleanupFunctions = [];
 const createFormAndUpdateProgressBar = (form, index) => {
     cleanupFunctions.forEach(cleanup => cleanup());
@@ -261,7 +259,8 @@ const setUrlParameters = (dataMap) => {
 };
 
 const setValueAndChange = (form, fieldName, dataMap) => {
-    const field = form.find('input[name="' + fieldName + '"]');
+    // const field = form.find('input[name="' + fieldName + '"]');
+    const field = form.find(`input[name="${fieldName}"]`);  
     const value = dataMap.get(fieldName);
     if (field.length > 0 && value) {
         field.val(value).change();
