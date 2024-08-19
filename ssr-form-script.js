@@ -501,68 +501,114 @@ const addBackButton = (form, index) => {
     return () => backButton.off('click', clickHandler);
 };
 
+// const addCustomValidate = (form) => {
+//     let input = form.find('input[type="text"], input[type="tel"], input[type="email"]');
+//     let inputCheckbox = form.find('.input ul');
+
+//     function globalInputsOnChangeHandler() {
+//         for (var i = 0; i < input.length; i += 1) {
+//             let typeCheck = input[i].getAttribute('type') == 'checkbox' || input[i].getAttribute('type') == 'tel' ? true : input[i].hasAttribute('required')
+//             if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck) {
+//                 let changedElement = input[i];
+//                 setTimeout(function () {
+//                     if (changedElement.classList.contains('invalid') || changedElement.classList.contains('error')) {
+//                         let parentElement = changedElement.closest('.field');
+//                         let errorDiv = parentElement.querySelector('.hs-error-msg');
+//                         if (errorDiv && changedElement.getAttribute('type') == 'tel') {
+//                             errorDiv.innerHTML = `<span>&#9888;</span> ${error_messages['tel']}`
+//                         } else if (errorDiv) {
+//                             errorDiv.innerHTML = `<span>&#9888;</span> ${error_messages[changedElement.getAttribute('name')]}`
+//                         }
+//                     }
+//                 }, 50)
+//             }
+//         }
+//         let complete_all_fields = form.find('.hs_error_rollup');
+//         if (complete_all_fields.length > 0) {
+//             complete_all_fields[0].style.display = 'none';
+//         }
+//     }
+
+//     const observer = new MutationObserver(function (e) {
+//         globalInputsOnChangeHandler()
+//     });
+
+//     for (var i = 0; i < input.length; i += 1) {
+//         let typeCheck = input[i].getAttribute('type') == 'checkbox' || input[i].getAttribute('type') == 'tel' ? true : input[i].hasAttribute('required')
+//         if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck) {
+//             attributeName = input[i].getAttribute('name')
+//             if (attributeName) {
+//                 var target = form.find(`input[name=${attributeName}]`);
+//                 if (target) {
+//                     observer.observe(target[0], {
+//                         attributes: true
+//                     });
+//                 }
+//             } else {
+//                 var targetTel = form.find('input[type="tel"]');
+//                 if (targetTel) {
+//                     observer.observe(targetTel[0], {
+//                         attributes: true
+//                     });
+//                 }
+//             }
+//         }
+//     }
+
+//     if (inputCheckbox.length > 0) {
+//         observer.observe(inputCheckbox[0], {
+//             attributes: true
+//         });
+//     }
+
+//     return () => observer.disconnect();
+// }
+
 const addCustomValidate = (form) => {
     let input = form.find('input[type="text"], input[type="tel"], input[type="email"]');
-    let inputCheckbox = form.find('.input ul');
-
+    
     function globalInputsOnChangeHandler() {
-        for (var i = 0; i < input.length; i += 1) {
-            let typeCheck = input[i].getAttribute('type') == 'checkbox' || input[i].getAttribute('type') == 'tel' ? true : input[i].hasAttribute('required')
-            if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck) {
-                let changedElement = input[i];
+        input.each(function () {
+            let inputElement = $(this);
+            let inputType = inputElement.attr('type');
+            let inputName = inputElement.attr('name');
+
+            if (error_messages.hasOwnProperty(inputName) || inputElement.attr('required')) {
                 setTimeout(function () {
-                    if (changedElement.classList.contains('invalid') || changedElement.classList.contains('error')) {
-                        let parentElement = changedElement.closest('.field');
-                        let errorDiv = parentElement.querySelector('.hs-error-msg');
-                        if (errorDiv && changedElement.getAttribute('type') == 'tel') {
-                            errorDiv.innerHTML = `<span>&#9888;</span> ${error_messages['tel']}`
-                        } else if (errorDiv) {
-                            errorDiv.innerHTML = `<span>&#9888;</span> ${error_messages[changedElement.getAttribute('name')]}`
+                    if (inputElement.hasClass('invalid') || inputElement.hasClass('error')) {
+                        let parentElement = inputElement.closest('.field');
+                        let errorDiv = parentElement.find('.hs-error-msg');
+                        
+                        if (errorDiv.length) {
+                            let errorMessage = inputType === 'tel' ? error_messages['tel'] : error_messages[inputName];
+                            errorDiv.html(`<span>&#9888;</span> ${errorMessage}`);
                         }
                     }
-                }, 50)
+                }, 50);
             }
-        }
+        });
+
         let complete_all_fields = form.find('.hs_error_rollup');
         if (complete_all_fields.length > 0) {
-            complete_all_fields[0].style.display = 'none';
+            complete_all_fields.hide();
         }
     }
 
-    const observer = new MutationObserver(function (e) {
-        globalInputsOnChangeHandler()
+    const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            if (mutation.type === 'attributes' && (mutation.attributeName === 'class')) {
+                globalInputsOnChangeHandler();
+            }
+        });
     });
 
-    for (var i = 0; i < input.length; i += 1) {
-        let typeCheck = input[i].getAttribute('type') == 'checkbox' || input[i].getAttribute('type') == 'tel' ? true : input[i].hasAttribute('required')
-        if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck) {
-            attributeName = input[i].getAttribute('name')
-            if (attributeName) {
-                var target = form.find(`input[name=${attributeName}]`);
-                if (target) {
-                    observer.observe(target[0], {
-                        attributes: true
-                    });
-                }
-            } else {
-                var targetTel = form.find('input[type="tel"]');
-                if (targetTel) {
-                    observer.observe(targetTel[0], {
-                        attributes: true
-                    });
-                }
-            }
-        }
-    }
-
-    if (inputCheckbox.length > 0) {
-        observer.observe(inputCheckbox[0], {
-            attributes: true
+    input.each(function () {
+        observer.observe(this, {
+            attributes: true,
+            attributeFilter: ['class']
         });
-    }
-
-    return () => observer.disconnect();
-}
+    });
+};
 
 const multiStepForm = () => {
     formKeys.forEach((form, index) => {
