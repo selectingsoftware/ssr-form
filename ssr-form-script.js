@@ -232,9 +232,13 @@ const generateFormOptions = (form, index) => {
 };
 
 let cleanupFunctions = [];
+
 const createFormAndUpdateProgressBar = (form, index) => {
     cleanupFunctions.forEach(cleanup => cleanup());
     cleanupFunctions = [];
+
+    if (observer) observer.disconnect();
+
     hbspt.forms.create(options[index]);
 
     if (form) {
