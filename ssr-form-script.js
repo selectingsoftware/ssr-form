@@ -7,7 +7,7 @@ const formInformation = {
     "77cdf42b-3eec-4bc8-8219-0310a41d5924": {
         step: 2,  // What kind of solutions are you looking for?
         progressBarPercentage: 25,
-        timeRemaining: "50"
+        timeRemaining: "45"
     },
     "ab08f443-4da2-4cd6-bb81-9bab35772677": {
         step: 3,  // Where should we send your HR software advice?
@@ -453,19 +453,19 @@ const addCustomCss = (form, index) => {
 
 const addEvents = (form, index) => {
 
-    // if (index === 0) {
-    //     var labels = form.find('label');
-    //     labels.on('click', function () {
-    //         var inputId = $(this).attr('for');
-    //         if (inputId) {
-    //             var input = form.find('#' + inputId);
-    //             if (input.length > 0) {
-    //                 serializeMap(form);
-    //                 form.submit();
-    //             }
-    //         }
-    //     });
-    // }
+    if (index === 0) {
+        var labels = form.find('label');
+        labels.on('click', function () {
+            var inputId = $(this).attr('for');
+            if (inputId) {
+                var input = form.find('#' + inputId);
+                if (input.length > 0) {
+                    serializeMap(form);
+                    form.submit();
+                }
+            }
+        });
+    }
 
     // if (index > 0) {
     //     const backButton = $(`<div style="height: 100%;margin-right:5px;"><button class="hs-back-button" tabindex="0" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6.52239 9.16414H16.6654V10.8308H6.52239L10.9924 15.3007L9.81387 16.4792L3.33203 9.99747L9.81387 3.51562L10.9924 4.69413L6.52239 9.16414Z" fill="black"/></svg></button></div>`);
