@@ -237,8 +237,6 @@ const createFormAndUpdateProgressBar = (form, index) => {
     cleanupFunctions.forEach(cleanup => cleanup());
     cleanupFunctions = [];
 
-    if (observer) {observer.disconnect()};
-
     hbspt.forms.create(options[index]);
 
     if (form) {
@@ -531,7 +529,7 @@ const addCustomValidate = (form) => {
         }
     }
 
-    let observer = new MutationObserver(function (e) {
+    const observer = new MutationObserver(function (e) {
         globalInputsOnChangeHandler()
     });
 
@@ -562,6 +560,8 @@ const addCustomValidate = (form) => {
             attributes: true
         });
     }
+
+    return () => observer.disconnect();
 }
 
 const multiStepForm = () => {
