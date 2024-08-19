@@ -7,7 +7,7 @@ const formInformation = {
     "77cdf42b-3eec-4bc8-8219-0310a41d5924": {
         step: 2,  // What kind of solutions are you looking for?
         progressBarPercentage: 25,
-        timeRemaining: "45"
+        timeRemaining: "50"
     },
     "ab08f443-4da2-4cd6-bb81-9bab35772677": {
         step: 3,  // Where should we send your HR software advice?
@@ -71,6 +71,11 @@ let stepByprogress = document.getElementById('progress-bar-container');
 })();
 
 const updateProgressBar = (nextForm, loader) => {
+    let hideThanksLoaderTimeout, showCalendarTimeout;
+    let thanksLoader = document.getElementById('thanks-loading');
+    let hubspotCalender = document.getElementById('hubspotCalender');
+    let timerContainer = document.getElementById('timer-container');
+
     if (nextForm) {
         const percentage = formInformation[nextForm].progressBarPercentage;
         const timeRemaining = formInformation[nextForm].timeRemaining;
@@ -79,7 +84,7 @@ const updateProgressBar = (nextForm, loader) => {
         progressText.innerText = `Progress: ${percentage}%`;
         timerText.innerText = timeRemaining;
 
-        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : '-100%';
+        // const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : '-100%';
         progressBarFilled.style.width = `${percentage}%`;
         stepByForm.setAttribute('aria-valuenow', percentage);
         stepByprogress.setAttribute('aria-valuenow', percentage);
@@ -92,7 +97,7 @@ const updateProgressBar = (nextForm, loader) => {
         progressText.innerText = `Progress: ${percentage}%`;
         timerText.innerText = timeRemaining;
 
-        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : '-100%';
+        // const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : '-100%';
         progressBarFilled.style.width = `${percentage}%`;
         stepByForm.setAttribute('aria-valuenow', percentage);
         stepByprogress.setAttribute('aria-valuenow', percentage);
@@ -101,32 +106,44 @@ const updateProgressBar = (nextForm, loader) => {
         progressBar.setAttribute('aria-valuenow', percentage);
         progressText.innerText = `Progress: ${percentage}%`;
 
-        const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : '-100%';
+        // const translateXValue = percentage > 0 ? -(100 - percentage) + '%' : '-100%';
         progressBarFilled.style.width = `${percentage}%`;
 
-        const timerContainer = document.getElementById('timer-container');
         timerContainer.style.display = 'none';
 
-        const thanksLoader = document.getElementById('thanks-loading');
         thanksLoader.style.display = 'block';
-        const hideThanksLoader = () => {
-            setTimeout(() => {
-                thanksLoader.style.display = 'none';
-            }, 3000);
-        };
-        hideThanksLoader();
+        // const hideThanksLoader = () => {
+        //     setTimeout(() => {
+        //         thanksLoader.style.display = 'none';
+        //     }, 3000);
+        // };
+        // hideThanksLoader();
 
-        const hubspotCalender = document.getElementById('hubspotCalender');
-        const showCalendar = () => {
-            setTimeout(() => {
-                hubspotCalender.style.display = 'block';
-            }, 4000);
-        };
-        showCalendar();
+        // const showCalendar = () => {
+        //     setTimeout(() => {
+        //         hubspotCalender.style.display = 'block';
+        //     }, 4000);
+        // };
+        // showCalendar();
 
         stepByForm.setAttribute('aria-valuenow', percentage);
         stepByprogress.setAttribute('aria-valuenow', percentage);
     }
+
+    if (!nextForm && !loader) {
+        hideThanksLoaderTimeout = setTimeout(() => {
+            thanksLoader.style.display = 'none';
+        }, 3000);
+
+        showCalendarTimeout = setTimeout(() => {
+            hubspotCalender.style.display = 'block';
+        }, 4000);
+    };
+
+    return () => {
+        clearTimeout(hideThanksLoaderTimeout);
+        clearTimeout(showCalendarTimeout);
+    };
 };
 
 const generateFormOptions = (form, index) => {
@@ -214,8 +231,10 @@ const generateFormOptions = (form, index) => {
         }
     };
 };
-
+let cleanupFunctions = [];
 const createFormAndUpdateProgressBar = (form, index) => {
+    cleanupFunctions.forEach(cleanup => cleanup());
+    cleanupFunctions = [];
     hbspt.forms.create(options[index]);
 
     if (form) {
@@ -447,15 +466,36 @@ const addEvents = (form, index) => {
         });
     }
 
+    // if (index > 0) {
+    //     const backButton = $(`<div style="height: 100%;margin-right:5px;"><button class="hs-back-button" tabindex="0" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6.52239 9.16414H16.6654V10.8308H6.52239L10.9924 15.3007L9.81387 16.4792L3.33203 9.99747L9.81387 3.51562L10.9924 4.69413L6.52239 9.16414Z" fill="black"/></svg></button></div>`);
+    //     backButton.on('click', function (event) {
+    //         event.preventDefault();
+    //         const previousForm = formKeys[index - 1];
+    //         createFormAndUpdateProgressBar(previousForm, index - 1);
+    //     });
+    //     form.find('.actions').prepend(backButton);
+    // }
+
     if (index > 0) {
-        const backButton = $(`<div style="height: 100%;margin-right:5px;"><button class="hs-back-button" tabindex="0" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6.52239 9.16414H16.6654V10.8308H6.52239L10.9924 15.3007L9.81387 16.4792L3.33203 9.99747L9.81387 3.51562L10.9924 4.69413L6.52239 9.16414Z" fill="black"/></svg></button></div>`);
-        backButton.on('click', function (event) {
-            event.preventDefault();
-            const previousForm = formKeys[index - 1];
-            createFormAndUpdateProgressBar(previousForm, index - 1);
-        });
-        form.find('.actions').prepend(backButton);
+        const cleanupBackButton = addBackButton(form, index);
+        cleanupFunctions.push(cleanupBackButton);
     }
+};
+
+const addBackButton = (form, index) => {
+    const backButton = $(`<div style="height: 100%;margin-right:5px;"><button class="hs-back-button" tabindex="0" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6.52239 9.16414H16.6654V10.8308H6.52239L10.9924 15.3007L9.81387 16.4792L3.33203 9.99747L9.81387 3.51562L10.9924 4.69413L6.52239 9.16414Z" fill="black"/></svg></button></div>`);
+
+    const clickHandler = (event) => {
+        event.preventDefault();
+        const previousForm = formKeys[index - 1];
+        createFormAndUpdateProgressBar(previousForm, index - 1);
+    };
+
+    backButton.on('click', clickHandler);
+    form.find('.actions').prepend(backButton);
+
+    // Clean up the event listener when navigating away from the form
+    return () => backButton.off('click', clickHandler);
 };
 
 const addCustomValidate = (form) => {
