@@ -179,7 +179,8 @@ const generateFormOptions = (form, index) => {
             setValueAndChange(form, utmCampaignField, dataMap);
             setValueAndChange(form, utmTermField, dataMap);
         },
-        onFormSubmit: function (form) {
+        onFormSubmit: function (event, form) {
+            event.preventDefault();
             if (index === 4) {
                 const hubspotSuccessMessage = document.getElementById('multistep-form');
                 hubspotSuccessMessage.style.display = 'none';
@@ -192,7 +193,8 @@ const generateFormOptions = (form, index) => {
                 serializeMap(form);
             }
         },
-        onFormSubmitted: function (form) {
+        onFormSubmitted: function (event) {
+            event.preventDefault();
             if (index < formKeys.length - 1) {
                 const nextForm = formKeys[index + 1];
                 const nextFormStep = formInformation[nextForm].step;
@@ -471,7 +473,6 @@ const addBackButton = (form, index) => {
     backButton.on('click', clickHandler);
     form.find('.actions').prepend(backButton);
 
-    // Clean up the event listener when navigating away from the form
     return () => backButton.off('click', clickHandler);
 };
 
@@ -503,39 +504,39 @@ const addCustomValidate = (form) => {
         }
     }
 
-    // var observer = new MutationObserver(function (e) {
-    //     globalInputsOnChangeHandler()
-    // });
+    var observer = new MutationObserver(function (e) {
+        globalInputsOnChangeHandler()
+    });
 
-    // for (var i = 0; i < input.length; i += 1) {
-    //     let typeCheck = input[i].getAttribute('type') == 'checkbox' || input[i].getAttribute('type') == 'tel' ? true : input[i].hasAttribute('required')
-    //     if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck) {
-    //         attributeName = input[i].getAttribute('name')
-    //         if (attributeName) {
-    //             var target = form.find(`input[name=${attributeName}]`);
-    //             if (target) {
-    //                 observer.observe(target[0], {
-    //                     attributes: true
-    //                 });
-    //             }
-    //         } else {
-    //             var targetTel = form.find('input[type="tel"]');
-    //             if (targetTel) {
-    //                 observer.observe(targetTel[0], {
-    //                     attributes: true
-    //                 });
-    //             }
-    //         }
-    //     }
-    // }
+    for (var i = 0; i < input.length; i += 1) {
+        let typeCheck = input[i].getAttribute('type') == 'checkbox' || input[i].getAttribute('type') == 'tel' ? true : input[i].hasAttribute('required')
+        if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck) {
+            attributeName = input[i].getAttribute('name')
+            if (attributeName) {
+                var target = form.find(`input[name=${attributeName}]`);
+                if (target) {
+                    observer.observe(target[0], {
+                        attributes: true
+                    });
+                }
+            } else {
+                var targetTel = form.find('input[type="tel"]');
+                if (targetTel) {
+                    observer.observe(targetTel[0], {
+                        attributes: true
+                    });
+                }
+            }
+        }
+    }
 
-    // if (inputCheckbox.length > 0) {
-    //     observer.observe(inputCheckbox[0], {
-    //         attributes: true
-    //     });
-    // }
+    if (inputCheckbox.length > 0) {
+        observer.observe(inputCheckbox[0], {
+            attributes: true
+        });
+    }
 
-    // return () => observer.disconnect();
+    return () => observer.disconnect();
 }
 
 const multiStepForm = () => {
