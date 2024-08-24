@@ -117,9 +117,12 @@ const updateProgressBar = (nextForm, loader) => {
     }
 
     if (!nextForm && !loader) {
+        hideThanksLoaderTimeout = setTimeout(() => {
+            thanksLoader.style.display = 'none';
+        }, 3000);
         showCalendarTimeout = setTimeout(() => {
             hubspotCalender.style.display = 'block';
-        }, 4000);
+        }, 3000);
     };
 
     return () => {
@@ -176,19 +179,19 @@ const generateFormOptions = (form, index) => {
             setValueAndChange(form, utmCampaignField, dataMap);
             setValueAndChange(form, utmTermField, dataMap);
         },
-        // onFormSubmit: function (form) {
-        //     if (index === 4) {
-        //         const hubspotSuccessMessage = document.getElementById('multistep-form');
-        //         hubspotSuccessMessage.style.display = 'none';
-        //     } else if (index === 1) {
-        //         const form2 = $(form).serializeArray();
-        //         solutionValues = form2
-        //             .filter(item => item.name === solutionField)
-        //             .map(item => item.value);
-        //     } else {
-        //         serializeMap(form);
-        //     }
-        // },
+        onFormSubmit: function (form) {
+            if (index === 4) {
+                const hubspotSuccessMessage = document.getElementById('multistep-form');
+                hubspotSuccessMessage.style.display = 'none';
+            } else if (index === 1) {
+                const form2 = $(form).serializeArray();
+                solutionValues = form2
+                    .filter(item => item.name === solutionField)
+                    .map(item => item.value);
+            } else {
+                serializeMap(form);
+            }
+        },
         onFormSubmitted: function (form) {
             if (index < formKeys.length - 1) {
                 const nextForm = formKeys[index + 1];
@@ -197,13 +200,12 @@ const generateFormOptions = (form, index) => {
                 if (nextFormStep === 3) {
                     const loadingContainer = document.getElementById('loading-container');
                     loadingContainer.style.display = 'block';
-
-                    updateProgressBar(undefined, true);
-
+                    
                     setTimeout(() => {
                         loadingContainer.style.display = 'none';
                         createFormAndUpdateProgressBar(nextForm, index + 1);
                     }, 3000);
+                    updateProgressBar(undefined, true);
                 } else {
                     createFormAndUpdateProgressBar(nextForm, index + 1);
                 }
