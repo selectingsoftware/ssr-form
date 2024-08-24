@@ -140,7 +140,7 @@ const generateFormOptions = (form, index) => {
             }
         },
         onFormReady: function (form) {
-            // addCustomValidate(form);
+            addCustomValidate(form);
             addEvents(form, index);
             addCustomCss(form, index);
 
@@ -176,19 +176,19 @@ const generateFormOptions = (form, index) => {
             setValueAndChange(form, utmCampaignField, dataMap);
             setValueAndChange(form, utmTermField, dataMap);
         },
-        onFormSubmit: function (form) {
-            if (index === 4) {
-                const hubspotSuccessMessage = document.getElementById('multistep-form');
-                hubspotSuccessMessage.style.display = 'none';
-            } else if (index === 1) {
-                const form2 = $(form).serializeArray();
-                solutionValues = form2
-                    .filter(item => item.name === solutionField)
-                    .map(item => item.value);
-            } else {
-                serializeMap(form);
-            }
-        },
+        // onFormSubmit: function (form) {
+        //     if (index === 4) {
+        //         const hubspotSuccessMessage = document.getElementById('multistep-form');
+        //         hubspotSuccessMessage.style.display = 'none';
+        //     } else if (index === 1) {
+        //         const form2 = $(form).serializeArray();
+        //         solutionValues = form2
+        //             .filter(item => item.name === solutionField)
+        //             .map(item => item.value);
+        //     } else {
+        //         serializeMap(form);
+        //     }
+        // },
         onFormSubmitted: function (form) {
             if (index < formKeys.length - 1) {
                 const nextForm = formKeys[index + 1];
@@ -244,7 +244,6 @@ const setUrlParameters = (dataMap) => {
 };
 
 const setValueAndChange = (form, fieldName, dataMap) => {
-    // const field = form.find('input[name="' + fieldName + '"]');
     const field = form.find(`input[name="${fieldName}"]`);  
     const value = dataMap.get(fieldName);
     if (field.length > 0 && value) {
@@ -451,16 +450,6 @@ const addEvents = (form, index) => {
             }
         });
     }
-
-    // if (index > 0) {
-    //     const backButton = $(`<div style="height: 100%;margin-right:5px;"><button class="hs-back-button" tabindex="0" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6.52239 9.16414H16.6654V10.8308H6.52239L10.9924 15.3007L9.81387 16.4792L3.33203 9.99747L9.81387 3.51562L10.9924 4.69413L6.52239 9.16414Z" fill="black"/></svg></button></div>`);
-    //     backButton.on('click', function (event) {
-    //         event.preventDefault();
-    //         const previousForm = formKeys[index - 1];
-    //         createFormAndUpdateProgressBar(previousForm, index - 1);
-    //     });
-    //     form.find('.actions').prepend(backButton);
-    // }
 
     if (index > 0) {
         const cleanupBackButton = addBackButton(form, index);
