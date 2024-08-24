@@ -503,39 +503,39 @@ const addCustomValidate = (form) => {
         }
     }
 
-    const observer = new MutationObserver(function (e) {
-        globalInputsOnChangeHandler()
-    });
+    // var observer = new MutationObserver(function (e) {
+    //     globalInputsOnChangeHandler()
+    // });
 
-    for (var i = 0; i < input.length; i += 1) {
-        let typeCheck = input[i].getAttribute('type') == 'checkbox' || input[i].getAttribute('type') == 'tel' ? true : input[i].hasAttribute('required')
-        if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck) {
-            attributeName = input[i].getAttribute('name')
-            if (attributeName) {
-                var target = form.find(`input[name=${attributeName}]`);
-                if (target) {
-                    observer.observe(target[0], {
-                        attributes: true
-                    });
-                }
-            } else {
-                var targetTel = form.find('input[type="tel"]');
-                if (targetTel) {
-                    observer.observe(targetTel[0], {
-                        attributes: true
-                    });
-                }
-            }
-        }
-    }
+    // for (var i = 0; i < input.length; i += 1) {
+    //     let typeCheck = input[i].getAttribute('type') == 'checkbox' || input[i].getAttribute('type') == 'tel' ? true : input[i].hasAttribute('required')
+    //     if (error_messages.hasOwnProperty(input[i].getAttribute('name')) || typeCheck) {
+    //         attributeName = input[i].getAttribute('name')
+    //         if (attributeName) {
+    //             var target = form.find(`input[name=${attributeName}]`);
+    //             if (target) {
+    //                 observer.observe(target[0], {
+    //                     attributes: true
+    //                 });
+    //             }
+    //         } else {
+    //             var targetTel = form.find('input[type="tel"]');
+    //             if (targetTel) {
+    //                 observer.observe(targetTel[0], {
+    //                     attributes: true
+    //                 });
+    //             }
+    //         }
+    //     }
+    // }
 
-    if (inputCheckbox.length > 0) {
-        observer.observe(inputCheckbox[0], {
-            attributes: true
-        });
-    }
+    // if (inputCheckbox.length > 0) {
+    //     observer.observe(inputCheckbox[0], {
+    //         attributes: true
+    //     });
+    // }
 
-    return () => observer.disconnect();
+    // return () => observer.disconnect();
 }
 
 const multiStepForm = () => {
