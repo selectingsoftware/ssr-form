@@ -160,7 +160,6 @@ const generateFormOptions = (form, index) => {
                 form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
                     return oldHtml.replace('{FirstName}', firstname);
                 });
-                // setUrlParameters(dataMap);
             }
 
             if (index > 0) {
@@ -180,7 +179,9 @@ const generateFormOptions = (form, index) => {
             setValueAndChange(form, utmTermField, dataMap);
         },
         onFormSubmit: function (event, form) {
-            event.preventDefault();
+            if (event && event.preventDefault) {
+                event.preventDefault();
+            }
             if (index === 4) {
                 const hubspotSuccessMessage = document.getElementById('multistep-form');
                 hubspotSuccessMessage.style.display = 'none';
@@ -193,8 +194,10 @@ const generateFormOptions = (form, index) => {
                 serializeMap(form);
             }
         },
-        onFormSubmitted: function (event) {
-            event.preventDefault();
+        onFormSubmitted: function ( event) {
+            if (event && event.preventDefault) {
+                event.preventDefault();
+            }
             if (index < formKeys.length - 1) {
                 const nextForm = formKeys[index + 1];
                 const nextFormStep = formInformation[nextForm].step;
