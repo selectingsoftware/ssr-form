@@ -230,7 +230,7 @@ const createFormAndUpdateProgressBar = (form, index) => {
     hbspt.forms.create(options[index]);
 
     if (form) {
-        updateProgressBar(form, index);
+        updateProgressBar(form);
     }
 };
 
