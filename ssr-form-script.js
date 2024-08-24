@@ -7,7 +7,7 @@ const formInformation = {
     "77cdf42b-3eec-4bc8-8219-0310a41d5924": {
         step: 2,  // What kind of solutions are you looking for?
         progressBarPercentage: 25,
-        timeRemaining: "50"
+        timeRemaining: "45"
     },
     "ab08f443-4da2-4cd6-bb81-9bab35772677": {
         step: 3,  // Where should we send your HR software advice?
