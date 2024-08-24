@@ -284,6 +284,23 @@
       .formBody[aria-valuenow="50"],
       .formBody[aria-valuenow="75"] {
       }
+    .loader {
+      width: 60px;
+      margin: 0 auto;
+      aspect-ratio: 4;
+      --_g: no-repeat radial-gradient(circle closest-side,#000 90%,#0000);
+      background: 
+        var(--_g) 0%   50%,
+        var(--_g) 50%  50%,
+        var(--_g) 100% 50%;
+      background-size: calc(100%/3) 100%;
+      animation: l7 1s infinite linear;
+    }
+    @keyframes l7 {
+        33%{background-size:calc(100%/3) 0%  ,calc(100%/3) 100%,calc(100%/3) 100%}
+        50%{background-size:calc(100%/3) 100%,calc(100%/3) 0%  ,calc(100%/3) 100%}
+        66%{background-size:calc(100%/3) 100%,calc(100%/3) 100%,calc(100%/3) 0%  }
+    }
 
       /* Media query support */
       @media (max-width: 650px) {
@@ -474,15 +491,10 @@
           </div>
         </div>
         <div id="loading-container" style="display: none">
-          <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
-
-    <dotlottie-player src="https://lottie.host/2b4ddf8d-398a-4f02-a036-911d78ca817a/rEbCQH0Poy.json" background="transparent" speed="1" style="width: 100%; height: 300px;" loop autoplay></dotlottie-player>
-         <!-- <iframe class="loader" src="https://lottie.host/embed/672fa010-82ef-4270-9af4-9e229bcd97f9/bBB2AWEXr9.json"></iframe> -->
-
-         <!-- <iframe class="loader" src="https://lottie.host/embed/2b4ddf8d-398a-4f02-a036-911d78ca817a/rEbCQH0Poy.json"></iframe> -->
-
-            <!-- src="https://lottie.host/embed/672fa010-82ef-4270-9af4-9e229bcd97f9/bBB2AWEXr9.json" -->
-          <!-- <p class="loading-text">Hold on - we're finding vendors that best match your needs!</p> -->
+          <p class="loading-text" style="text-align: center;">Hold on - we're finding vendors that best match your needs!</p>
+          <div class="loader"></div>
+          <!-- <iframe class="loader" src="https://lottie.host/embed/2b4ddf8d-398a-4f02-a036-911d78ca817a/rEbCQH0Poy.json"></iframe> -->
+          <!-- src="https://lottie.host/embed/672fa010-82ef-4270-9af4-9e229bcd97f9/bBB2AWEXr9.json" -->
           <!-- <iframe src="https://lottie.host/embed/3ccc55f9-7d3a-4b4d-8fc9-b8fed1eda3c3/IMBfJVN67R.json"></iframe> -->
         </div>
         <div id="thanks-loading" style="display: none">
