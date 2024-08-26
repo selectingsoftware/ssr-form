@@ -284,23 +284,29 @@
       .formBody[aria-valuenow="50"],
       .formBody[aria-valuenow="75"] {
       }
-    .loader {
-      width: 60px;
-      margin: 0 auto;
-      aspect-ratio: 4;
-      --_g: no-repeat radial-gradient(circle closest-side,#000 90%,#0000);
-      background: 
-        var(--_g) 0%   50%,
-        var(--_g) 50%  50%,
-        var(--_g) 100% 50%;
-      background-size: calc(100%/3) 100%;
-      animation: l7 1s infinite linear;
-    }
-    @keyframes l7 {
-        33%{background-size:calc(100%/3) 0%  ,calc(100%/3) 100%,calc(100%/3) 100%}
-        50%{background-size:calc(100%/3) 100%,calc(100%/3) 0%  ,calc(100%/3) 100%}
-        66%{background-size:calc(100%/3) 100%,calc(100%/3) 100%,calc(100%/3) 0%  }
-    }
+      .loader {
+        width: 60px;
+        margin: 0 auto;
+        aspect-ratio: 4;
+        --_g: no-repeat radial-gradient(circle closest-side, #000 90%, #0000);
+        background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+        background-size: calc(100% / 3) 100%;
+        animation: l7 1s infinite linear;
+      }
+      @keyframes l7 {
+        33% {
+          background-size: calc(100% / 3) 0%, calc(100% / 3) 100%,
+            calc(100% / 3) 100%;
+        }
+        50% {
+          background-size: calc(100% / 3) 100%, calc(100% / 3) 0%,
+            calc(100% / 3) 100%;
+        }
+        66% {
+          background-size: calc(100% / 3) 100%, calc(100% / 3) 100%,
+            calc(100% / 3) 0%;
+        }
+      }
 
       /* Media query support */
       @media (max-width: 650px) {
@@ -320,6 +326,11 @@
           width: 50%;
           order: 1;
           margin-bottom: 16px;
+          display: none;
+        }
+        .formBody[aria-valuenow="10"] .rightImg,
+        .formBody[aria-valuenow="25"] .rightImg {
+          display: none !important;
         }
         .formHolder {
           width: 100%;
@@ -380,7 +391,9 @@
           </span>
         </div>
         <p class="progressCount" id="progress-text">Progress: 0%</p>
-        <p class="readyToMeet" style="display: none">WE'RE EXCITED TO HELP! LET'S SETUP A TIME TO TALK</p>
+        <p class="readyToMeet" style="display: none">
+          WE'RE EXCITED TO HELP! LET'S SETUP A TIME TO TALK
+        </p>
       </div>
       <div class="formBody" id="formMain" aria-valuenow="0">
         <div class="formWrap">
@@ -465,7 +478,7 @@
                     fill="white"
                   />
                 </svg>
-                <span>Tailor a vendor shortlist for your organization               </span>
+                <span>Tailor a vendor shortlist for your organization </span>
               </li>
             </ul>
             <h5>HOW WE WON'T USE YOUR INFORMATION:</h5>
@@ -483,16 +496,18 @@
                     fill="white"
                   />
                 </svg>
-                <span
-                  >No spam, ever</span
-                >
+                <span>No spam, ever</span>
               </li>
             </ul>
           </div>
         </div>
         <div id="loading-container" style="display: none">
-          <p class="loading-text" style="text-align: center;">Hold on - we're finding vendors that best match your needs!</p>
-          <div class="loader"></div>
+          <!-- <p class="loading-text" style="text-align: center;">Hold on - we're finding vendors that best match your needs!</p>
+          <div class="loader"></div> -->
+          <video width="100%" height="240" autoplay loop>
+            <source src="images/searching.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
           <!-- <iframe class="loader" src="https://lottie.host/embed/2b4ddf8d-398a-4f02-a036-911d78ca817a/rEbCQH0Poy.json"></iframe> -->
           <!-- src="https://lottie.host/embed/672fa010-82ef-4270-9af4-9e229bcd97f9/bBB2AWEXr9.json" -->
           <!-- <iframe src="https://lottie.host/embed/3ccc55f9-7d3a-4b4d-8fc9-b8fed1eda3c3/IMBfJVN67R.json"></iframe> -->
