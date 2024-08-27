@@ -178,10 +178,7 @@ const generateFormOptions = (form, index) => {
             setValueAndChange(form, utmCampaignField, dataMap);
             setValueAndChange(form, utmTermField, dataMap);
         },
-        onFormSubmit: function (event, form) {
-            if (event && event.preventDefault) {
-                event.preventDefault();
-            }
+        onFormSubmit: function (form) {            
             if (index === 4) {
                 const hubspotSuccessMessage = document.getElementById('multistep-form');
                 hubspotSuccessMessage.style.display = 'none';
@@ -194,10 +191,7 @@ const generateFormOptions = (form, index) => {
                 serializeMap(form);
             }
         },
-        onFormSubmitted: function ( event) {
-            if (event && event.preventDefault) {
-                event.preventDefault();
-            }
+        onFormSubmitted: function ( form) {
             if (index < formKeys.length - 1) {
                 const nextForm = formKeys[index + 1];
                 const nextFormStep = formInformation[nextForm].step;
