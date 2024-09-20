@@ -209,7 +209,7 @@ const generateFormOptions = (form, index) => {
                     setTimeout(() => {
                         loadingContainer.style.display = 'none';
                         createFormAndUpdateProgressBar(nextForm, index + 1);
-                    }, 3000);
+                    }, 4300);
                 } else {
                     createFormAndUpdateProgressBar(nextForm, index + 1);
                 }
@@ -376,7 +376,7 @@ const addCustomCss = (form, index) => {
         'align-items': 'center'
     });
     form.find('.input > .inputs-list > li').css({
-        'max-width': '100px',
+        'max-width': '150px',
     });
     form.find('.input > .inputs-list > li > label > span').css({
         'display': 'block',
