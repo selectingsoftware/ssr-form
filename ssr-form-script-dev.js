@@ -375,11 +375,11 @@ const addCustomCss = (form, index) => {
         'display': 'flex',
         'align-items': 'center'
     });
-    form.find('.hs_hr_software_confirmation > .input > .inputs-list > li').css({
-        'max-width': '150px',
-    });
     form.find('.input > .inputs-list > li').css({
         'max-width': '100px',
+    });
+    form.find('.hs_hr_software_confirmation .input > .inputs-list > li').css({
+        'max-width': '150px',
     });
     form.find('.input > .inputs-list > li > label > span').css({
         'display': 'block',
