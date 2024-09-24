@@ -274,7 +274,7 @@ const addCustomCss = (form, index) => {
         'flex-direction': 'column',
         'justify-content': 'center',
         'align-items': 'center',
-        'margin-right': '15px',
+        'margin-right': '5px',
         'margin-bottom': '0px'
     });
     form.find('.input > .inputs-list  label > span').css({
