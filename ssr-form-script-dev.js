@@ -441,16 +441,37 @@ const addCustomCss = (form, index) => {
     });
     form.find('.hs_software_type_requested label span strong').css({
         'color': 'black'
+    });       
+    form.find('#hr_software_confirmation0-4b9c5993-26ef-4425-bf6f-96fac07d85a1').css({
+        'visibility': 'hidden'
     });
+    form.find('#hr_software_confirmation1-4b9c5993-26ef-4425-bf6f-96fac07d85a1').css({
+        'visibility': 'hidden'
+    });  
 }
 
-const addEvents = (form, index) => {
+const confirmationBox = document.getElementById('confirmation');
+const tickSvg = document.getElementById('tickSvg');
+const crossSvg = document.getElementById('crossSvg');
 
+const addEvents = (form, index) => {
+    confirmationBox.style.display = 'none'; 
     if (index === 0) {
+        confirmationBox.style.display = 'flex'; 
         var labels = form.find('label');
         labels.on('click', function () {
             var inputId = $(this).attr('for');
             if (inputId) {
+                if(inputId == 'hr_software_confirmation0-4b9c5993-26ef-4425-bf6f-96fac07d85a1'){
+                    tickSvg.setAttribute('fill', 'green');
+                    crossSvg.setAttribute('fill', 'gray');
+                }else if(inputId == 'hr_software_confirmation1-4b9c5993-26ef-4425-bf6f-96fac07d85a1'){
+                    tickSvg.setAttribute('fill', 'gray');
+                    crossSvg.setAttribute('fill', 'red');
+                }else{
+                    tickSvg.setAttribute('fill', 'gray');
+                    crossSvg.setAttribute('fill', 'gray');
+                }
                 var input = form.find('#' + inputId);
                 if (input.length > 0) {
                     serializeMap(form);
