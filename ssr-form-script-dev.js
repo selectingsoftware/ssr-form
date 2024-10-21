@@ -159,7 +159,7 @@ const generateFormOptions = (form, index) => {
             }
 
             if (index === 5) {
-                form.find('.hs_' + solutionField).hide();
+                // form.find('.hs_' + solutionField).hide();
                 const firstname = dataMap.get(firstnameField);
 
                 form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
@@ -174,6 +174,7 @@ const generateFormOptions = (form, index) => {
             setValueAndChange(form, employeeField, dataMap);
             setValueAndChange(form, firstnameField, dataMap);
             setValueAndChange(form, lastnameField, dataMap);
+            setValueAndChange(form, solutionField, dataMap);
             setValueAndChange(form, emailField, dataMap);
             setValueAndChange(form, companyField, dataMap);
             setValueAndChange(form, websiteField, dataMap);
