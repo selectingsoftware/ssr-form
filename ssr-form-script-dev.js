@@ -48,7 +48,6 @@ const utmTermField = 'utm_term';
 
 const dataMap = new Map();
 const options = [];
-let solutionValues = [];
 const formKeys = Object.keys(formInformation);
 
 let error_messages = {
@@ -152,14 +151,7 @@ const generateFormOptions = (form, index) => {
             addEvents(form, index);
             addCustomCss(form, index);
 
-            if (index === 2 || index === 5) {
-                solutionValues.forEach(value => {
-                    form.find('input[name="' + solutionField + '"][value="' + value + '"]').prop('checked', true).change();
-                });
-            }
-
             if (index === 5) {
-                // form.find('.hs_' + solutionField).hide();
                 const firstname = dataMap.get(firstnameField);
 
                 form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
@@ -188,12 +180,7 @@ const generateFormOptions = (form, index) => {
             if (index === 5) {
                 const hubspotSuccessMessage = document.getElementById('multistep-form');
                 hubspotSuccessMessage.style.display = 'none';
-            } else if (index === 1) {
-                const form2 = $(form).serializeArray();
-                solutionValues = form2
-                    .filter(item => item.name === solutionField)
-                    .map(item => item.value);
-            } else {
+            }else {
                 serializeMap(form);
             }
         },
