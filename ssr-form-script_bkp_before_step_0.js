@@ -1,33 +1,28 @@
 const formInformation = {
-    "4b9c5993-26ef-4425-bf6f-96fac07d85a1": {
-        step: 1,  // Do you currently use an HR software?
+    "69dba9c6-a008-435d-866e-3d8f23ce936d": {
+        step: 1,  // How many employees are in your company?
         progressBarPercentage: 10,
         timeRemaining: "60"
     },
-    "69dba9c6-a008-435d-866e-3d8f23ce936d": {
-        step: 2,  // How many employees are in your company?
-        progressBarPercentage: 20,
-        timeRemaining: "50"
-    },
     "77cdf42b-3eec-4bc8-8219-0310a41d5924": {
-        step: 3,  // What kind of solutions are you looking for?
-        progressBarPercentage: 40,
-        timeRemaining: "40"
+        step: 2,  // What kind of solutions are you looking for?
+        progressBarPercentage: 25,
+        timeRemaining: "45"
     },
     "ab08f443-4da2-4cd6-bb81-9bab35772677": {
-        step: 4,  // Where should we send your HR software advice?
-        progressBarPercentage: 60,
-        timeRemaining: "30"
-    },
-    "0bdcee61-bc3f-4450-b5d4-5453268fde89": {
-        step: 5, // How should we get in touch?
-        progressBarPercentage: 80,
+        step: 3,  // Where should we send your HR software advice?
+        progressBarPercentage: 70,
         timeRemaining: "20"
     },
-    "347762a3-e6f8-4c4a-b4a2-e11b560fd6e3": {
-        step: 6, // Can we get your Phone Number?
-        progressBarPercentage: 95,
+    "0bdcee61-bc3f-4450-b5d4-5453268fde89": {
+        step: 4, // How should we get in touch?
+        progressBarPercentage: 80,
         timeRemaining: "10"
+    },
+    "347762a3-e6f8-4c4a-b4a2-e11b560fd6e3": {
+        step: 5, // Can we get your Phone Number?
+        progressBarPercentage: 95,
+        timeRemaining: "5"
     }
 };
 
@@ -48,6 +43,7 @@ const utmTermField = 'utm_term';
 
 const dataMap = new Map();
 const options = [];
+let solutionValues = [];
 const formKeys = Object.keys(formInformation);
 
 let error_messages = {
@@ -151,7 +147,14 @@ const generateFormOptions = (form, index) => {
             addEvents(form, index);
             addCustomCss(form, index);
 
-            if (index === 5) {
+            if (index === 1 || index === 4) {
+                solutionValues.forEach(value => {
+                    form.find('input[name="' + solutionField + '"][value="' + value + '"]').prop('checked', true).change();
+                });
+            }
+
+            if (index === 4) {
+                form.find('.hs_' + solutionField).hide();
                 const firstname = dataMap.get(firstnameField);
 
                 form.find('.hs-richtext.hs-main-font-element h1').html(function (index, oldHtml) {
@@ -166,7 +169,6 @@ const generateFormOptions = (form, index) => {
             setValueAndChange(form, employeeField, dataMap);
             setValueAndChange(form, firstnameField, dataMap);
             setValueAndChange(form, lastnameField, dataMap);
-            setValueAndChange(form, solutionField, dataMap);
             setValueAndChange(form, emailField, dataMap);
             setValueAndChange(form, companyField, dataMap);
             setValueAndChange(form, websiteField, dataMap);
@@ -177,10 +179,15 @@ const generateFormOptions = (form, index) => {
             setValueAndChange(form, utmTermField, dataMap);
         },
         onFormSubmit: function (form) {            
-            if (index === 5) {
+            if (index === 4) {
                 const hubspotSuccessMessage = document.getElementById('multistep-form');
                 hubspotSuccessMessage.style.display = 'none';
-            }else {
+            } else if (index === 1) {
+                const form2 = $(form).serializeArray();
+                solutionValues = form2
+                    .filter(item => item.name === solutionField)
+                    .map(item => item.value);
+            } else {
                 serializeMap(form);
             }
         },
@@ -189,7 +196,7 @@ const generateFormOptions = (form, index) => {
                 const nextForm = formKeys[index + 1];
                 const nextFormStep = formInformation[nextForm].step;
 
-                if (nextFormStep === 4) {
+                if (nextFormStep === 3) {
                     const loadingContainer = document.getElementById('loading-container');
                     loadingContainer.style.display = 'block';
                     updateProgressBar(undefined, true);
@@ -197,7 +204,7 @@ const generateFormOptions = (form, index) => {
                     setTimeout(() => {
                         loadingContainer.style.display = 'none';
                         createFormAndUpdateProgressBar(nextForm, index + 1);
-                    }, 4300);
+                    }, 3000);
                 } else {
                     createFormAndUpdateProgressBar(nextForm, index + 1);
                 }
@@ -366,9 +373,6 @@ const addCustomCss = (form, index) => {
     form.find('.input > .inputs-list > li').css({
         'max-width': '100px',
     });
-    form.find('.hs_hr_software_confirmation .input > .inputs-list > li').css({
-        'max-width': '150px',
-    });
     form.find('.input > .inputs-list > li > label > span').css({
         'display': 'block',
     });
@@ -429,37 +433,16 @@ const addCustomCss = (form, index) => {
     });
     form.find('.hs_software_type_requested label span strong').css({
         'color': 'black'
-    });       
-    // form.find('#hr_software_confirmation0-4b9c5993-26ef-4425-bf6f-96fac07d85a1').css({
-    //     'visibility': 'hidden'
-    // });
-    // form.find('#hr_software_confirmation1-4b9c5993-26ef-4425-bf6f-96fac07d85a1').css({
-    //     'visibility': 'hidden'
-    // });  
+    });
 }
 
-// const confirmationBox = document.getElementById('confirmation');
-// const tickSvg = document.getElementById('tickSvg');
-// const crossSvg = document.getElementById('crossSvg');
-
 const addEvents = (form, index) => {
-    // confirmationBox.style.display = 'none'; 
+
     if (index === 0) {
-        // confirmationBox.style.display = 'flex'; 
         var labels = form.find('label');
         labels.on('click', function () {
             var inputId = $(this).attr('for');
             if (inputId) {
-                // if(inputId == 'hr_software_confirmation0-4b9c5993-26ef-4425-bf6f-96fac07d85a1'){
-                //     tickSvg.setAttribute('fill', 'green');
-                //     crossSvg.setAttribute('fill', 'gray');
-                // }else if(inputId == 'hr_software_confirmation1-4b9c5993-26ef-4425-bf6f-96fac07d85a1'){
-                //     tickSvg.setAttribute('fill', 'gray');
-                //     crossSvg.setAttribute('fill', 'red');
-                // }else{
-                //     tickSvg.setAttribute('fill', 'gray');
-                //     crossSvg.setAttribute('fill', 'gray');
-                // }
                 var input = form.find('#' + inputId);
                 if (input.length > 0) {
                     serializeMap(form);
