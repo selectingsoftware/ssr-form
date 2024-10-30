@@ -33,6 +33,7 @@ const formInformation = {
 
 const portalId = '22035903';
 const target = '#multistep-form';
+const hrSoftwareConfirmation = 'hr_software_confirmation';
 const solutionField = 'software_type_requested';
 const employeeField = 'annualrevenue';
 const firstnameField = 'firstname';
@@ -164,6 +165,7 @@ const generateFormOptions = (form, index) => {
             }
 
             setValueAndChange(form, employeeField, dataMap);
+            setValueAndChange(form, hrSoftwareConfirmation, dataMap);
             setValueAndChange(form, firstnameField, dataMap);
             setValueAndChange(form, lastnameField, dataMap);
             setValueAndChange(form, solutionField, dataMap);
