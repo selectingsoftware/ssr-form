@@ -446,7 +446,7 @@ const addCustomCss = (form, index) => {
 
 const addEvents = (form, index) => {
     // confirmationBox.style.display = 'none'; 
-    if (index === 0) {
+    if (index === 0 || index === 1) {
         // confirmationBox.style.display = 'flex'; 
         var labels = form.find('label');
         labels.on('click', function () {
