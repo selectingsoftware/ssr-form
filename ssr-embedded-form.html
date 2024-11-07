@@ -68,13 +68,15 @@
         color: #fff;
         font-size: 16px;
         font-weight: 500;
-        line-height: 12px;
+        line-height: 24px;
         letter-spacing: 0.8px;
         text-transform: uppercase;
         margin: 0;
+        position: relative;
+        z-index: 2;
       }
       .progress-bar-root {
-        margin: 0px 0px 16px 0px;
+        margin: 16px 0px 16px 0px;
       }
       .progress-bar-filled {
         width: 100%;
@@ -90,6 +92,7 @@
         -moz-transition: width 1s ease-in-out;
         -o-transition: width 1s ease-in-out;
         transition: width 1s ease-in-out;
+        z-index: 1;
       }
       .progress-bar {
         overflow: hidden;
@@ -99,8 +102,7 @@
         position: relative;
         background: rgba(255, 255, 255, 0.2);
         border-radius: 100px;
-        height: 16px;
-
+        height: 24px;
         transition: transform 0.4s linear 2s;
       }
       .timerWrap p {
@@ -406,6 +408,7 @@
             aria-valuemin="0"
             aria-valuemax="100"
           >
+          <p class="progressCount" id="progress-text">Progress: 0%</p>
             <span
               id="progress-bar-filled"
               class="bar-color-primary progress-bar-filled"
@@ -413,7 +416,6 @@
             ></span>
           </span>
         </div>
-        <p class="progressCount" id="progress-text">Progress: 0%</p>
         <p class="readyToMeet" style="display: none">
           WE'RE EXCITED TO HELP! LET'S SETUP A TIME TO TALK
         </p>
