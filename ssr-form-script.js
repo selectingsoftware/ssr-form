@@ -180,6 +180,7 @@ const generateFormOptions = (form, index) => {
             setValueAndChange(form, utmTermField, dataMap);
             setValueAndChange(form, referringShortCode, dataMap);
             
+            
         },
         onFormSubmit: function (form) {            
             if (index === 5) {
