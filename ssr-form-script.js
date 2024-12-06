@@ -436,11 +436,6 @@ const addCustomCss = (form, index) => {
     form.find('.hs_software_type_requested label span strong').css({
         'color': 'black'
     });
-    
-    form.find('.hs-richtext .hs-main-font-element p span').css({
-        'font-size': '12px',
-        'font-weight': '300',
-    }); 
     // form.find('#hr_software_confirmation0-4b9c5993-26ef-4425-bf6f-96fac07d85a1').css({
     //     'visibility': 'hidden'
     // });
