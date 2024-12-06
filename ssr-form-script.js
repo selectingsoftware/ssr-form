@@ -437,7 +437,7 @@ const addCustomCss = (form, index) => {
         'color': 'black'
     });
     
-    form.find('.hs-richtext .hs-main-font-element p').css({
+    form.find('.hs-richtext .hs-main-font-element p span').css({
         'font-size': '12px',
         'font-weight': '300',
     }); 
